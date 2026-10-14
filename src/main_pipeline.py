@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from provenance import save_metadata
+from provenance import save_metadata, publish_metadata
 from dotenv import load_dotenv
 from supabase import create_client, Client
 
@@ -174,6 +174,14 @@ def run_pipeline(client=None, cities=None, delay=3, report_path=REPORT_PATH):
         finally:
             time.sleep(delay)  # ménage les API publiques, y compris après une erreur
 
+    report["metadata_published"] = False
+    if report["updated"]:
+        try:
+            publish_metadata(client)
+            report["metadata_published"] = True
+        except Exception as e:
+            print(f"❌ Publication des métadonnées impossible : {type(e).__name__}")
+            report["source_errors"].append({"city": "Métadonnées du site", "source": "Supabase Storage", "error": type(e).__name__})
     report["finished_at"] = datetime.now(timezone.utc).isoformat()
     report["success"] = bool(selected_cities) and not report["failed"] and not report["source_errors"]
     report_path = Path(report_path)
