@@ -75,7 +75,7 @@ function servicesMatrix(rows) {
   const value=row.services[key];
   if(value==null)return `<td class="missing" title="${escapeHtml(row.name)} : ${label}, collecte non documentée">—</td>`;
   const proportion=value/maxima[key],light=96-proportion*60,ink=proportion>.6?"#fff":"#244a3a";
-  return `<td style="background:hsl(156 30% ${light}%);color:${ink}" title="${escapeHtml(row.name)} : ${number(value)} services ${label.toLowerCase()} dans la commune, collecte du ${date(row.info.poi.collected_at)}">${number(value)}</td>`;
+  return `<td style="background:hsl(156 30% ${light}%);color:${ink}" title="${escapeHtml(row.name)} : ${number(value)} services ${label.toLowerCase()} dans la commune, collecte du ${date(row.info.poi.collected_at)}${row.info.poi.retained?", dernière mise à jour indisponible":""}">${number(value)}</td>`;
  }).join("")}</tr>`).join("");
  return `<div class="matrix-scroll"><table class="services-table"><caption class="sr-only">Services référencés par catégorie et par commune</caption><thead><tr><th scope="col">Ville</th>${header}</tr></thead><tbody>${body}</tbody></table></div><div class="matrix-legend"><span>Moins de services</span><span class="legend-ramp"></span><span>Plus de services</span></div>`;
 }
@@ -132,9 +132,10 @@ function risksMatrix(rows) {
 }
 function qualityCoverage(rows) {
  const n=rows.length;
+ const retained=rows.filter(r=>r.info.poi?.status==="available"&&r.info.poi.retained).length;
  const definitions=[
   ["Immobilier · DVF",rows.filter(r=>r.apartment!=null||r.house!=null).length,"Prix calculés sur une sélection de ventes. Ils donnent un repère, sans décrire tous les logements."],
-  ["Services · OSM",rows.filter(r=>r.info.poi?.status==="available").length,"Comptage sur toute la commune. Les services absents des données OpenStreetMap peuvent ne pas être recensés."],
+  ["Services · OSM",rows.filter(r=>r.info.poi?.status==="available").length,`Comptage sur toute la commune. Les services absents d’OpenStreetMap peuvent manquer.${retained?` Pour ${retained} ville(s), les derniers chiffres sont conservés après une panne, avec leur date.`:""}`],
   ["Air · OpenAQ",rows.filter(r=>r.air!=null).length,"La station et l’heure de chaque mesure sont conservées. Ces relevés ne décrivent pas toute une année."],
   ["Risques · GASPAR",rows.filter(r=>r.risks!=null).length,"Liste des risques mentionnés pour la commune. Elle ne décrit pas la situation de chaque logement."]
  ];
