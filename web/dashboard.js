@@ -151,7 +151,8 @@ function renderDashboard() {
  }
  const rows=selectedDashboardRows(),n=rows.length,prices=rows.filter(r=>r.apartment!=null||r.house!=null),osm=rows.filter(r=>r.info.poi?.status==="available");
  const samples=rows.filter(r=>r.samples!=null),total=samples.reduce((sum,r)=>sum+r.samples,0);
- $("dashboardDate").textContent=audit.audited_at?`Audit du ${date(audit.audited_at)}`:"Observations documentées";
+ const collectedDates=rows.map(r=>r.info.collected?.collected_at||r.info.poi?.collected_at).filter(d=>d&&!Number.isNaN(Date.parse(d))).sort((a,b)=>Date.parse(b)-Date.parse(a));
+ $("dashboardDate").textContent=collectedDates.length?`Dernière collecte du ${date(collectedDates[0])}`:audit.audited_at?`Contrôle du ${date(audit.audited_at)}`:"Observations documentées";
  $("dashboardCities").innerHTML=cities.map(city=>`<button class="city-chip" data-dashboard-city="${escapeHtml(city.insee_code)}" aria-pressed="${dashboardSelection==null||dashboardSelection.has(city.insee_code)}">${escapeHtml(city.city_name)}</button>`).join("");
  const cards=[["Villes dans l’analyse",n,"Choisissez les villes à comparer ci-dessus","⌖"],["Prix immobiliers disponibles",`${prices.length} <small>/ ${n}</small>`,"Villes avec des prix disponibles pour les appartements ou les maisons","⌂"],["Ventes retenues",samples.length?number(total):"—","Ventes conservées après nettoyage des données","↗"],["Collectes de services",`${osm.length} <small>/ ${n}</small>`,"Services recensés à l’échelle de la commune","◈"]];
  $("kpiGrid").innerHTML=cards.map(([label,value,note,icon])=>`<div class="kpi-card"><div class="kpi-top"><span>${label}</span><span aria-hidden="true">${icon}</span></div><div class="kpi-value">${value}</div><div class="kpi-note">${note}</div></div>`).join("");
