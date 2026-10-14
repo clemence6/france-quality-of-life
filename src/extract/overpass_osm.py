@@ -10,10 +10,11 @@ import requests
 
 REQUEST_TIMEOUT = 30
 
-# Endpoints Overpass officiels
+# Instances publiques mondiales répertoriées sur le wiki OpenStreetMap.
+# L'instance principale surchargée renvoie régulièrement des 504 depuis Azure.
 OVERPASS_ENDPOINTS = [
+    "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
     "https://overpass.private.coffee/api/interpreter",
-    "https://overpass-api.de/api/interpreter",
 ]
 
 # User-Agent épuré : évite le blocage 406 déclenché par ModSecurity sur les faux User-Agents Mozilla
@@ -32,16 +33,20 @@ POI_TAGS = {
 }
 
 
-def commune_query(insee_code: str) -> str:
+def commune_query(insee_code: str, relation_id: int | None = None) -> str:
     """Résoudre la commune par son code INSEE, jamais par un nom ambigu."""
     if not re.fullmatch(r"(?:\d{5}|2[AB]\d{3})", insee_code):
         raise ValueError("Code INSEE invalide")
+    if relation_id is not None and (type(relation_id) is not int or relation_id <= 0):
+        raise ValueError("Identifiant de limite communale invalide")
+    boundary = (f"relation({relation_id})" if relation_id is not None else
+                f'relation["boundary"="administrative"]["admin_level"="8"]["ref:INSEE"="{insee_code}"]')
     selectors = "\n".join(
         f'nwr["{key}"="{value}"](area.commune); out count;'
         for key, value in POI_TAGS.values()
     )
-    return f'''[out:json][timeout:40];
-relation["boundary"="administrative"]["admin_level"="8"]["ref:INSEE"="{insee_code}"]->.boundary;
+    return f'''[out:json][timeout:60][maxsize:134217728];
+{boundary}->.boundary;
 .boundary out tags;
 .boundary map_to_area->.commune;
 .commune out tags;
@@ -81,17 +86,22 @@ def parse_commune_counts(data: dict, insee_code: str) -> dict:
             "source_timestamp": data.get("osm3s", {}).get("timestamp_osm_base")}
 
 
-def get_commune_poi_counts(insee_code: str) -> dict:
+def get_commune_poi_counts(insee_code: str, relation_id: int | None = None) -> dict:
     """Compter les services référencés à l'intérieur des limites de la commune."""
-    query = commune_query(insee_code)
+    # Même avec un identifiant déjà connu, la réponse doit confirmer le code INSEE.
+    query = commune_query(insee_code, relation_id)
     errors = []
     for endpoint in OVERPASS_ENDPOINTS:
         try:
-            response = requests.post(endpoint, data={"data": query}, headers=HEADERS, timeout=55)
+            response = requests.post(endpoint, data={"data": query}, headers=HEADERS, timeout=(10, 95))
             response.raise_for_status()
-            return parse_commune_counts(response.json(), insee_code)
+            result = parse_commune_counts(response.json(), insee_code)
+            result["api_endpoint"] = endpoint
+            return result
         except (requests.RequestException, ValueError, KeyError) as error:
             errors.append(f"{endpoint}: {error}")
+            if isinstance(error, requests.HTTPError) and error.response is not None and error.response.status_code in (429, 406):
+                time.sleep(30)
     raise RuntimeError("Collecte communale indisponible : " + " | ".join(errors))
 
 
