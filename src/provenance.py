@@ -4,6 +4,7 @@ Le schéma distant reste compatible : publier web/ avec le fichier de provenance
 Ne contient ni clés privées ni variables d'environnement.
 """
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 PUBLIC_DIR = Path(__file__).resolve().parents[1] / "web" / "data"
@@ -16,6 +17,45 @@ SNAPSHOT_FIELDS = ["updated_at", "latitude", "longitude", "avg_price_m2",
 
 def snapshot(row):
     return {field: row.get(field) for field in SNAPSHOT_FIELDS}
+
+
+def recent_commune_services(paths=None, now=None):
+    """Repli sur des comptages communaux contrôlés, âgés de sept jours au maximum."""
+    now = now or datetime.now(timezone.utc)
+    paths = paths if paths is not None else [PUBLIC_DIR / "audit.json", PUBLIC_DIR / "provenance.json"]
+    categories = {"sport", "park", "supermarket", "pharmacy", "school", "restaurant", "hospital"}
+    result = {}
+    for path in paths:
+        try:
+            document = json.loads(Path(path).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if not isinstance(document, dict) or not isinstance(document.get("cities"), dict):
+            continue
+        for code, entry in document["cities"].items():
+            if not isinstance(entry, dict):
+                continue
+            poi = entry.get("poi_commune") or {}
+            if not isinstance(poi, dict):
+                continue
+            counts = poi.get("counts") or {}
+            if not isinstance(counts, dict):
+                continue
+            relation, area = poi.get("relation_id"), poi.get("area_id")
+            if (poi.get("scope") != "commune" or poi.get("status") != "available"
+                    or poi.get("insee_code") != code or poi.get("method") != "osm-commune-nwr-count-v1"
+                    or type(relation) is not int or relation <= 0 or area != relation + 3600000000
+                    or set(counts) != categories or any(type(v) is not int or v < 0 for v in counts.values())):
+                continue
+            try:
+                collected = datetime.fromisoformat(poi["collected_at"].replace("Z", "+00:00"))
+                if collected.tzinfo is None or not timedelta(0) <= now - collected <= timedelta(days=7):
+                    continue
+            except (KeyError, TypeError, ValueError):
+                continue
+            if code not in result or collected > datetime.fromisoformat(result[code]["collected_at"].replace("Z", "+00:00")):
+                result[code] = poi.copy()
+    return result
 
 
 def save_metadata(code, row, metadata):
