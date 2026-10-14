@@ -1,1 +1,1179 @@
-{"cities": {}}
+{
+  "cities": {
+    "75056": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:48:18.441549+00:00",
+        "latitude": 48.859,
+        "longitude": 2.347,
+        "avg_price_m2": 9655.17,
+        "total_transactions": 9915,
+        "risks_count": 2,
+        "air_quality_score": 80.4,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-14T11:48:18.441549+00:00",
+      "geocoding": {
+        "label": "Paris",
+        "latitude": 48.859,
+        "longitude": 2.347,
+        "city": "Paris",
+        "postcode": "75001",
+        "score": 0.9702754545454544,
+        "insee_code": "75056"
+      },
+      "risks": {
+        "code_insee": "75056",
+        "commune": "PARIS",
+        "total_risks": 2,
+        "risks": [
+          "Inondation",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Paris",
+        "station_id": 2162591,
+        "station_name": "PARIS 1er Les Halles",
+        "distance_km": 0.39,
+        "measurements": {
+          "co": {
+            "value": 545.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7773042
+          },
+          "o3": {
+            "value": 7.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7773420
+          },
+          "no2": {
+            "value": 53.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7773850
+          },
+          "pm25": {
+            "value": 80.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7775825
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "75056"
+      },
+      "dvf": {
+        "commune": "Paris",
+        "nb_ventes_totales": 9915,
+        "prix_m2_median_global": 9655.17,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 9642.86,
+            "sample_count": 9815
+          },
+          "house": {
+            "median_price_m2": 11674.5,
+            "sample_count": 100
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 84440,
+        "source_mutations": 40811,
+        "excluded_by_price": 425,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "13055": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:49:40.14847+00:00",
+        "latitude": 43.282,
+        "longitude": 5.405,
+        "avg_price_m2": 3367.14,
+        "total_transactions": 3800,
+        "risks_count": 15,
+        "air_quality_score": 8,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-14T11:49:40.148470+00:00",
+      "geocoding": {
+        "label": "Marseille",
+        "latitude": 43.282,
+        "longitude": 5.405,
+        "city": "Marseille",
+        "postcode": "13001",
+        "score": 0.9663454545454545,
+        "insee_code": "13055"
+      },
+      "risks": {
+        "code_insee": "13055",
+        "commune": "MARSEILLE",
+        "total_risks": 15,
+        "risks": [
+          "Affaissement minier",
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Eboulement ou chutes de pierres et de blocs",
+          "Effondrements généralisés",
+          "Feu de forêt",
+          "Glissement de terrain",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par ruissellement et coulée de boue",
+          "Par submersion marine",
+          "Par une crue torrentielle ou à montée rapide de cours d'eau",
+          "Recul du trait de côte et de falaises",
+          "Séisme",
+          "Tassements différentiels",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Marseille",
+        "station_id": 2162726,
+        "station_name": "MARSEILLE 5 AVENUES",
+        "distance_km": 2.72,
+        "measurements": {
+          "so2": {
+            "value": 0.3,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7773873
+          },
+          "no2": {
+            "value": 12.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7772760
+          },
+          "pm10": {
+            "value": 14.3,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7772890
+          },
+          "co": {
+            "value": 191.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7775172
+          },
+          "o3": {
+            "value": 63.7,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7775562
+          },
+          "pm25": {
+            "value": 8.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7775645
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "13055"
+      },
+      "dvf": {
+        "commune": "Marseille",
+        "nb_ventes_totales": 3800,
+        "prix_m2_median_global": 3367.14,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 3182.0,
+            "sample_count": 3055
+          },
+          "house": {
+            "median_price_m2": 4367.84,
+            "sample_count": 745
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 34398,
+        "source_mutations": 16507,
+        "excluded_by_price": 20,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "69123": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:51:00.427459+00:00",
+        "latitude": 45.758,
+        "longitude": 4.835,
+        "avg_price_m2": 4689.66,
+        "total_transactions": 1533,
+        "risks_count": 17,
+        "air_quality_score": 6.2,
+        "poi_sport": 94,
+        "poi_park": 284,
+        "poi_supermarket": 98,
+        "poi_pharmacy": 152,
+        "poi_school": 382,
+        "poi_restaurant": 1610,
+        "poi_hospital": 17
+      },
+      "collected_at": "2026-10-14T11:51:00.427459+00:00",
+      "geocoding": {
+        "label": "Lyon",
+        "latitude": 45.758,
+        "longitude": 4.835,
+        "city": "Lyon",
+        "postcode": "69001",
+        "score": 0.9639145454545454,
+        "insee_code": "69123"
+      },
+      "risks": {
+        "code_insee": "69123",
+        "commune": "LYON",
+        "total_risks": 17,
+        "risks": [
+          "Effet de surpression",
+          "Effet thermique",
+          "Effet toxique",
+          "Foudre",
+          "Grêle",
+          "Inondation",
+          "Neige et pluies verglaçantes",
+          "Par remontées de nappes naturelles",
+          "Par une crue torrentielle ou à montée rapide de cours d'eau",
+          "Par une crue à débordement lent de cours d'eau",
+          "Phénomène lié à l'atmosphère",
+          "Radon",
+          "Risque industriel",
+          "Rupture de barrage",
+          "Séisme",
+          "Tempête et grains (vent)",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Lyon",
+        "station_id": 2696,
+        "station_name": "LYON Centre",
+        "distance_km": 1.49,
+        "measurements": {
+          "o3": {
+            "value": 22.3,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 8557
+          },
+          "pm25": {
+            "value": 6.2,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 8559
+          },
+          "pm10": {
+            "value": 10.2,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 8558
+          },
+          "no2": {
+            "value": 9.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 8556
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "69123",
+        "scope_label": "Lyon",
+        "counts": {
+          "sport": 94,
+          "park": 284,
+          "supermarket": 98,
+          "pharmacy": 152,
+          "school": 382,
+          "restaurant": 1610,
+          "hospital": 17
+        },
+        "relation_id": 120965,
+        "area_id": 3600120965,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/120965",
+        "collected_at": "2026-10-14T11:50:57.494492+00:00",
+        "source_timestamp": "2026-10-14T11:48:43Z"
+      },
+      "dvf": {
+        "commune": "Lyon",
+        "nb_ventes_totales": 1533,
+        "prix_m2_median_global": 4689.66,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 4686.67,
+            "sample_count": 1455
+          },
+          "house": {
+            "median_price_m2": 5000.0,
+            "sample_count": 78
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 22534,
+        "source_mutations": 9604,
+        "excluded_by_price": 6,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "31555": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:52:16.932131+00:00",
+        "latitude": 43.604082,
+        "longitude": 1.433805,
+        "avg_price_m2": 3928.41,
+        "total_transactions": 1730,
+        "risks_count": 6,
+        "air_quality_score": 9.6,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-14T11:52:16.932131+00:00",
+      "geocoding": {
+        "label": "Toulouse",
+        "latitude": 43.604082,
+        "longitude": 1.433805,
+        "city": "Toulouse",
+        "postcode": "31000",
+        "score": 0.9638772727272726,
+        "insee_code": "31555"
+      },
+      "risks": {
+        "code_insee": "31555",
+        "commune": "TOULOUSE",
+        "total_risks": 6,
+        "risks": [
+          "Effet thermique",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par une crue à débordement lent de cours d'eau",
+          "Risque industriel",
+          "Rupture de barrage"
+        ]
+      },
+      "air": {
+        "city": "Toulouse",
+        "station_id": 2162670,
+        "station_name": "Toulouse Port de l'Embouchure",
+        "distance_km": 1.65,
+        "measurements": {
+          "pm25": {
+            "value": 9.6,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7773381
+          },
+          "pm10": {
+            "value": 21.9,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7774169
+          },
+          "no2": {
+            "value": 27.8,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7775402
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "31555"
+      },
+      "dvf": {
+        "commune": "Toulouse",
+        "nb_ventes_totales": 1730,
+        "prix_m2_median_global": 3928.41,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 4072.14,
+            "sample_count": 1142
+          },
+          "house": {
+            "median_price_m2": 3569.05,
+            "sample_count": 588
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 24567,
+        "source_mutations": 10656,
+        "excluded_by_price": 3,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "06088": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:53:29.709095+00:00",
+        "latitude": 43.71273,
+        "longitude": 7.255313,
+        "avg_price_m2": 5130.43,
+        "total_transactions": 2519,
+        "risks_count": 15,
+        "air_quality_score": 11.4,
+        "poi_sport": 24,
+        "poi_park": 113,
+        "poi_supermarket": 88,
+        "poi_pharmacy": 151,
+        "poi_school": 225,
+        "poi_restaurant": 789,
+        "poi_hospital": 14
+      },
+      "collected_at": "2026-10-14T11:53:29.709095+00:00",
+      "geocoding": {
+        "label": "Nice",
+        "latitude": 43.71273,
+        "longitude": 7.255313,
+        "city": "Nice",
+        "postcode": "06000",
+        "score": 0.9622227272727273,
+        "insee_code": "06088"
+      },
+      "risks": {
+        "code_insee": "06088",
+        "commune": "NICE",
+        "total_risks": 15,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Eboulement ou chutes de pierres et de blocs",
+          "Effet thermique",
+          "Feu de forêt",
+          "Glissement de terrain",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par ruissellement et coulée de boue",
+          "Par submersion marine",
+          "Par une crue torrentielle ou à montée rapide de cours d'eau",
+          "Recul du trait de côte et de falaises",
+          "Risque industriel",
+          "Séisme",
+          "Tassements différentiels",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Nice",
+        "station_id": 4087,
+        "station_name": "NICE ARSON",
+        "distance_km": 2.75,
+        "measurements": {
+          "no2": {
+            "value": 37.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 5078478
+          },
+          "o3": {
+            "value": 18.6,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 5078700
+          },
+          "pm10": {
+            "value": 29.6,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 5078621
+          },
+          "pm25": {
+            "value": 11.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 5078694
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "06088",
+        "scope_label": "Nice",
+        "counts": {
+          "sport": 24,
+          "park": 113,
+          "supermarket": 88,
+          "pharmacy": 151,
+          "school": 225,
+          "restaurant": 789,
+          "hospital": 14
+        },
+        "relation_id": 170100,
+        "area_id": 3600170100,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/170100",
+        "collected_at": "2026-10-14T11:53:26.948093+00:00",
+        "source_timestamp": "2026-10-14T11:51:51Z"
+      },
+      "dvf": {
+        "commune": "Nice",
+        "nb_ventes_totales": 2519,
+        "prix_m2_median_global": 5130.43,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 5079.37,
+            "sample_count": 2423
+          },
+          "house": {
+            "median_price_m2": 6138.08,
+            "sample_count": 96
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 22562,
+        "source_mutations": 10590,
+        "excluded_by_price": 9,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "44109": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:54:53.163535+00:00",
+        "latitude": 47.239367,
+        "longitude": -1.555335,
+        "avg_price_m2": 3812.17,
+        "total_transactions": 1410,
+        "risks_count": 22,
+        "air_quality_score": 8.2,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-14T11:54:53.163535+00:00",
+      "geocoding": {
+        "label": "Nantes",
+        "latitude": 47.239367,
+        "longitude": -1.555335,
+        "city": "Nantes",
+        "postcode": "44000",
+        "score": 0.9618245454545453,
+        "insee_code": "44109"
+      },
+      "risks": {
+        "code_insee": "44109",
+        "commune": "NANTES",
+        "total_risks": 22,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Affaissements et effondrements d'origine naturelle (cavités souterraines)",
+          "Avancée dunaire",
+          "Eboulement ou chutes de pierres et de blocs",
+          "Engins de guerre",
+          "Foudre",
+          "Glissement de terrain",
+          "Grêle",
+          "Inondation",
+          "Mouvement de terrain",
+          "Neige et pluies verglaçantes",
+          "Par remontées de nappes naturelles",
+          "Par ruissellement et coulée de boue",
+          "Par une crue à débordement lent de cours d'eau",
+          "Phénomène lié à l'atmosphère",
+          "Radon",
+          "Risque industriel",
+          "Rupture de barrage",
+          "Séisme",
+          "Tassements différentiels",
+          "Tempête et grains (vent)",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Nantes",
+        "station_id": 6159395,
+        "station_name": "CIM BOUTEILLERIE",
+        "distance_km": 2.34,
+        "measurements": {
+          "no2": {
+            "value": 17.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 14850202
+          },
+          "o3": {
+            "value": 27.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 14850195
+          },
+          "pm10": {
+            "value": 15.9,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 14850168
+          },
+          "pm25": {
+            "value": 8.2,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 14850158
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "44109"
+      },
+      "dvf": {
+        "commune": "Nantes",
+        "nb_ventes_totales": 1410,
+        "prix_m2_median_global": 3812.17,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 3640.0,
+            "sample_count": 867
+          },
+          "house": {
+            "median_price_m2": 4115.38,
+            "sample_count": 543
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 14219,
+        "source_mutations": 6430,
+        "excluded_by_price": 6,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "67482": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:56:04.422316+00:00",
+        "latitude": 48.579831,
+        "longitude": 7.761454,
+        "avg_price_m2": null,
+        "total_transactions": null,
+        "risks_count": 15,
+        "air_quality_score": 9.9,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-14T11:56:04.422316+00:00",
+      "geocoding": {
+        "label": "Strasbourg",
+        "latitude": 48.579831,
+        "longitude": 7.761454,
+        "city": "Strasbourg",
+        "postcode": "67000",
+        "score": 0.9613272727272727,
+        "insee_code": "67482"
+      },
+      "risks": {
+        "code_insee": "67482",
+        "commune": "STRASBOURG",
+        "total_risks": 15,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Effet de surpression",
+          "Effet thermique",
+          "Effet toxique",
+          "Engins de guerre",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par remontées de nappes naturelles",
+          "Par une crue à débordement lent de cours d'eau",
+          "Phénomène lié à l'atmosphère",
+          "Risque industriel",
+          "Séisme",
+          "Tassements différentiels",
+          "Tempête et grains (vent)",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Strasbourg",
+        "station_id": 2162767,
+        "station_name": "Strasbourg Neudorf Ecoquartier Danube",
+        "distance_km": 0.91,
+        "measurements": {
+          "pm10": {
+            "value": 15.3,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7775795
+          },
+          "no2": {
+            "value": 10.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7774349
+          },
+          "pm25": {
+            "value": 9.9,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7775539
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "67482"
+      },
+      "dvf": null
+    },
+    "34172": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:57:28.148001+00:00",
+        "latitude": 43.610476,
+        "longitude": 3.87048,
+        "avg_price_m2": 3620.69,
+        "total_transactions": 1133,
+        "risks_count": 12,
+        "air_quality_score": 8.3,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-14T11:57:28.148001+00:00",
+      "geocoding": {
+        "label": "Montpellier",
+        "latitude": 43.610476,
+        "longitude": 3.87048,
+        "city": "Montpellier",
+        "postcode": "34000",
+        "score": 0.9615745454545455,
+        "insee_code": "34172"
+      },
+      "risks": {
+        "code_insee": "34172",
+        "commune": "MONTPELLIER",
+        "total_risks": 12,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Eboulement ou chutes de pierres et de blocs",
+          "Feu de forêt",
+          "Glissement de terrain",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par une crue torrentielle ou à montée rapide de cours d'eau",
+          "Radon",
+          "Rupture de barrage",
+          "Séisme",
+          "Tassements différentiels",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Montpellier",
+        "station_id": 2720,
+        "station_name": "Montpellier Prés d'Arènes",
+        "distance_km": 2.49,
+        "measurements": {
+          "o3": {
+            "value": 17.9,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 5670
+          },
+          "pm25": {
+            "value": 8.3,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 5672
+          },
+          "pm10": {
+            "value": 53.8,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 5671
+          },
+          "no2": {
+            "value": 18.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 5673
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "34172"
+      },
+      "dvf": {
+        "commune": "Montpellier",
+        "nb_ventes_totales": 1133,
+        "prix_m2_median_global": 3620.69,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 3621.21,
+            "sample_count": 855
+          },
+          "house": {
+            "median_price_m2": 3610.43,
+            "sample_count": 278
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 14062,
+        "source_mutations": 6317,
+        "excluded_by_price": 3,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "33063": {
+      "snapshot": {
+        "updated_at": "2026-10-14T11:58:51.962249+00:00",
+        "latitude": 44.851939,
+        "longitude": -0.587877,
+        "avg_price_m2": 4500,
+        "total_transactions": 1922,
+        "risks_count": 7,
+        "air_quality_score": 5.2,
+        "poi_sport": 45,
+        "poi_park": 112,
+        "poi_supermarket": 56,
+        "poi_pharmacy": 103,
+        "poi_school": 225,
+        "poi_restaurant": 839,
+        "poi_hospital": 13
+      },
+      "collected_at": "2026-10-14T11:58:51.962249+00:00",
+      "geocoding": {
+        "label": "Bordeaux",
+        "latitude": 44.851939,
+        "longitude": -0.587877,
+        "city": "Bordeaux",
+        "postcode": "33000",
+        "score": 0.96091,
+        "insee_code": "33063"
+      },
+      "risks": {
+        "code_insee": "33063",
+        "commune": "BORDEAUX",
+        "total_risks": 7,
+        "risks": [
+          "Inondation",
+          "Mouvement de terrain",
+          "Par une crue à débordement lent de cours d'eau",
+          "Radon",
+          "Risque industriel",
+          "Séisme",
+          "Tassements différentiels"
+        ]
+      },
+      "air": {
+        "city": "Bordeaux",
+        "station_id": 2162620,
+        "station_name": "TALENCE",
+        "distance_km": 5.73,
+        "measurements": {
+          "pm10": {
+            "value": 8.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7772882
+          },
+          "o3": {
+            "value": 21.3,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7774134
+          },
+          "no2": {
+            "value": 7.2,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7774354
+          },
+          "pm25": {
+            "value": 5.2,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T10:00:00Z",
+            "sensor_id": 7775560
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "33063",
+        "scope_label": "Bordeaux",
+        "counts": {
+          "sport": 45,
+          "park": 112,
+          "supermarket": 56,
+          "pharmacy": 103,
+          "school": 225,
+          "restaurant": 839,
+          "hospital": 13
+        },
+        "relation_id": 105270,
+        "area_id": 3600105270,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/105270",
+        "collected_at": "2026-10-14T11:58:48.469549+00:00",
+        "source_timestamp": "2026-10-14T11:56:51Z"
+      },
+      "dvf": {
+        "commune": "Bordeaux",
+        "nb_ventes_totales": 1922,
+        "prix_m2_median_global": 4500.0,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 4391.07,
+            "sample_count": 1253
+          },
+          "house": {
+            "median_price_m2": 4788.73,
+            "sample_count": 669
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 15456,
+        "source_mutations": 6400,
+        "excluded_by_price": 8,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "59350": {
+      "snapshot": {
+        "updated_at": "2026-10-14T12:00:17.71705+00:00",
+        "latitude": 50.630951,
+        "longitude": 3.045391,
+        "avg_price_m2": 3524.03,
+        "total_transactions": 1434,
+        "risks_count": 6,
+        "air_quality_score": 7.7,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-14T12:00:17.717050+00:00",
+      "geocoding": {
+        "label": "Lille",
+        "latitude": 50.630951,
+        "longitude": 3.045391,
+        "city": "Lille",
+        "postcode": "59000",
+        "score": 0.9603745454545453,
+        "insee_code": "59350"
+      },
+      "risks": {
+        "code_insee": "59350",
+        "commune": "LILLE",
+        "total_risks": 6,
+        "risks": [
+          "Engins de guerre",
+          "Inondation",
+          "Mouvement de terrain",
+          "Risque industriel",
+          "Séisme",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Lille",
+        "station_id": 3831,
+        "station_name": "Wattignies",
+        "distance_km": 3.7,
+        "measurements": {
+          "no2": {
+            "value": 24.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T09:00:00Z",
+            "sensor_id": 13053060
+          },
+          "o3": {
+            "value": 21.3,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T09:00:00Z",
+            "sensor_id": 5078749
+          },
+          "pm10": {
+            "value": 18.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T09:00:00Z",
+            "sensor_id": 13931342
+          },
+          "pm25": {
+            "value": 7.7,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-14T09:00:00Z",
+            "sensor_id": 13931336
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "59350"
+      },
+      "dvf": {
+        "commune": "Lille",
+        "nb_ventes_totales": 1434,
+        "prix_m2_median_global": 3524.03,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 4076.12,
+            "sample_count": 826
+          },
+          "house": {
+            "median_price_m2": 2757.76,
+            "sample_count": 608
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 10412,
+        "source_mutations": 4503,
+        "excluded_by_price": 1,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "83137": {
+      "snapshot": {
+        "updated_at": "2026-10-14T12:01:44.636418+00:00",
+        "latitude": 43.136696,
+        "longitude": 5.933796,
+        "avg_price_m2": 2950,
+        "total_transactions": 882,
+        "risks_count": 15,
+        "air_quality_score": null,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-14T12:01:44.636418+00:00",
+      "geocoding": {
+        "label": "Toulon",
+        "latitude": 43.136696,
+        "longitude": 5.933796,
+        "city": "Toulon",
+        "postcode": "83000",
+        "score": 0.9590781818181817,
+        "insee_code": "83137"
+      },
+      "risks": {
+        "code_insee": "83137",
+        "commune": "TOULON",
+        "total_risks": 15,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Eboulement ou chutes de pierres et de blocs",
+          "Feu de forêt",
+          "Glissement de terrain",
+          "Inondation",
+          "Mouvement de terrain",
+          "Nucléaire",
+          "Par submersion marine",
+          "Par une crue torrentielle ou à montée rapide de cours d'eau",
+          "Radon",
+          "Recul du trait de côte et de falaises",
+          "Risque industriel",
+          "Séisme",
+          "Tassements différentiels",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Toulon",
+        "measurements": {}
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "83137"
+      },
+      "dvf": {
+        "commune": "Toulon",
+        "nb_ventes_totales": 882,
+        "prix_m2_median_global": 2950.0,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 2636.36,
+            "sample_count": 681
+          },
+          "house": {
+            "median_price_m2": 4233.58,
+            "sample_count": 201
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-30",
+        "source_rows": 9108,
+        "source_mutations": 3908,
+        "excluded_by_price": 4,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    }
+  }
+}
