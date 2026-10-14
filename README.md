@@ -99,13 +99,19 @@ Les fichiers DVF du millésime configuré (2025 actuellement) sont retélécharg
 source n'a pas changé. Strasbourg reste sans prix DVF car le Bas-Rhin n'est
 pas couvert. L'absence de mesure récente d'air est également possible.
 
-Le pipeline actualise Supabase et le workflow enregistre `web/data/provenance.json`
-dans le dépôt. Ce fichier doit rester synchronisé avec le site : pour une copie
-locale, récupérer le dernier commit avant de recharger la page ; pour un site
-hébergé, republier `web/` depuis ce commit. Une mise à jour de Supabase seule ne
-suffit pas, car l'interface vérifie que les métadonnées correspondent aux chiffres.
-Un push effectué avec `GITHUB_TOKEN` ne déclenche généralement pas un autre
-workflow de déploiement ; celui-ci doit être appelé explicitement si nécessaire.
+Le pipeline actualise Supabase et publie les métadonnées dans son bucket public
+`qol-public-metadata`, créé à la première exécution. Il contient uniquement le
+fichier JSON des observations, de leurs sources, dates et calculs ; aucune clé.
+Le site récupère automatiquement ce fichier à chaque rechargement, y compris
+lorsqu'il tourne sur localhost. Il vérifie que ces informations correspondent
+aux chiffres chargés avant de les afficher. Les fichiers locaux restent un repli
+si la publication distante n'est pas disponible et s'ils correspondent aux données.
+
+Le workflow enregistre aussi `web/data/provenance.json` dans le dépôt pour garder
+une trace des mises à jour. Un push effectué avec `GITHUB_TOKEN` ne déclenche
+généralement pas un autre workflow de déploiement ; un éventuel déploiement du
+code du site doit être appelé explicitement. La mise à jour des données via
+Supabase n'a pas besoin de redéployer le site.
 
 Le bilan et les métadonnées sont conservés 30 jours dans les artefacts Actions.
 Une collecte partielle publie les données disponibles et signale un échec ;
