@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from provenance import save_metadata, publish_metadata
+from provenance import save_metadata, publish_metadata, recent_commune_services
 from dotenv import load_dotenv
 from supabase import create_client, Client
 
@@ -53,8 +53,10 @@ def run_pipeline(client=None, cities=None, delay=3, report_path=REPORT_PATH):
         client = create_client(url, key)
     selected_cities = CITIES_TO_PROCESS if cities is None else cities
     report = {"started_at": datetime.now(timezone.utc).isoformat(),
-              "requested": len(selected_cities), "updated": [], "failed": [], "source_errors": []}
+              "requested": len(selected_cities), "updated": [], "failed": [], "source_errors": [],
+              "fresh_services": [], "retained_services": []}
     dvf_cache = {}
+    previous_services = recent_commune_services()
 
     for city in selected_cities:
         city_name = city["name"]
@@ -105,13 +107,21 @@ def run_pipeline(client=None, cities=None, delay=3, report_path=REPORT_PATH):
             # 4. POI OpenStreetMap
             print("🏛️  [4/5] OpenStreetMap (Overpass)...")
             try:
-                poi_metadata = get_commune_poi_counts(insee_code)
+                poi_metadata = get_commune_poi_counts(insee_code, relation_id=previous_services.get(insee_code, {}).get("relation_id"))
                 poi_data = poi_metadata["counts"]
+                report["fresh_services"].append(city_name)
             except Exception as e:
                 print(f"   ⚠️ Overpass indisponible (données manquantes) : {e}")
-                report["source_errors"].append({"city": city_name, "source": "Overpass", "error": type(e).__name__})
-                poi_data = {}
-                poi_metadata = {"status": "unavailable", "scope": "commune", "insee_code": insee_code}
+                cached = previous_services.get(insee_code)
+                report["source_errors"].append({"city": city_name, "source": "Overpass", "error": type(e).__name__, "retained": bool(cached)})
+                if cached:
+                    poi_metadata = {**cached, "retained": True, "refresh_status": "failed",
+                                    "last_attempt_at": datetime.now(timezone.utc).isoformat()}
+                    poi_data = cached["counts"]
+                    report["retained_services"].append({"city": city_name, "collected_at": cached["collected_at"]})
+                else:
+                    poi_data = {}
+                    poi_metadata = {"status": "unavailable", "scope": "commune", "insee_code": insee_code}
             print(f"   -> {poi_data}")
 
             # 5. DVF (immobilier)
@@ -183,7 +193,9 @@ def run_pipeline(client=None, cities=None, delay=3, report_path=REPORT_PATH):
             print(f"❌ Publication des métadonnées impossible : {type(e).__name__}")
             report["source_errors"].append({"city": "Métadonnées du site", "source": "Supabase Storage", "error": type(e).__name__})
     report["finished_at"] = datetime.now(timezone.utc).isoformat()
-    report["success"] = bool(selected_cities) and not report["failed"] and not report["source_errors"]
+    # Une donnée récente conservée reste datée et signalée dans le bilan et le site.
+    unresolved = [error for error in report["source_errors"] if not error.get("retained")]
+    report["success"] = bool(selected_cities) and not report["failed"] and not unresolved
     report_path = Path(report_path)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
