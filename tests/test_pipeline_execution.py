@@ -28,6 +28,7 @@ class PipelineExecutionTests(unittest.TestCase):
             "download_dvf_department": Mock(return_value=object()),
             "get_commune_stats": Mock(return_value={"prix_m2_median_global": 4000, "nb_ventes_totales": 20}),
             "save_metadata": Mock(),
+            "publish_metadata": Mock(),
         }
         self.mocks = mocks
         self.stack.enter_context(patch.multiple(pipeline, **mocks))
@@ -50,6 +51,7 @@ class PipelineExecutionTests(unittest.TestCase):
         self.assertIsNone(payload["air_quality_score"])
         self.assertEqual(payload["poi_park"], 0)
         self.mocks["save_metadata"].assert_called_once()
+        self.assertTrue(report["metadata_published"])
 
     def test_source_failure_is_not_a_success_or_a_zero(self):
         self.mocks["get_commune_poi_counts"].side_effect = RuntimeError("API indisponible")
@@ -83,6 +85,13 @@ class PipelineExecutionTests(unittest.TestCase):
         self.assertFalse(report["success"])
         self.assertEqual(report["updated"], [])
         self.mocks["save_metadata"].assert_not_called()
+
+    def test_publication_failure_makes_the_run_fail(self):
+        self.mocks["publish_metadata"].side_effect = RuntimeError("Storage indisponible")
+        report = self.run_collection()
+        self.assertFalse(report["success"])
+        self.assertFalse(report["metadata_published"])
+        self.assertEqual(report["source_errors"][0]["source"], "Supabase Storage")
 
 
 if __name__ == "__main__":
