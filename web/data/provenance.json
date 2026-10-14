@@ -2,22 +2,22 @@
   "cities": {
     "75056": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:48:18.441549+00:00",
+        "updated_at": "2026-10-14T17:53:42.832455+00:00",
         "latitude": 48.859,
         "longitude": 2.347,
         "avg_price_m2": 9655.17,
         "total_transactions": 9915,
         "risks_count": 2,
-        "air_quality_score": 80.4,
-        "poi_sport": null,
-        "poi_park": null,
-        "poi_supermarket": null,
-        "poi_pharmacy": null,
-        "poi_school": null,
-        "poi_restaurant": null,
-        "poi_hospital": null
+        "air_quality_score": 16.3,
+        "poi_sport": 312,
+        "poi_park": 715,
+        "poi_supermarket": 511,
+        "poi_pharmacy": 873,
+        "poi_school": 1258,
+        "poi_restaurant": 9078,
+        "poi_hospital": 75
       },
-      "collected_at": "2026-10-14T11:48:18.441549+00:00",
+      "collected_at": "2026-10-14T17:53:42.832455+00:00",
       "geocoding": {
         "label": "Paris",
         "latitude": 48.859,
@@ -43,35 +43,54 @@
         "distance_km": 0.39,
         "measurements": {
           "co": {
-            "value": 545.0,
+            "value": 157.0,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7773042
           },
           "o3": {
-            "value": 7.4,
+            "value": 61.2,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7773420
           },
           "no2": {
-            "value": 53.5,
+            "value": 18.0,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7773850
           },
           "pm25": {
-            "value": 80.4,
+            "value": 16.3,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7775825
           }
         }
       },
       "poi_commune": {
-        "status": "unavailable",
+        "status": "available",
         "scope": "commune",
-        "insee_code": "75056"
+        "insee_code": "75056",
+        "scope_label": "Paris",
+        "counts": {
+          "sport": 312,
+          "park": 715,
+          "supermarket": 511,
+          "pharmacy": 873,
+          "school": 1258,
+          "restaurant": 9078,
+          "hospital": 75
+        },
+        "relation_id": 7444,
+        "area_id": 3600007444,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/7444",
+        "collected_at": "2026-10-14T09:29:02.039596+00:00",
+        "source_timestamp": "2026-10-14T09:27:05Z",
+        "retained": true,
+        "refresh_status": "failed",
+        "last_attempt_at": "2026-10-14T17:53:36.814728+00:00"
       },
       "dvf": {
         "commune": "Paris",
@@ -99,22 +118,22 @@
     },
     "13055": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:49:40.14847+00:00",
+        "updated_at": "2026-10-14T17:54:21.04651+00:00",
         "latitude": 43.282,
         "longitude": 5.405,
         "avg_price_m2": 3367.14,
         "total_transactions": 3800,
         "risks_count": 15,
-        "air_quality_score": 8,
-        "poi_sport": null,
-        "poi_park": null,
-        "poi_supermarket": null,
-        "poi_pharmacy": null,
-        "poi_school": null,
-        "poi_restaurant": null,
-        "poi_hospital": null
+        "air_quality_score": 7.2,
+        "poi_sport": 45,
+        "poi_park": 208,
+        "poi_supermarket": 183,
+        "poi_pharmacy": 371,
+        "poi_school": 747,
+        "poi_restaurant": 1171,
+        "poi_hospital": 33
       },
-      "collected_at": "2026-10-14T11:49:40.148470+00:00",
+      "collected_at": "2026-10-14T17:54:21.046510+00:00",
       "geocoding": {
         "label": "Marseille",
         "latitude": 43.282,
@@ -153,47 +172,64 @@
         "distance_km": 2.72,
         "measurements": {
           "so2": {
-            "value": 0.3,
+            "value": 0.8,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7773873
           },
           "no2": {
-            "value": 12.5,
+            "value": 11.0,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7772760
           },
           "pm10": {
-            "value": 14.3,
+            "value": 11.6,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7772890
           },
           "co": {
-            "value": 191.0,
+            "value": 208.0,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7775172
           },
           "o3": {
-            "value": 63.7,
+            "value": 104.0,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7775562
           },
           "pm25": {
-            "value": 8.0,
+            "value": 7.2,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7775645
           }
         }
       },
       "poi_commune": {
-        "status": "unavailable",
+        "status": "available",
         "scope": "commune",
-        "insee_code": "13055"
+        "insee_code": "13055",
+        "scope_label": "Marseille",
+        "counts": {
+          "sport": 45,
+          "park": 208,
+          "supermarket": 183,
+          "pharmacy": 371,
+          "school": 747,
+          "restaurant": 1171,
+          "hospital": 33
+        },
+        "relation_id": 76469,
+        "area_id": 3600076469,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/76469",
+        "collected_at": "2026-10-14T17:54:15.419437+00:00",
+        "source_timestamp": "2026-10-14T17:52:08Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": {
         "commune": "Marseille",
@@ -221,13 +257,13 @@
     },
     "69123": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:51:00.427459+00:00",
+        "updated_at": "2026-10-14T17:54:55.331096+00:00",
         "latitude": 45.758,
         "longitude": 4.835,
         "avg_price_m2": 4689.66,
         "total_transactions": 1533,
         "risks_count": 17,
-        "air_quality_score": 6.2,
+        "air_quality_score": 3.8,
         "poi_sport": 94,
         "poi_park": 284,
         "poi_supermarket": 98,
@@ -236,7 +272,7 @@
         "poi_restaurant": 1610,
         "poi_hospital": 17
       },
-      "collected_at": "2026-10-14T11:51:00.427459+00:00",
+      "collected_at": "2026-10-14T17:54:55.331096+00:00",
       "geocoding": {
         "label": "Lyon",
         "latitude": 45.758,
@@ -277,27 +313,27 @@
         "distance_km": 1.49,
         "measurements": {
           "o3": {
-            "value": 22.3,
+            "value": 51.8,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 8557
           },
           "pm25": {
-            "value": 6.2,
+            "value": 3.8,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 8559
           },
           "pm10": {
-            "value": 10.2,
+            "value": 7.3,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 8558
           },
           "no2": {
-            "value": 9.4,
+            "value": 4.6,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 8556
           }
         }
@@ -320,8 +356,9 @@
         "area_id": 3600120965,
         "method": "osm-commune-nwr-count-v1",
         "source": "https://www.openstreetmap.org/relation/120965",
-        "collected_at": "2026-10-14T11:50:57.494492+00:00",
-        "source_timestamp": "2026-10-14T11:48:43Z"
+        "collected_at": "2026-10-14T17:54:50.340580+00:00",
+        "source_timestamp": "2026-10-14T17:53:10Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": {
         "commune": "Lyon",
@@ -349,22 +386,22 @@
     },
     "31555": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:52:16.932131+00:00",
+        "updated_at": "2026-10-14T17:55:27.024189+00:00",
         "latitude": 43.604082,
         "longitude": 1.433805,
         "avg_price_m2": 3928.41,
         "total_transactions": 1730,
         "risks_count": 6,
-        "air_quality_score": 9.6,
-        "poi_sport": null,
-        "poi_park": null,
-        "poi_supermarket": null,
-        "poi_pharmacy": null,
-        "poi_school": null,
-        "poi_restaurant": null,
-        "poi_hospital": null
+        "air_quality_score": 1.6,
+        "poi_sport": 71,
+        "poi_park": 216,
+        "poi_supermarket": 60,
+        "poi_pharmacy": 156,
+        "poi_school": 383,
+        "poi_restaurant": 890,
+        "poi_hospital": 23
       },
-      "collected_at": "2026-10-14T11:52:16.932131+00:00",
+      "collected_at": "2026-10-14T17:55:27.024189+00:00",
       "geocoding": {
         "label": "Toulouse",
         "latitude": 43.604082,
@@ -394,29 +431,46 @@
         "distance_km": 1.65,
         "measurements": {
           "pm25": {
-            "value": 9.6,
+            "value": 1.6,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7773381
           },
           "pm10": {
-            "value": 21.9,
+            "value": 5.2,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7774169
           },
           "no2": {
-            "value": 27.8,
+            "value": 10.3,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7775402
           }
         }
       },
       "poi_commune": {
-        "status": "unavailable",
+        "status": "available",
         "scope": "commune",
-        "insee_code": "31555"
+        "insee_code": "31555",
+        "scope_label": "Toulouse",
+        "counts": {
+          "sport": 71,
+          "park": 216,
+          "supermarket": 60,
+          "pharmacy": 156,
+          "school": 383,
+          "restaurant": 890,
+          "hospital": 23
+        },
+        "relation_id": 35738,
+        "area_id": 3600035738,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/35738",
+        "collected_at": "2026-10-14T17:55:22.408752+00:00",
+        "source_timestamp": "2026-10-14T17:53:10Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": {
         "commune": "Toulouse",
@@ -444,13 +498,13 @@
     },
     "06088": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:53:29.709095+00:00",
+        "updated_at": "2026-10-14T17:56:01.687053+00:00",
         "latitude": 43.71273,
         "longitude": 7.255313,
         "avg_price_m2": 5130.43,
         "total_transactions": 2519,
         "risks_count": 15,
-        "air_quality_score": 11.4,
+        "air_quality_score": 7.6,
         "poi_sport": 24,
         "poi_park": 113,
         "poi_supermarket": 88,
@@ -459,7 +513,7 @@
         "poi_restaurant": 789,
         "poi_hospital": 14
       },
-      "collected_at": "2026-10-14T11:53:29.709095+00:00",
+      "collected_at": "2026-10-14T17:56:01.687053+00:00",
       "geocoding": {
         "label": "Nice",
         "latitude": 43.71273,
@@ -498,27 +552,27 @@
         "distance_km": 2.75,
         "measurements": {
           "no2": {
-            "value": 37.4,
+            "value": 6.0,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 5078478
           },
           "o3": {
-            "value": 18.6,
+            "value": 99.7,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 5078700
           },
           "pm10": {
-            "value": 29.6,
+            "value": 14.0,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 5078621
           },
           "pm25": {
-            "value": 11.4,
+            "value": 7.6,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 5078694
           }
         }
@@ -541,8 +595,9 @@
         "area_id": 3600170100,
         "method": "osm-commune-nwr-count-v1",
         "source": "https://www.openstreetmap.org/relation/170100",
-        "collected_at": "2026-10-14T11:53:26.948093+00:00",
-        "source_timestamp": "2026-10-14T11:51:51Z"
+        "collected_at": "2026-10-14T17:55:56.651813+00:00",
+        "source_timestamp": "2026-10-14T17:54:11Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": {
         "commune": "Nice",
@@ -570,22 +625,22 @@
     },
     "44109": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:54:53.163535+00:00",
+        "updated_at": "2026-10-14T17:56:40.111425+00:00",
         "latitude": 47.239367,
         "longitude": -1.555335,
         "avg_price_m2": 3812.17,
         "total_transactions": 1410,
         "risks_count": 22,
-        "air_quality_score": 8.2,
-        "poi_sport": null,
-        "poi_park": null,
-        "poi_supermarket": null,
-        "poi_pharmacy": null,
-        "poi_school": null,
-        "poi_restaurant": null,
-        "poi_hospital": null
+        "air_quality_score": 8.5,
+        "poi_sport": 46,
+        "poi_park": 178,
+        "poi_supermarket": 45,
+        "poi_pharmacy": 79,
+        "poi_school": 254,
+        "poi_restaurant": 577,
+        "poi_hospital": 11
       },
-      "collected_at": "2026-10-14T11:54:53.163535+00:00",
+      "collected_at": "2026-10-14T17:56:40.111425+00:00",
       "geocoding": {
         "label": "Nantes",
         "latitude": 47.239367,
@@ -631,35 +686,52 @@
         "distance_km": 2.34,
         "measurements": {
           "no2": {
-            "value": 17.4,
+            "value": 7.8,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 14850202
           },
           "o3": {
-            "value": 27.4,
+            "value": 58.3,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 14850195
           },
           "pm10": {
-            "value": 15.9,
+            "value": 19.1,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 14850168
           },
           "pm25": {
-            "value": 8.2,
+            "value": 8.5,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 14850158
           }
         }
       },
       "poi_commune": {
-        "status": "unavailable",
+        "status": "available",
         "scope": "commune",
-        "insee_code": "44109"
+        "insee_code": "44109",
+        "scope_label": "Nantes",
+        "counts": {
+          "sport": 46,
+          "park": 178,
+          "supermarket": 45,
+          "pharmacy": 79,
+          "school": 254,
+          "restaurant": 577,
+          "hospital": 11
+        },
+        "relation_id": 59874,
+        "area_id": 3600059874,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/59874",
+        "collected_at": "2026-10-14T17:56:34.811238+00:00",
+        "source_timestamp": "2026-10-14T17:55:11Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": {
         "commune": "Nantes",
@@ -687,22 +759,22 @@
     },
     "67482": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:56:04.422316+00:00",
+        "updated_at": "2026-10-14T17:57:02.195692+00:00",
         "latitude": 48.579831,
         "longitude": 7.761454,
         "avg_price_m2": null,
         "total_transactions": null,
         "risks_count": 15,
-        "air_quality_score": 9.9,
-        "poi_sport": null,
-        "poi_park": null,
-        "poi_supermarket": null,
-        "poi_pharmacy": null,
-        "poi_school": null,
-        "poi_restaurant": null,
-        "poi_hospital": null
+        "air_quality_score": 8,
+        "poi_sport": 26,
+        "poi_park": 331,
+        "poi_supermarket": 56,
+        "poi_pharmacy": 76,
+        "poi_school": 150,
+        "poi_restaurant": 657,
+        "poi_hospital": 15
       },
-      "collected_at": "2026-10-14T11:56:04.422316+00:00",
+      "collected_at": "2026-10-14T17:57:02.195692+00:00",
       "geocoding": {
         "label": "Strasbourg",
         "latitude": 48.579831,
@@ -741,50 +813,67 @@
         "distance_km": 0.91,
         "measurements": {
           "pm10": {
-            "value": 15.3,
+            "value": 14.2,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7775795
           },
           "no2": {
-            "value": 10.0,
+            "value": 5.6,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7774349
           },
           "pm25": {
-            "value": 9.9,
+            "value": 8.0,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7775539
           }
         }
       },
       "poi_commune": {
-        "status": "unavailable",
+        "status": "available",
         "scope": "commune",
-        "insee_code": "67482"
+        "insee_code": "67482",
+        "scope_label": "Strasbourg",
+        "counts": {
+          "sport": 26,
+          "park": 331,
+          "supermarket": 56,
+          "pharmacy": 76,
+          "school": 150,
+          "restaurant": 657,
+          "hospital": 15
+        },
+        "relation_id": 71033,
+        "area_id": 3600071033,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/71033",
+        "collected_at": "2026-10-14T17:57:02.194044+00:00",
+        "source_timestamp": "2026-10-14T17:55:11Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": null
     },
     "34172": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:57:28.148001+00:00",
+        "updated_at": "2026-10-14T17:57:34.175444+00:00",
         "latitude": 43.610476,
         "longitude": 3.87048,
         "avg_price_m2": 3620.69,
         "total_transactions": 1133,
         "risks_count": 12,
-        "air_quality_score": 8.3,
-        "poi_sport": null,
-        "poi_park": null,
-        "poi_supermarket": null,
-        "poi_pharmacy": null,
-        "poi_school": null,
-        "poi_restaurant": null,
-        "poi_hospital": null
+        "air_quality_score": 3.6,
+        "poi_sport": 37,
+        "poi_park": 186,
+        "poi_supermarket": 40,
+        "poi_pharmacy": 97,
+        "poi_school": 214,
+        "poi_restaurant": 634,
+        "poi_hospital": 19
       },
-      "collected_at": "2026-10-14T11:57:28.148001+00:00",
+      "collected_at": "2026-10-14T17:57:34.175444+00:00",
       "geocoding": {
         "label": "Montpellier",
         "latitude": 43.610476,
@@ -820,35 +909,52 @@
         "distance_km": 2.49,
         "measurements": {
           "o3": {
-            "value": 17.9,
+            "value": 59.6,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 5670
           },
           "pm25": {
-            "value": 8.3,
+            "value": 3.6,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 5672
           },
           "pm10": {
-            "value": 53.8,
+            "value": 11.2,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 5671
           },
           "no2": {
-            "value": 18.4,
+            "value": 8.1,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 5673
           }
         }
       },
       "poi_commune": {
-        "status": "unavailable",
+        "status": "available",
         "scope": "commune",
-        "insee_code": "34172"
+        "insee_code": "34172",
+        "scope_label": "Montpellier",
+        "counts": {
+          "sport": 37,
+          "park": 186,
+          "supermarket": 40,
+          "pharmacy": 97,
+          "school": 214,
+          "restaurant": 634,
+          "hospital": 19
+        },
+        "relation_id": 28722,
+        "area_id": 3600028722,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/28722",
+        "collected_at": "2026-10-14T17:57:29.554131+00:00",
+        "source_timestamp": "2026-10-14T17:56:10Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": {
         "commune": "Montpellier",
@@ -876,22 +982,22 @@
     },
     "33063": {
       "snapshot": {
-        "updated_at": "2026-10-14T11:58:51.962249+00:00",
+        "updated_at": "2026-10-14T17:59:22.140918+00:00",
         "latitude": 44.851939,
         "longitude": -0.587877,
         "avg_price_m2": 4500,
         "total_transactions": 1922,
         "risks_count": 7,
-        "air_quality_score": 5.2,
-        "poi_sport": 45,
-        "poi_park": 112,
-        "poi_supermarket": 56,
-        "poi_pharmacy": 103,
-        "poi_school": 225,
-        "poi_restaurant": 839,
+        "air_quality_score": 3.7,
+        "poi_sport": 42,
+        "poi_park": 106,
+        "poi_supermarket": 53,
+        "poi_pharmacy": 104,
+        "poi_school": 226,
+        "poi_restaurant": 845,
         "poi_hospital": 13
       },
-      "collected_at": "2026-10-14T11:58:51.962249+00:00",
+      "collected_at": "2026-10-14T17:59:22.140918+00:00",
       "geocoding": {
         "label": "Bordeaux",
         "latitude": 44.851939,
@@ -922,27 +1028,27 @@
         "distance_km": 5.73,
         "measurements": {
           "pm10": {
-            "value": 8.4,
+            "value": 5.9,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7772882
           },
           "o3": {
-            "value": 21.3,
+            "value": 41.6,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7774134
           },
           "no2": {
-            "value": 7.2,
+            "value": 4.3,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7774354
           },
           "pm25": {
-            "value": 5.2,
+            "value": 3.7,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T10:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 7775560
           }
         }
@@ -953,20 +1059,21 @@
         "insee_code": "33063",
         "scope_label": "Bordeaux",
         "counts": {
-          "sport": 45,
-          "park": 112,
-          "supermarket": 56,
-          "pharmacy": 103,
-          "school": 225,
-          "restaurant": 839,
+          "sport": 42,
+          "park": 106,
+          "supermarket": 53,
+          "pharmacy": 104,
+          "school": 226,
+          "restaurant": 845,
           "hospital": 13
         },
         "relation_id": 105270,
         "area_id": 3600105270,
         "method": "osm-commune-nwr-count-v1",
         "source": "https://www.openstreetmap.org/relation/105270",
-        "collected_at": "2026-10-14T11:58:48.469549+00:00",
-        "source_timestamp": "2026-10-14T11:56:51Z"
+        "collected_at": "2026-10-14T17:59:16.343731+00:00",
+        "source_timestamp": "2026-06-01T08:52:28Z",
+        "api_endpoint": "https://overpass.private.coffee/api/interpreter"
       },
       "dvf": {
         "commune": "Bordeaux",
@@ -994,22 +1101,22 @@
     },
     "59350": {
       "snapshot": {
-        "updated_at": "2026-10-14T12:00:17.71705+00:00",
+        "updated_at": "2026-10-14T17:59:52.309071+00:00",
         "latitude": 50.630951,
         "longitude": 3.045391,
         "avg_price_m2": 3524.03,
         "total_transactions": 1434,
         "risks_count": 6,
-        "air_quality_score": 7.7,
-        "poi_sport": null,
-        "poi_park": null,
-        "poi_supermarket": null,
-        "poi_pharmacy": null,
-        "poi_school": null,
-        "poi_restaurant": null,
-        "poi_hospital": null
+        "air_quality_score": 7.1,
+        "poi_sport": 24,
+        "poi_park": 200,
+        "poi_supermarket": 40,
+        "poi_pharmacy": 77,
+        "poi_school": 194,
+        "poi_restaurant": 575,
+        "poi_hospital": 22
       },
-      "collected_at": "2026-10-14T12:00:17.717050+00:00",
+      "collected_at": "2026-10-14T17:59:52.309071+00:00",
       "geocoding": {
         "label": "Lille",
         "latitude": 50.630951,
@@ -1039,9 +1146,9 @@
         "distance_km": 3.7,
         "measurements": {
           "no2": {
-            "value": 24.5,
+            "value": 3.5,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T09:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 13053060
           },
           "o3": {
@@ -1051,23 +1158,40 @@
             "sensor_id": 5078749
           },
           "pm10": {
-            "value": 18.4,
+            "value": 14.7,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T09:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 13931342
           },
           "pm25": {
-            "value": 7.7,
+            "value": 7.1,
             "unit": "µg/m³",
-            "measured_at": "2026-10-14T09:00:00Z",
+            "measured_at": "2026-10-14T16:00:00Z",
             "sensor_id": 13931336
           }
         }
       },
       "poi_commune": {
-        "status": "unavailable",
+        "status": "available",
         "scope": "commune",
-        "insee_code": "59350"
+        "insee_code": "59350",
+        "scope_label": "Lille",
+        "counts": {
+          "sport": 24,
+          "park": 200,
+          "supermarket": 40,
+          "pharmacy": 77,
+          "school": 194,
+          "restaurant": 575,
+          "hospital": 22
+        },
+        "relation_id": 58404,
+        "area_id": 3600058404,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/58404",
+        "collected_at": "2026-10-14T17:59:46.767029+00:00",
+        "source_timestamp": "2026-10-14T17:58:13Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": {
         "commune": "Lille",
@@ -1095,22 +1219,22 @@
     },
     "83137": {
       "snapshot": {
-        "updated_at": "2026-10-14T12:01:44.636418+00:00",
+        "updated_at": "2026-10-14T18:00:26.465843+00:00",
         "latitude": 43.136696,
         "longitude": 5.933796,
         "avg_price_m2": 2950,
         "total_transactions": 882,
         "risks_count": 15,
         "air_quality_score": null,
-        "poi_sport": null,
-        "poi_park": null,
-        "poi_supermarket": null,
-        "poi_pharmacy": null,
-        "poi_school": null,
-        "poi_restaurant": null,
-        "poi_hospital": null
+        "poi_sport": 14,
+        "poi_park": 75,
+        "poi_supermarket": 29,
+        "poi_pharmacy": 53,
+        "poi_school": 138,
+        "poi_restaurant": 206,
+        "poi_hospital": 7
       },
-      "collected_at": "2026-10-14T12:01:44.636418+00:00",
+      "collected_at": "2026-10-14T18:00:26.465843+00:00",
       "geocoding": {
         "label": "Toulon",
         "latitude": 43.136696,
@@ -1147,9 +1271,26 @@
         "measurements": {}
       },
       "poi_commune": {
-        "status": "unavailable",
+        "status": "available",
         "scope": "commune",
-        "insee_code": "83137"
+        "insee_code": "83137",
+        "scope_label": "Toulon",
+        "counts": {
+          "sport": 14,
+          "park": 75,
+          "supermarket": 29,
+          "pharmacy": 53,
+          "school": 138,
+          "restaurant": 206,
+          "hospital": 7
+        },
+        "relation_id": 35280,
+        "area_id": 3600035280,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/35280",
+        "collected_at": "2026-10-14T18:00:21.959956+00:00",
+        "source_timestamp": "2026-10-14T17:59:13Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
       },
       "dvf": {
         "commune": "Toulon",
