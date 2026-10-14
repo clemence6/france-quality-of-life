@@ -71,10 +71,12 @@ jobs:
           if path.exists():
               report = json.loads(path.read_text(encoding='utf-8'))
               text = f"## Mise à jour des données\n\n{len(report['updated'])} / {report['requested']} villes mises à jour.\n"
+              text += f"\nServices : {len(report.get('fresh_services', []))} collectes nouvelles ; {len(report.get('retained_services', []))} collectes précédentes conservées.\n"
               for error in report['failed']:
                   text += f"\n- Ville non mise à jour : {error['city']} ({error['error']})"
               for error in report['source_errors']:
-                  text += f"\n- Source indisponible : {error['city']} · {error['source']} ({error['error']})"
+                  retained = ' — derniers chiffres conservés avec leur date' if error.get('retained') else ''
+                  text += f"\n- Actualisation indisponible : {error['city']} · {error['source']} ({error['error']}){retained}"
           else:
               text = '## Mise à jour interrompue\n\nAucun bilan de collecte disponible. Consulter les logs.\n'
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
