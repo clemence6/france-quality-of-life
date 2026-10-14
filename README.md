@@ -114,8 +114,13 @@ code du site doit être appelé explicitement. La mise à jour des données via
 Supabase n'a pas besoin de redéployer le site.
 
 Le bilan et les métadonnées sont conservés 30 jours dans les artefacts Actions.
-Une collecte partielle publie les données disponibles et signale un échec ;
-les sources indisponibles restent inconnues, jamais remplacées par zéro.
+En cas de panne Overpass, un comptage communal déjà contrôlé peut être conservé
+pendant sept jours au maximum. Sa date d'origine reste visible, et la panne est
+signalée dans le bilan et la fiche. Les anciennes collectes à 1 km, les données
+incomplètes ou trop anciennes ne peuvent pas servir de repli.
+Une collecte partielle publie les données disponibles. Elle signale un échec
+si une ville, la publication ou une source sans repli valide manque ; les valeurs
+indisponibles restent inconnues, jamais remplacées par zéro.
 Les erreurs par ville et par source apparaissent dans le résumé du lancement.
 
 Le cron ne fonctionne que sur la branche par défaut. GitHub peut retarder son
