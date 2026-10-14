@@ -29,6 +29,7 @@ class PipelineExecutionTests(unittest.TestCase):
             "get_commune_stats": Mock(return_value={"prix_m2_median_global": 4000, "nb_ventes_totales": 20}),
             "save_metadata": Mock(),
             "publish_metadata": Mock(),
+            "recent_commune_services": Mock(return_value={}),
         }
         self.mocks = mocks
         self.stack.enter_context(patch.multiple(pipeline, **mocks))
@@ -92,6 +93,25 @@ class PipelineExecutionTests(unittest.TestCase):
         self.assertFalse(report["success"])
         self.assertFalse(report["metadata_published"])
         self.assertEqual(report["source_errors"][0]["source"], "Supabase Storage")
+
+    def test_recent_services_survive_outage_with_original_date(self):
+        cached = {"status":"available", "scope":"commune", "insee_code":"33063",
+                  "relation_id":123, "area_id":3600000123,
+                  "counts":{"park":17}, "collected_at":"2026-10-13T10:00:00+00:00"}
+        self.mocks["recent_commune_services"].return_value = {"33063":cached}
+        self.mocks["get_commune_poi_counts"].side_effect = RuntimeError("API indisponible")
+        report = self.run_collection()
+        self.assertTrue(report["success"])
+        self.assertEqual(len(report["retained_services"]),1)
+        self.assertEqual(report["fresh_services"],[])
+        payload = self.client.table.return_value.upsert.call_args.args[0]
+        self.assertEqual(payload["poi_park"],17)
+        poi = self.mocks["save_metadata"].call_args.args[2]["poi_commune"]
+        self.assertEqual(poi["collected_at"],cached["collected_at"])
+        self.assertTrue(poi["retained"])
+        self.assertEqual(poi["refresh_status"],"failed")
+        self.assertNotIn("retained",cached)
+        self.mocks["get_commune_poi_counts"].assert_called_once_with("33063",relation_id=123)
 
 
 if __name__ == "__main__":
