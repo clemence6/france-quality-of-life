@@ -64,10 +64,11 @@ function coords(city) {
  return [Number(lon),Number(lat)];
 }
 async function fetchJson(url, options = {}) {
+ const {timeoutMs=20000,...requestOptions}=options;
  const controller = new AbortController();
- const timer = setTimeout(() => controller.abort(), 20000);
+ const timer = setTimeout(() => controller.abort(), timeoutMs);
  try {
-  const response = await fetch(url, {...options, signal:controller.signal});
+  const response = await fetch(url, {...requestOptions, signal:controller.signal});
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || `HTTP ${response.status}`);
   return data;
@@ -88,8 +89,11 @@ async function loadCities() {
    rows.push(...page); if (page.length<1000) break;
   }
   // Les rapports sont facultatifs : sans eux les valeurs restent historiques.
-  const documents = await Promise.allSettled([fetchJson("data/provenance.json"), fetchJson("data/audit.json")]);
-  provenance = documents[0].status === "fulfilled" ? documents[0].value : {};
+  const metadataUrl = new URL("/storage/v1/object/public/qol-public-metadata/provenance.json",SUPABASE_CONFIG.url);
+  const documents = await Promise.allSettled([fetchJson("data/provenance.json"), fetchJson("data/audit.json"),fetchJson(metadataUrl.href,{timeoutMs:5000,cache:"no-store"})]);
+  const local=documents[0].status === "fulfilled" ? documents[0].value : {};
+  const remote=documents[2].status === "fulfilled" ? documents[2].value : {};
+  provenance = resolveProvenance(rows,local,remote);
   audit = documents[1].status === "fulfilled" ? documents[1].value : {};
   cities = rows.filter((c) => c.insee_code && typeof c.city_name === "string").sort((a,b)=>a.city_name.localeCompare(b.city_name,"fr"));
   if (!cities.length) { $("statusArea").textContent = "Aucune ville accessible. Vérifie l’alimentation de la table et sa policy RLS de lecture."; return; }
@@ -104,6 +108,9 @@ async function loadCities() {
   const button = document.createElement("button"); button.className="retry"; button.textContent="Réessayer"; button.addEventListener("click",loadCities);
   $("statusArea").replaceChildren(p,button);
  }
+}
+function resolveProvenance(rows,local,remote) {
+ return {cities:Object.fromEntries(rows.map(city=>[city.insee_code,matchingEntry(remote,city)||matchingEntry(local,city)]).filter(([,entry])=>entry))};
 }
 function filteredCities() {
  const normalize = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
