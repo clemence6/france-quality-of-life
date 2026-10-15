@@ -29,6 +29,14 @@ Les valeurs indisponibles ne sont pas remplacées par zéro. Les services compt�
 
 ## Publication
 
-`firebase.json` est prêt et le compte est connecté au CLI Firebase. La mise en ligne n'est pas terminée : Google exige l'acceptation des conditions Cloud/Firebase et la console intégrée échoue à charger cette étape. L'absence d'URL publique vérifiée doit être distinguée de la prévisualisation locale.
+Après confirmation de l'acceptation des conditions par la propriétaire, le projet `ou-habiter-clemence` a été créé et le site publié avec succès sur Firebase Hosting le 15 octobre 2026.
 
-Après acceptation des conditions dans un navigateur habituel, vérifier la création du projet, publier, puis contrôler l'URL publique en français et sur `/en/`.
+- [Site en français](https://ou-habiter-clemence.web.app/).
+- [Site en anglais](https://ou-habiter-clemence.web.app/en/).
+- Version Hosting publiée : `d279ef1adf4d882d`.
+
+Les deux pages et les fichiers JavaScript, CSS, configuration publique et provenance répondent en HTTPS avec un statut 200 et correspondent aux fichiers locaux. Le chargement des vingt villes, une fiche Montpellier, les dates des sources et le comparateur Montpellier / Angers ont été vérifiés sur l'hébergement public. Le passage français / anglais fonctionne ; aucune erreur JavaScript n'a été constatée pendant ces vérifications.
+
+Les chemins `/.env`, `/.firebaserc` et `/src/main_pipeline.py` répondent 404. Aucune des clés privées Supabase ou OpenAQ du fichier local `.env` n'a été trouvée dans les fichiers publics contrôlés. La connexion aux données utilise la clé publique anon prévue à cet effet.
+
+Le cron continue d'actualiser Supabase indépendamment de Firebase : les observations disponibles sont chargées à chaque visite sans redéploiement quotidien du site.
