@@ -41,6 +41,15 @@ CITIES_TO_PROCESS = [
     {"name": "Bordeaux", "dept": "33", "insee": "33063"},
     {"name": "Lille", "dept": "59", "insee": "59350"},
     {"name": "Toulon", "dept": "83", "insee": "83137"},
+    {"name": "Brest", "dept": "29", "insee": "29019"},
+    {"name": "Rennes", "dept": "35", "insee": "35238"},
+    {"name": "Caen", "dept": "14", "insee": "14118"},
+    {"name": "Rouen", "dept": "76", "insee": "76540"},
+    {"name": "Angers", "dept": "49", "insee": "49007"},
+    {"name": "Tours", "dept": "37", "insee": "37261"},
+    {"name": "Dijon", "dept": "21", "insee": "21231"},
+    {"name": "Clermont-Ferrand", "dept": "63", "insee": "63113"},
+    {"name": "Grenoble", "dept": "38", "insee": "38185"},
 ]
 
 
