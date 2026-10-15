@@ -1,0 +1,341 @@
+# French source text ||| English translation. Longest match wins in one pass.
+Où habiter ? · Comprendre où mieux vivre|||Where to live? · Understand your options
+où habiter ?|||where to live?
+LES DONNÉES POUR MIEUX VIVRE|||DATA FOR A BETTER PLACE TO LIVE
+Découvrir les villes|||Explore cities
+Comparer|||Compare
+Sources & méthode|||Sources & methodology
+Langue du site|||Website language
+Explorer les villes françaises|||Explore French cities
+Carte interactive centrée sur la France|||Interactive map centred on France
+FRANCE · DONNÉES PUBLIQUES|||FRANCE · PUBLIC DATA
+Où vivre dans|||Where could you
+les meilleures|||live a better
+conditions ?|||life?
+Où vivre dans les meilleures conditions ? Explorez les villes françaises et comparez logement, services, air et risques dans un dashboard de données publiques.|||Find a place to live that suits you. Explore French cities and compare housing, local services, air and hazards through public data.
+Trouvez la ville qui vous correspond. Logement, services du quotidien, air et risques : explorez les données qui comptent pour vous.|||Find the city that suits you. Housing, everyday services, air and hazards: explore the data that matters to you.
+Une ville en tête ?|||Have a city in mind?
+Rechercher une ville|||Search for a city
+VILLES À EXPLORER|||CITIES TO EXPLORE
+Connexion aux données…|||Connecting to the data…
+Votre qualité de vie a plusieurs dimensions.|||Quality of life has many dimensions.
+Explorez la carte, puis le dashboard pour comprendre les atouts et les limites de chaque ville.|||Explore the map, then the dashboard to understand the strengths and limitations of each city.
+Détails de la ville|||City details
+VOTRE SÉLECTION|||YOUR SELECTION
+Deux villes, toutes leurs nuances.|||Two cities. A clearer picture.
+Des valeurs dans leurs unités d’origine. Les différences de période et de périmètre restent visibles.|||Each indicator keeps its original unit. Differences in dates and geographical coverage remain visible.
+Première ville|||First city
+Deuxième ville|||Second city
+PORTFOLIO · DATA ANALYSE|||PORTFOLIO · DATA ANALYSIS
+Des données publiques.|||Public data.
+Des choix mieux éclairés.|||Better-informed choices.
+Où habiter ? est un projet de portfolio qui explore une question concrète : comment comparer les villes pour trouver celle qui nous correspond ? Du téléchargement des données aux graphiques interactifs, voici la démarche et les choix qui rendent l’analyse compréhensible.|||Where to live? is a portfolio project exploring a practical question: how can we compare cities to find one that suits us? From data collection to interactive charts, this is the process and the reasoning behind the analysis.
+LA QUESTION|||THE QUESTION
+Où aimerait-on vivre ?|||Where would we like to live?
+Croiser le budget logement, les services du quotidien, l’air et les risques.|||Bring together housing budgets, everyday services, air and hazards.
+LE TERRAIN D’ÉTUDE|||THE STUDY AREA
+20 villes françaises|||20 French cities
+villes françaises|||French cities
+Un premier périmètre d’analyse, avec des données disponibles qui varient selon la ville.|||An initial selection of cities, with data availability varying from one city to another.
+LE RÉSULTAT|||THE RESULT
+Une exploration interactive|||An interactive exploration
+Une carte, des portraits de villes et des graphiques pour comprendre les compromis.|||A map, city profiles and charts that make the trade-offs easier to understand.
+01 / LA DÉMARCHE|||01 / THE PROCESS
+De la source au graphique.|||From source to chart.
+Le travail commence bien avant la visualisation : il faut récupérer les données, les rapprocher et vérifier ce qu’elles permettent de comparer.|||The work starts long before visualisation: collecting data, matching sources and checking which comparisons they support.
+Collecter|||Collect
+Des scripts Python téléchargent les ventes immobilières et interrogent les API des services, de l’air, des risques et de la cartographie.|||Python scripts download property transactions and query APIs for services, air measurements, hazards and mapping.
+Préparer|||Prepare
+Le code INSEE identifie la même commune dans les différentes sources. Les données sont nettoyées et les maisons séparées des appartements.|||The INSEE municipality code links the same place across sources. Data is cleaned, with houses analysed separately from apartments.
+Contrôler|||Validate
+Les dates, les unités et les limites géographiques sont vérifiées. Une information manquante reste manquante : elle ne devient pas zéro.|||Dates, units and geographical boundaries are checked. Missing information stays missing: it is never replaced with zero.
+Restituer|||Present
+Les résultats sont organisés dans Supabase et accompagnés de leur origine. La carte et les graphiques les rendent explorables, ville par ville.|||Results are stored in Supabase together with their provenance. The map and charts make them explorable, city by city.
+02 / LES DONNÉES|||02 / THE DATA
+Une source pour chaque question.|||A source for each question.
+Une API permet aux scripts de récupérer des informations directement auprès d’un service. Ici, chaque source répond à une question différente ; chaque indicateur garde son unité, sa date et son périmètre.|||An API lets scripts retrieve information directly from a service. Each source answers a different question; each indicator keeps its unit, date and geographical scope.
+Pourquoi les données INSEE ne figurent-elles pas dans les graphiques ?|||Why are INSEE indicators not included in the charts?
+Les essais sur les données INSEE ne sont pas encore intégrés à cette version. La population, les revenus et le chômage ne sont donc pas affichés. Le|||Experiments with INSEE data are not yet integrated into this version. Population, income and unemployment are therefore not shown. The
+comparateur officiel de territoires ↗|||official area comparison tool ↗
+permet de compléter la lecture.|||provides additional context.
+03 / LES CHOIX D’ANALYSE|||03 / ANALYTICAL DECISIONS
+Nettoyer les données, c’est aussi prendre des décisions.|||Cleaning data means making choices.
+IMMOBILIER|||HOUSING
+Éviter les prix mal calculés|||Avoid misleading price calculations
+Une vente peut apparaître sur plusieurs lignes ou concerner plusieurs biens. Le calcul retient les ventes décrites sur une seule ligne pour limiter les erreurs d’attribution du prix.|||A transaction can appear on multiple rows or involve several properties. The calculation keeps single-row transactions to reduce incorrect price attribution.
+SERVICES|||SERVICES
+Comparer toute la commune|||Cover the whole municipality
+Un cercle autour du centre ne couvre pas tous les quartiers. Le comptage utilise les limites de la commune pour inclure les services référencés dans l’ensemble de la ville.|||A circle around the centre misses some neighbourhoods. Counts use municipal boundaries to include mapped services throughout the city.
+QUALITÉ DES DONNÉES|||DATA QUALITY
+Distinguer zéro et inconnu|||Distinguish zero from unknown
+Si une API ne répond pas, cela ne signifie pas qu’il n’y a aucun service ou aucun risque. La valeur est signalée comme indisponible et aucun chiffre n’est inventé.|||An API failing to respond does not mean there are no services or hazards. The value is marked unavailable; no number is invented.
+COMPARAISON|||COMPARISON
+Garder des indicateurs séparés|||Keep indicators separate
+Un prix, un relevé d’air et une liste de risques ne décrivent pas la même chose. Les graphiques permettent de les croiser sans fabriquer une note de « meilleure ville ».|||A price, an air measurement and a list of hazards describe different things. The charts bring them together without inventing a single best-city score.
+Comment les prix immobiliers sont-ils calculés ?|||How are property prices calculated?
+Un prix médian est un repère :|||The median price is a reference point:
+la moitié des ventes retenues a un prix au m² inférieur, l’autre moitié un prix supérieur. Le calcul est fait séparément pour les maisons et les appartements, dans chaque ville.|||half of the retained transactions have a lower price per square metre, and half a higher one. Houses and apartments are calculated separately for each city.
+Seules les ventes de maisons ou d’appartements décrites sur une seule ligne sont conservées. Le prix et la surface doivent être renseignés et positifs. Les prix inférieurs à 200 ou supérieurs à 20 000 €/m² sont écartés pour limiter les valeurs extrêmes. Il faut au moins 10 ventes retenues pour afficher un prix médian.|||Only house or apartment sales recorded on a single row are retained. Price and floor area must be present and positive. Prices below 200 or above 20,000 €/m² are excluded to limit extreme values. A median is shown only when at least 10 transactions remain.
+Ces filtres excluent une partie des ventes, y compris des transactions réelles. Le résultat donne un repère sur les ventes retenues, pas une estimation de tous les logements de la ville. La période et le nombre de ventes restent accessibles dans les fiches et les graphiques.|||These filters exclude some sales, including genuine transactions. The result is a reference for the retained sample, not a valuation of every home in the city. Dates and sample sizes remain available in city profiles and charts.
+Comment les contrôles peuvent-ils être vérifiés ?|||How can the checks be reviewed?
+Les scripts conservent la source, la date de collecte, la commune et les informations utiles au calcul. Un rapport permet de retrouver les filtres immobiliers, les stations de mesure et les réponses des API. Des tests vérifient notamment les ventes sur plusieurs lignes, les unités de l’air et les limites communales.|||Scripts retain the source, collection date, municipality and calculation details. A report records property filters, monitoring stations and API responses. Tests cover multi-row transactions, air measurement units and municipal boundaries.
+Une vérification technique ne garantit pas que toutes les données sont complètes. Par exemple, un service absent d’OpenStreetMap peut exister dans la réalité.|||Technical checks cannot guarantee complete data. For example, a service missing from OpenStreetMap may still exist in reality.
+Ouvrir le rapport de contrôle détaillé ↗|||Open the detailed validation report ↗
+04 / LA RÉALISATION|||04 / IMPLEMENTATION
+Un projet data de bout en bout.|||An end-to-end data project.
+Collecte & préparation|||Collection & preparation
+Python, pandas et requests : téléchargement des fichiers, appels API, filtres et calcul des indicateurs.|||Python, pandas and requests: file downloads, API calls, filtering and indicator calculations.
+Stockage & traçabilité|||Storage & provenance
+Supabase et PostgreSQL pour les résultats ; fichiers JSON pour conserver les sources, les dates et les contrôles.|||Supabase and PostgreSQL store results; JSON files retain sources, dates and validation details.
+Analyse & visualisation|||Analysis & visualisation
+HTML, CSS et JavaScript, carte MapLibre et graphiques SVG interactifs : filtres, comparaisons et accès aux valeurs détaillées.|||HTML, CSS and JavaScript, a MapLibre map and interactive SVG charts: filters, comparisons and access to detailed values.
+Ce que ce projet met en pratique|||Skills demonstrated by this project
+Relier plusieurs sources, définir des indicateurs cohérents, documenter les choix de calcul et construire une restitution accessible. Le dashboard montre les différences entre villes et les informations qui manquent encore pour décider.|||Combining sources, defining consistent indicators, documenting calculation choices and building an accessible presentation. The dashboard highlights differences between cities and the information still missing for a decision.
+PARLONS DATA|||LET US TALK DATA
+Un projet, une opportunité, un échange ?|||A project, an opportunity, a conversation?
+Ce portfolio présente ma démarche en analyse de données. Retrouvez-moi sur LinkedIn pour échanger autour du projet ou d’une opportunité professionnelle.|||This portfolio presents my approach to data analysis. Find me on LinkedIn to discuss the project or a professional opportunity.
+Me contacter sur LinkedIn ↗|||Contact me on LinkedIn ↗
+Voir toutes les villes étudiées|||View all cities in the study
+Vue d’ensemble|||Overview
+Recentrer sur la France|||Centre on France
+Glissez la carte · Cliquez sur une ville|||Drag the map · Select a city
+LES VILLES EN CHIFFRES|||CITIES IN NUMBERS
+La qualité de vie,|||Quality of life,
+sous plusieurs angles.|||from different angles.
+Repérez les compromis qui comptent pour votre prochain lieu de vie. Chaque graphique pose une question, chaque indicateur conserve son unité.|||Explore the trade-offs that matter for your next place to live. Each chart asks a question; each indicator keeps its own unit.
+Chargement de l’audit…|||Loading the validation report…
+Voir les données ↗|||View the data ↗
+PÉRIMÈTRE DE L’ANALYSE|||SCOPE OF THE ANALYSIS
+Toutes les villes ↺|||All cities ↺
+Les graphiques apparaîtront après le chargement des villes.|||Charts will appear once the cities have loaded.
+01 / BUDGET LOGEMENT|||01 / HOUSING BUDGET
+Quel budget pour acheter ?|||What budget do you need to buy?
+Type de logement du graphique de prix|||Property type for the price chart
+Appartements|||Apartments
+Maisons|||Houses
+Comparez les prix médians au m² des ventes retenues dans chaque ville, du moins cher au plus cher.|||Compare median prices per square metre in the retained sales sample, from the lowest to the highest.
+02 / TYPES DE LOGEMENT|||02 / PROPERTY TYPES
+Appartement ou maison ?|||Apartment or house?
+Prix médians|||Median prices
+Voyez comment les prix au m² diffèrent entre les maisons et les appartements vendus dans chaque ville.|||Explore how prices per square metre differ between houses and apartments sold in each city.
+Appartement|||Apartment
+Maison|||House
+Les biens vendus peuvent être très différents. Survolez les points pour voir le nombre de ventes utilisées.|||The properties sold can differ considerably. Hover over a point to see the number of transactions used.
+03 / VIE QUOTIDIENNE|||03 / EVERYDAY LIFE
+Quels services trouve-t-on dans chaque ville ?|||Which services are mapped in each city?
+Matrice des services|||Services matrix
+Parcs, pharmacies, écoles, commerces : comparez les services référencés dans l’ensemble de chaque commune.|||Parks, pharmacies, schools and shops: compare mapped services across each municipality.
+Plus la couleur est soutenue, plus le nombre est élevé pour ce service. Les cases grisées correspondent aux données indisponibles.|||Darker colours indicate higher counts for that service. Grey cells mean that data is unavailable.
+04 / COMPROMIS|||04 / TRADE-OFFS
+Budget et services : quel équilibre ?|||Housing budget and services: what balance?
+Service à croiser avec le prix|||Service to compare with property prices
+Parcs|||Parks
+Pharmacies|||Pharmacies
+Écoles|||Schools
+Restaurants|||Restaurants
+Hôpitaux|||Hospitals
+Centres de fitness|||Fitness centres
+Supermarchés|||Supermarkets
+Repérez les villes qui combinent un budget logement adapté et les services qui comptent pour vous.|||Find cities that combine a suitable housing budget with the services that matter to you.
+Survolez une ville pour la découvrir, ou cliquez pour la mettre en évidence. Les nombres de services couvrent toute la commune.|||Hover over a city to explore its values, or select it to highlight it. Service counts cover the whole municipality.
+Que mesurent les stations proches ?|||What do nearby monitoring stations measure?
+Les PM2.5 sont des particules fines présentes dans l’air. Chaque point montre une mesure conservée pour une station proche de la ville.|||PM2.5 are fine particles in the air. Each point shows a recorded measurement from a station near the city.
+Les mesures n’ont pas toutes été prises au même moment. Survolez un point pour connaître la station, sa distance et la date.|||Measurements were not all taken at the same time. Hover over a point to see its station, distance and date.
+06 / RISQUES RECENSÉS|||06 / RECORDED HAZARDS
+Quels types de risques sont documentés ?|||Which types of hazards are documented?
+Famille de risques|||Hazard category
+Toutes les catégories|||All categories
+Eau & inondations|||Water & flooding
+Sol & sous-sol|||Ground & geology
+Météo & atmosphère|||Weather & atmosphere
+Industrie & transport|||Industry & transport
+Un point indique qu’un risque est mentionné pour la commune. Il ne dit pas si votre logement est exposé, ni à quel niveau.|||A dot means a hazard is recorded for the municipality. It does not indicate whether a specific property is exposed or the level of exposure.
+Un risque absent de cette liste peut tout de même exister. Pour un bien précis, consultez Géorisques à son adresse.|||A hazard missing from this list may still exist. For a specific property, check its address on Géorisques.
+07 / QUALITÉ DES DONNÉES|||07 / DATA QUALITY
+Avant de conclure, vérifier ce qu’on sait.|||Before drawing conclusions, check what is known.
+Données disponibles|||Available data
+Ces nombres montrent pour combien de villes des données sont disponibles. Ils ne garantissent pas que chaque source est complète.|||These counts show how many cities have available data. They do not guarantee that each source is complete.
+Choisir la ville qui répond à vos priorités.|||Choose a city that matches your priorities.
+Ce projet aide à identifier les villes où il pourrait faire bon vivre pour vous, en rendant les compromis visibles. Les données éclairent votre choix ; elles ne résument pas une vie à une note.|||This project helps identify cities that could suit your life by making trade-offs visible. Data informs your choice; it cannot reduce a life to a score.
+Revenir à la carte ↑|||Back to the map ↑
+OÙ HABITER ? · DES DONNÉES POUR CHOISIR SON LIEU DE VIE.|||WHERE TO LIVE? · DATA TO HELP YOU CHOOSE YOUR NEXT HOME.
+France métropolitaine · villes documentées|||Metropolitan France · documented cities
+Ancien calcul retiré · à recalculer|||Previous calculation removed · recalculation needed
+ventes retenues|||retained sales
+Renseigne l’URL et la clé publique dans config.js.|||Set the Supabase URL and public key in config.js.
+Réponse Supabase inattendue.|||Unexpected response from Supabase.
+Aucune ville accessible. Vérifie l’alimentation de la table et sa policy RLS de lecture.|||No cities are accessible. Check that the table contains data and permits public read access.
+villes documentées · France métropolitaine|||documented cities · metropolitan France
+Rapport de contrôle du|||Validation report dated
+. Les prix sont recalculés à partir des fichiers DVF déjà téléchargés ; chaque collecte d’API conserve sa propre date.|||. Prices are recalculated from downloaded DVF files; each API collection keeps its own date.
+Le rapport de contrôle n’est pas disponible pour cette version.|||The validation report is unavailable for this version.
+La base ne répond pas après 20 secondes. Vérifie que le projet Supabase est actif.|||The database has not responded after 20 seconds. Check that the Supabase project is active.
+Impossible de joindre la base. Vérifie la connexion et que Supabase n’est pas en pause.|||Cannot connect to the database. Check the connection and whether Supabase is paused.
+Réessayer|||Try again
+€/m² · appartements, échantillon|||€/m² · apartments, sample
+Découvrir les données & leurs limites|||Explore the data & its limitations
+Aucune ville ne correspond à la recherche.|||No city matches your search.
+PORTRAIT DE VILLE|||CITY PROFILE
+Fermer la fiche|||Close city profile
+Commune · INSEE|||Municipality · INSEE
+Base mise à jour le|||Database updated on
+ACHETER UN APPARTEMENT|||BUYING AN APARTMENT
+Calculé à partir des ventes DVF|||Calculated from DVF property sales
+Prix indisponible|||Price unavailable
+Prix médian ·|||Median price ·
+Immobilier|||Property prices
+Maisons · prix médian|||Houses · median price
+Un repère calculé sur une sélection de ventes, pas sur tous les logements. Aucun prix n’est affiché avec moins de 10 ventes retenues.|||A reference based on a selection of transactions, not every home. No price is shown with fewer than 10 retained sales.
+Les données disponibles ne permettent pas encore de calculer un prix fiable pour cette ville.|||Available data does not yet support a reliable price calculation for this city.
+Que signifie « prix médian » ?|||What does median price mean?
+La moitié des ventes retenues a un prix au m² plus bas, l’autre moitié un prix plus élevé. Les maisons et les appartements sont étudiés séparément.|||Half of the retained sales have a lower price per square metre, and half a higher one. Houses and apartments are analysed separately.
+La sélection des ventes et les filtres de prix sont expliqués dans « Sources & méthode ».|||Transaction selection and price filters are explained in Sources & methodology.
+Les services dans la ville|||Services across the city
+Dernière collecte du|||Last collected on
+Actualisé le|||Updated on
+Données communales indisponibles|||Municipal data unavailable
+La mise à jour a échoué. Les chiffres du|||The update failed. Figures from
+restent affichés.|||remain displayed.
+Services référencés dans les limites de la commune de|||Services mapped within the municipal boundaries of
+. Le recensement dépend des informations disponibles dans OpenStreetMap.|||. Coverage depends on the information available in OpenStreetMap.
+Risques recensés|||Recorded hazards
+Risques · GASPAR|||Hazards · GASPAR
+Consulté le|||Checked on
+Source et date conservées|||Source and date retained
+Ancienne donnée · à vérifier|||Historical data · needs checking
+Types de risques|||Hazard types
+Un risque mentionné pour la commune ne touche pas forcément chaque logement. Consultez Géorisques à l’adresse du bien pour en savoir plus.|||A hazard recorded for a municipality does not necessarily affect every home. Check the property address on Géorisques for more details.
+La liste a évolué depuis l’ancienne collecte.|||The list has changed since the previous collection.
+Air · particules fines|||Air · fine particles
+Dernière mesure PM2.5 conservée|||Latest retained PM2.5 reading
+Mesure du|||Measured on
+Une mesure à un endroit et à un instant précis. Elle ne décrit pas l’air de toute la ville sur l’année.|||A measurement at a specific location and time. It does not describe annual air quality across the whole city.
+Donnée indisponible|||Data unavailable
+Aucune mesure récente de particules fines trouvée dans les stations interrogées à moins de 25 km. Cela ne signifie pas que l’air est bon ou mauvais.|||No recent fine-particle reading was found among the queried stations within 25 km. This does not imply that air quality is good or bad.
+Donnée insuffisante|||Insufficient data
+La source ou la date de l’ancienne mesure manque. Elle n’est pas affichée pour éviter une comparaison trompeuse.|||The source or date of the historical reading is missing. It is hidden to avoid a misleading comparison.
+Voir la comparaison ↗|||View comparison ↗
+Ajouter à ma comparaison ↗|||Add to my comparison ↗
+Portrait officiel INSEE ↗|||Official INSEE city profile ↗
+Chargez les villes pour les comparer.|||Load the cities to compare them.
+Liste documentée|||Documented list
+Historique, non certifié|||Historical, unverified
+pas une intensité de risque|||not a measure of severity
+relevé ponctuel|||single reading
+Aucun relevé PM2.5 récent exploitable trouvé|||No usable recent PM2.5 reading found
+Non comparable|||Not comparable
+Polluant / unité / date non conservés|||Pollutant, unit or date not retained
+Appartements · médiane|||Apartments · median
+Maisons · médiane|||Houses · median
+Air · relevé documenté|||Air · documented reading
+· dans la commune|||· across the municipality
+Recensé dans toute la commune|||Mapped across the whole municipality
+La même ville est sélectionnée des deux côtés.|||The same city is selected on both sides.
+Les prix couvrent la même période et sont calculés avec les mêmes règles. Les logements vendus peuvent cependant être différents d’une ville à l’autre.|||Prices cover the same period and use the same calculation rules. However, the properties sold can differ between cities.
+Les périodes des prix diffèrent ou certaines données manquent : comparez ces prix avec prudence.|||Price periods differ or some data is missing: compare these prices with care.
+Une grande ville peut compter davantage de services. Les mesures d’air décrivent un moment précis.|||Larger cities may have more services. Air readings describe a specific moment in time.
+Indicateur|||Indicator
+DVF · quel budget pour acheter ?|||DVF · what budget do you need to buy?
+Fichiers CSV · ventes immobilières|||CSV files · property transactions
+Les fichiers de ventes publiés par la DGFiP fournissent le prix, la surface et le type de logement. Python et pandas sélectionnent les ventes utilisables et calculent le prix médian au m² par ville, pour les maisons et les appartements séparément.|||Transaction files published by the French tax authority provide prices, floor areas and property types. Python and pandas select usable sales and calculate median prices per square metre for each city, separately for houses and apartments.
+Ces prix décrivent les ventes retenues. Strasbourg n’a pas de prix DVF : cette source ne couvre pas le Bas-Rhin.|||These prices describe the retained sales sample. Strasbourg has no DVF price because this source does not cover the Bas-Rhin department.
+OpenStreetMap · quels services au quotidien ?|||OpenStreetMap · which everyday services are mapped?
+API Overpass · services cartographiés|||Overpass API · mapped services
+Une requête récupère les services référencés dans les limites de chaque commune : pharmacies, hôpitaux, écoles, parcs, centres de fitness, supermarchés et restaurants. Le code INSEE permet de sélectionner le bon territoire.|||A query retrieves mapped services within each municipality: pharmacies, hospitals, schools, parks, fitness centres, supermarkets and restaurants. The INSEE code identifies the correct territory.
+La carte est alimentée par des contributeurs : des lieux peuvent manquer ou être décrits plusieurs fois. Le nombre de services dépend aussi de la taille de la ville.|||The map is maintained by contributors: places may be missing or mapped more than once. Service counts also depend on city size.
+Géorisques · quels risques sont recensés ?|||Géorisques · which hazards are recorded?
+API GASPAR · risques par commune|||GASPAR API · hazards by municipality
+L’API est interrogée pour chaque commune. Les intitulés des risques sont conservés et les répétitions retirées pour présenter une liste lisible.|||The API is queried for each municipality. Hazard names are retained and duplicates removed to produce a readable list.
+La liste concerne la commune. Elle n’indique ni la gravité d’un risque ni si un logement précis est exposé.|||The list covers the municipality. It does not show hazard severity or whether a specific home is exposed.
+OpenAQ · que mesure l’air à proximité ?|||OpenAQ · what is measured in the air nearby?
+API OpenAQ v3 · mesures de particules fines|||OpenAQ v3 API · fine-particle readings
+Le script cherche une station fixe de référence à moins de 25 km et récupère un relevé de particules fines PM2.5. Il garde la station, la distance, l’heure et l’unité de mesure. À la collecte, seuls les relevés de moins de 48 heures sont retenus.|||The script looks for a fixed reference station within 25 km and retrieves a PM2.5 fine-particle reading. It retains the station, distance, time and unit. At collection time, only readings less than 48 hours old are accepted.
+Il s’agit d’une mesure ponctuelle près d’une station, pas d’une moyenne annuelle pour toute la ville. La date reste visible même lorsque la mesure vieillit.|||This is a single reading near a monitoring station, not an annual average for the entire city. Its date remains visible as the measurement ages.
+IGN · où placer la ville sur la carte ?|||IGN · where should the city appear on the map?
+API de géocodage · coordonnées de la commune|||Geocoding API · municipal coordinates
+Le service IGN fournit les coordonnées de la commune. Le code renvoyé est vérifié pour éviter de placer sur la carte une autre ville portant le même nom.|||The IGN service provides municipal coordinates. The returned code is checked to avoid mapping a different city with the same name.
+Le point sert à localiser la commune et à rechercher les stations proches. Il ne représente pas tous ses quartiers.|||The point locates the municipality and helps find nearby monitoring stations. It does not represent every neighbourhood.
+Voir la source|||View source
+À garder en tête.|||Keep in mind.
+La bibliothèque cartographique est indisponible. Les fiches et la comparaison restent accessibles.|||The mapping library is unavailable. City profiles and comparisons remain accessible.
+Une ressource de la carte ne charge pas. Vérifie ta connexion ; les données des villes restent indépendantes du fond de carte.|||A map resource failed to load. Check your connection; city data remains available independently of the basemap.
+Ce navigateur ne permet pas d’afficher la carte WebGL. Explore les villes depuis la liste.|||This browser cannot display the WebGL map. Explore cities using the list.
+Explorer les|||Explore
+Découvrir ${city.city_name}|||Explore ${city.city_name}
+villes françaises|||French cities
+VILLES ↗|||CITIES ↗
+€/m² · appartements|||€/m² · apartments
+Échantillon DVF|||DVF sample
+Données publiques & périmètres|||Public data & geographical coverage
+Cliquer pour découvrir la fiche ↗|||Select to open the city profile ↗
+Lire les valeurs en tableau|||Read values in a table
+villes avec un prix disponible. Survolez une barre pour voir le nombre de ventes et la période. Le calcul est expliqué dans « Sources & méthode ».|||cities with available prices. Hover over a bar to see the sample size and dates. The calculation is explained in Sources & methodology.
+Aucune médiane documentée pour ce type de logement dans la sélection.|||No documented median is available for this property type in the selection.
+ventes retenues,|||retained sales,
+Cliquez pour sélectionner cette ville.|||Select to highlight this city.
+Médianes des prix au mètre carré par ville, ordre croissant|||Median property prices per square metre by city, ascending order
+Médiane €/m²|||Median €/m²
+Ventes retenues|||Retained sales
+Période|||Period
+Ville|||City
+Aucune ville ne dispose de deux médianes documentées dans cette sélection.|||No city in this selection has two documented medians.
+appartements|||apartments
+maisons|||houses
+ventes)|||sales)
+Écart de médianes|||Difference between medians
+Écarts entre médianes des appartements et des maisons|||Differences between apartment and house medians
+Écart €/m²|||Difference €/m²
+Sélectionnez au moins une ville pour afficher les services.|||Select at least one city to display services.
+collecte non documentée|||undocumented collection
+services ${label.toLowerCase()} dans la commune, collecte du|||mapped ${label.toLowerCase()} across the municipality, collected on
+dernière mise à jour indisponible|||latest update unavailable
+Services référencés par catégorie et par commune|||Mapped services by category and municipality
+Moins de services|||Fewer services
+Plus de services|||More services
+Aucune ville ne possède les deux indicateurs documentés dans cette sélection.|||No city in this selection has both documented indicators.
+nombre dans la ville|||count across the municipality
+et ${number(row.services[key])} services ${label.toLowerCase()} dans la commune.|||and ${number(row.services[key])} mapped ${label.toLowerCase()} across the municipality.
+Prix des appartements et nombre de|||Apartment prices and number of
+Prix appartements €/m²|||Apartment prices €/m²
+par commune pour|||across the municipality for
+villes|||cities
+Aucun relevé PM2.5 avec unité, station et date dans cette sélection.|||No PM2.5 reading with unit, station and date is available in this selection.
+station ${row.air.station}, à|||station ${row.air.station},
+Relevé ponctuel, sans classement sanitaire.|||Single reading, without a health ranking.
+Derniers relevés PM2.5 documentés, villes par ordre alphabétique|||Latest documented PM2.5 readings, cities in alphabetical order
+Relevé|||Reading
+Sélectionnez au moins une ville pour explorer les risques recensés.|||Select at least one city to explore recorded hazards.
+Aucun libellé de cette famille dans les réponses documentées de la sélection.|||No hazard of this category appears in the documented responses for this selection.
+Liste non documentée|||Undocumented list
+non recensé dans cette réponse|||not recorded in this response
+recensé|||recorded
+types de risques affichés. Le filtre permet de choisir un thème.|||hazard types shown. Use the filter to choose a category.
+Présence des libellés officiels de risques par ville|||Recorded hazard types by city (English translations of French source labels)
+Type de risque|||Hazard type
+Mentionné|||Recorded
+Absent de cette liste|||Not in this list
+Prix calculés sur une sélection de ventes. Ils donnent un repère, sans décrire tous les logements.|||Prices are calculated from a selected sample of sales. They provide a reference point, not a description of every home.
+Comptage sur toute la commune. Les services absents d’OpenStreetMap peuvent manquer.|||Counts cover the whole municipality. Services not mapped in OpenStreetMap may be missing.
+Pour ${retained} ville(s), les derniers chiffres sont conservés après une panne, avec leur date.|||For ${retained} cities, previous figures are retained after an update failure, together with their original date.
+La station et l’heure de chaque mesure sont conservées. Ces relevés ne décrivent pas toute une année.|||The station and time of each measurement are retained. These readings do not describe a full year.
+Liste des risques mentionnés pour la commune. Elle ne décrit pas la situation de chaque logement.|||A list of hazards recorded for the municipality. It does not describe exposure at each property.
+En attente de la connexion aux données|||Waiting for the data connection
+Les graphiques apparaîtront après le chargement des villes. Le statut de connexion est indiqué au-dessus de la carte.|||Charts will appear once the cities have loaded. The connection status is shown above the map.
+Villes dans l’analyse|||Cities in the analysis
+Prix immobiliers disponibles|||Available property prices
+Collectes de services|||Service collections
+En attente des données|||Waiting for data
+Les données des villes ne sont pas encore chargées.|||City data has not loaded yet.
+Contrôle du|||Checked on
+Observations documentées|||Documented observations
+Choisissez les villes à comparer ci-dessus|||Choose the cities to compare above
+Villes avec des prix disponibles pour les appartements ou les maisons|||Cities with available prices for apartments or houses
+Ventes conservées après nettoyage des données|||Sales retained after data cleaning
+Services recensés à l’échelle de la commune|||Services mapped across the municipality
+Dans votre sélection,|||In your selection,
+les prix médians des appartements vont de|||median apartment prices range from
+€/m² à|||€/m² in
+à <strong>|||to <strong>
+. Croisez ce budget avec les services de chaque commune pour affiner votre choix.|||. Compare this budget with municipal services to refine your choice.
+La sélection ne contient pas assez de médianes d’appartements pour commenter leur dispersion. Les données disponibles restent affichées séparément.|||There are not enough apartment medians in the selection to describe their spread. Available indicators remain displayed separately.
+Aucune ville sélectionnée. Activez les villes à analyser ou utilisez « Toutes les villes ».|||No city is selected. Choose cities to analyse, or use All cities.
