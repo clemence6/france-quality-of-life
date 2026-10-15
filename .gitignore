@@ -8,6 +8,7 @@ firebase-debug*.log
 docs/local-server*.log
 data/pipeline-run.json
 data/expanded-cities-run.json
+data/freshness-*.json
 data/raw/*
 data/processed/*
 !data/raw/.gitkeep
