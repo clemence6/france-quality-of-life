@@ -339,3 +339,27 @@ les prix médians des appartements vont de|||median apartment prices range from
 . Croisez ce budget avec les services de chaque commune pour affiner votre choix.|||. Compare this budget with municipal services to refine your choice.
 La sélection ne contient pas assez de médianes d’appartements pour commenter leur dispersion. Les données disponibles restent affichées séparément.|||There are not enough apartment medians in the selection to describe their spread. Available indicators remain displayed separately.
 Aucune ville sélectionnée. Activez les villes à analyser ou utilisez « Toutes les villes ».|||No city is selected. Choose cities to analyse, or use All cities.
+04 / ANALYSE DES COMPROMIS|||04 / EXPLORING TRADE-OFFS
+Quelles villes combinent un prix immobilier modéré et davantage de services référencés ?|||Which cities combine moderate property prices with more mapped services?
+Choisissez un service pour découvrir les villes qui associent un prix d’appartement modéré et davantage d’équipements référencés, par rapport aux autres villes de votre sélection.|||Choose a service to find cities with moderate apartment prices and more mapped amenities, relative to the other cities in your selection.
+Villes non évaluées, données incomplètes :|||Cities not assessed because of incomplete data:
+Les valeurs manquantes ne sont pas remplacées par zéro.|||Missing values are not replaced with zero.
+Les prix couvrent des années différentes. Sélectionnez des villes avec le même millésime immobilier pour établir les repères.|||Property prices cover different years. Select cities with prices from the same year to calculate the benchmarks.
+Sélectionnez au moins trois villes avec un prix d’appartement et ce service documentés pour faire apparaître l’analyse.|||Select at least three cities with documented apartment prices and this service to display the analysis.
+villes répondent aux deux critères.|||cities meet both criteria.
+Un prix au plus égal au repère de la sélection et un nombre de services supérieur au repère.|||An apartment price at or below the selection benchmark and a service count above its benchmark.
+Prix repère · appartements|||Price benchmark · apartments
+Services repères ·|||Service benchmark ·
+Ventes ${escapeHtml(year)}|||Sales ${escapeHtml(year)}
+Objets référencés par commune|||Mapped objects per municipality
+Services collectés le|||Services collected on
+chiffres précédents conservés|||previous figures retained
+Aucune ville ne réunit les deux critères dans cette sélection. Changez de service ou de périmètre pour explorer un autre compromis.|||No city meets both criteria in this selection. Change the service or the selected cities to explore another trade-off.
+Deux critères remplis|||Both criteria met
+Autres villes|||Other cities
+La zone verte associe les prix les plus modérés et davantage de services, par rapport aux repères de cette sélection.|||The green area combines lower prices and more services, relative to the benchmarks for this selection.
+Les villes à examiner|||Cities to explore
+Comment sont choisis les repères ?|||How are the benchmarks chosen?
+Chaque repère est la médiane des villes qui disposent des deux informations : la moitié des valeurs est en dessous, l’autre au-dessus. Le prix doit être inférieur ou égal à cette médiane ; le nombre de services doit être strictement supérieur à la sienne. Les repères changent avec votre sélection. Les villes sont affichées par ordre alphabétique.|||Each benchmark is the median across cities with both indicators: half the values fall below it and half above it. The apartment price must be at or below its median; the service count must be strictly above its own median. Benchmarks change with your selection. Cities are listed alphabetically.
+Les services sont comparés une catégorie à la fois, en nombre brut dans la commune. Une grande ville peut en compter davantage ; cela ne mesure ni la proximité depuis un quartier, ni la qualité, ni l’exhaustivité du recensement. Cette sélection ne constitue pas un classement de qualité de vie.|||Services are compared one category at a time using raw municipal counts. Larger cities may have more services; this does not measure proximity from a neighbourhood, quality or mapping completeness. This selection is not a quality-of-life ranking.
+Collecte des services|||Service collection date
