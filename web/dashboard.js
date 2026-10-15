@@ -123,7 +123,7 @@ function risksMatrix(rows) {
  const labels=[...new Set(rows.flatMap(row=>row.risks||[]))].filter(label=>category==="all"||riskFamily(label)===category).sort((a,b)=>a.localeCompare(b,"fr"));
  if(!labels.length)return chartEmpty("Aucun libellé de cette famille dans les réponses documentées de la sélection.");
  const head=rows.map(row=>`<th scope="col">${escapeHtml(row.name)}</th>`).join("");
- const body=labels.map(label=>`<tr><td>${escapeHtml(label)}</td>${rows.map(row=>{
+ const body=labels.map(label=>`<tr><td>${escapeHtml(riskLabel(label))}</td>${rows.map(row=>{
   if(!row.risks)return '<td class="missing" title="Liste non documentée">—</td>';
   const present=row.risks.includes(label);
   return `<td class="${present?"present":""}" aria-label="${escapeHtml(row.name)} : ${present?"recensé":"non recensé dans cette réponse"}" title="${escapeHtml(row.name)} : ${present?"recensé":"non recensé dans cette réponse"}"><span class="${present?"risk-presence":"risk-absence"}" aria-hidden="true"></span></td>`;
