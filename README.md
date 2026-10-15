@@ -109,6 +109,11 @@ Google acceptées au préalable. Firebase héberge les pages ; le cron GitHub
 continue à actualiser les observations et leur provenance dans Supabase, sans
 redéploiement quotidien des pages.
 
+Le site est publié sur Firebase Hosting :
+[version française](https://ou-habiter-clemence.web.app/) et
+[version anglaise](https://ou-habiter-clemence.web.app/en/).
+Le sélecteur de langue mémorise le choix du visiteur.
+
 ## Mise à jour quotidienne sur GitHub
 
 [Le workflow](.github/workflows/update-data.yml) lance le pipeline chaque jour à
