@@ -77,6 +77,38 @@ node tests/dashboard-integrity.cjs
 
 Les contrôles couvrent les manquants, les unités, les mutations DVF complexes, l'association entre observations et métadonnées, les filtres et les sélections vides.
 
+## Français / English et Firebase Hosting
+
+Le sélecteur de langue conserve le choix du visiteur dans son navigateur. La
+version française se trouve à la racine et la version anglaise dans `web/en/`.
+Elles partagent les mêmes données, unités, fichiers de style et bibliothèques.
+Les libellés de risques sont traduits pour la lecture ; les rapports JSON
+conservent les intitulés originaux des sources.
+
+Après une modification des textes français, régénérer la version anglaise :
+
+~~~powershell
+python scripts/build_english.py
+node tests/english-integrity.cjs
+~~~
+
+Les traductions relues sont dans `translations/en.tsv` et
+`translations/risks.en.json`. Les trois fichiers de `web/en/` sont générés :
+modifier le catalogue et les sources françaises, puis relancer le script.
+
+`firebase.json` publie uniquement `web/`. Sa commande de préparation régénère
+l’anglais et vérifie les deux interfaces avant chaque déploiement. Avec l’outil
+officiel Firebase CLI installé et connecté au bon compte :
+
+~~~powershell
+firebase deploy --only hosting --project ou-habiter-clemence
+~~~
+
+Le projet Firebase doit être créé sur le compte du portfolio et les conditions
+Google acceptées au préalable. Firebase héberge les pages ; le cron GitHub
+continue à actualiser les observations et leur provenance dans Supabase, sans
+redéploiement quotidien des pages.
+
 ## Mise à jour quotidienne sur GitHub
 
 [Le workflow](.github/workflows/update-data.yml) lance le pipeline chaque jour à
