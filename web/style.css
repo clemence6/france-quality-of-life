@@ -26,6 +26,17 @@
 
 @media(max-width:600px){nav{grid-template-columns:repeat(3,minmax(0,1fr))}.nav-btn{font-size:11px;padding:8px 4px}}
 
+.tradeoff-card .chart-header h3{max-width:760px;font-size:27px;line-height:1.3}
+.tradeoff-card .chart-header select{flex-shrink:0}
+.tradeoff-summary{background:#f0f6ee;border:1px solid #d3e3d2;border-radius:12px;padding:20px;margin:20px 0}
+.tradeoff-summary>p{margin:0 0 16px;font-size:15px;line-height:1.7}.tradeoff-summary>p strong{display:block;color:var(--accent);font-size:18px}
+.tradeoff-benchmarks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.tradeoff-benchmarks span,.tradeoff-benchmarks small{display:block;color:var(--muted);font-size:12px}.tradeoff-benchmarks strong{display:block;font-family:Manrope,sans-serif;font-size:26px;margin:4px 0}
+.tradeoff-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(240px,1fr);gap:26px;align-items:start}.tradeoff-layout>div{min-width:0}.tradeoff-layout h4{font-size:17px;margin:0 0 12px}
+.tradeoff-shortlist{display:grid;gap:10px;max-height:450px;overflow:auto;padding:3px}.tradeoff-city{display:grid;gap:5px;width:100%;text-align:left;padding:15px;border:1px solid #bcd2c2;border-radius:9px;background:#fff;color:var(--text)}.tradeoff-city:hover{background:#eef6ed;border-color:var(--accent)}.tradeoff-city strong{color:var(--accent);font-size:17px}.tradeoff-city span{font-size:13px}.tradeoff-city small{font-size:11px;color:var(--muted)}
+.tradeoff-exclusions{font-size:13px;line-height:1.7;background:#f6f6f1;padding:12px 15px;border-radius:8px;color:var(--muted)}.tradeoff-method p{line-height:1.8;max-width:950px}.tradeoff-card svg{width:100%;height:auto;display:block}
+@media(max-width:800px){.tradeoff-layout{grid-template-columns:1fr}.tradeoff-card .chart-header{flex-wrap:wrap}.tradeoff-shortlist{max-height:none;grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.tradeoff-card .chart-header h3{font-size:23px}.tradeoff-benchmarks,.tradeoff-shortlist{grid-template-columns:1fr}.tradeoff-card .tradeoff-layout svg{min-width:0}.tradeoff-summary{padding:16px}}
+
 /* La méthode se lit comme une étude de cas, avec un défilement de page naturel. */
 .map-stage.show-sources{height:auto;min-height:0;overflow:visible;background:var(--bg)}
 .show-sources #map,.show-sources .map-vignette,.show-sources .map-tools,.show-sources .map-caption,.show-sources .map-status{display:none!important}
