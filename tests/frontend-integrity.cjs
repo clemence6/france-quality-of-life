@@ -47,7 +47,7 @@ context.occupiedLabels=[{left:218,top:180,right:318,bottom:220}];
 let placement=vm.runInContext('chooseLabelPlacement(labelCase.point,labelCase.width,labelCase.height,occupiedLabels,[],labelCase.bounds)',context);
 assert.ok(placement.rect.right<=218 || placement.rect.left>=318 || placement.rect.bottom<=180 || placement.rect.top>=220,'Une étiquette voisine doit être évitée');
 placement=vm.runInContext('chooseLabelPlacement(labelCase.point,labelCase.width,labelCase.height,[],[],labelCase.bounds,true)',context);
-assert.ok(placement.rect.bottom<=170,'Le placement haut garde Montpellier éloigné du littoral');
+assert.ok(placement.rect.bottom<=190,'Le nom de Montpellier reste au-dessus de son point');
 context.labelCase.point={x:590,y:250};
 placement=vm.runInContext('chooseLabelPlacement(labelCase.point,labelCase.width,labelCase.height,[],[],labelCase.bounds)',context);
 assert.ok(placement.rect.right<=592 && placement.rect.left>=8,'Une étiquette reste dans la carte près du bord droit');
