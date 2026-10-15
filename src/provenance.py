@@ -45,7 +45,8 @@ def recent_commune_services(paths=None, now=None):
             if (poi.get("scope") != "commune" or poi.get("status") != "available"
                     or poi.get("insee_code") != code or poi.get("method") != "osm-commune-nwr-count-v1"
                     or type(relation) is not int or relation <= 0 or area != relation + 3600000000
-                    or set(counts) != categories or any(type(v) is not int or v < 0 for v in counts.values())):
+                    or set(counts) != categories or any(type(v) is not int or v < 0 for v in counts.values())
+                    or not any(counts.values())):
                 continue
             try:
                 collected = datetime.fromisoformat(poi["collected_at"].replace("Z", "+00:00"))
