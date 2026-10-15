@@ -20,6 +20,18 @@ du visiteur, sans fabriquer un classement global à partir d'unités différente
 
 ## Choix analytiques
 
+### Prix modéré et services référencés
+
+Le module « Quelles villes combinent un prix immobilier modéré et davantage de services référencés ? » compare les appartements et une seule catégorie de services à la fois. Il suit les filtres de villes du dashboard et propose les sept catégories OSM disponibles.
+
+Les deux repères sont calculés sur le même ensemble de villes : uniquement celles ayant un prix d'appartement et un comptage communal documentés pour le service choisi. Les prix doivent porter sur le même millésime DVF ; des années différentes bloquent l'analyse commune. Il faut au moins trois villes exploitables.
+
+Une ville satisfait les critères si son prix médian d'appartement est inférieur ou égal à la médiane des prix des villes comparables et si son nombre de services est strictement supérieur à la médiane des comptages de ces mêmes villes. Une égalité sur les services ne satisfait pas « davantage ». Un zéro documenté reste valide ; une valeur inconnue est exclue des deux calculs.
+
+La zone verte du graphique matérialise ce compromis. Les fiches de résultats, en ordre alphabétique, affichent prix, nombre de ventes, service choisi et date de collecte, y compris lorsqu'une collecte précédente est conservée. Les villes non évaluées sont nommées. Les seuils évoluent avec les filtres : ils ne définissent pas un prix abordable universel.
+
+Les comptages bruts favorisent potentiellement les grandes communes et ne mesurent ni l'accessibilité depuis un quartier, ni la qualité des équipements, ni la complétude d'OSM. Aucun score synthétique ni classement général n'est produit.
+
 | Vue | Question | Précaution |
 | --- | --- | --- |
 | Barres de prix | Quel budget au m² dans l'échantillon ? | Axe commençant à zéro ; même type de logement ; effectifs et dates conservés |
