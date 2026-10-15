@@ -42,3 +42,13 @@ assert.equal(vm.runInContext('resolveProvenance([city],localDoc,remoteDoc).citie
 context.localDoc.cities['69123'].snapshot = context.remoteDoc.cities['69123'].snapshot;
 assert.equal(vm.runInContext('Object.keys(resolveProvenance([city],localDoc,remoteDoc).cities).length',context),0,'Deux documents périmés ne certifient pas des observations');
 console.log('PASS: métadonnées liées aux observations, zéros incertains, air historique, échappement et absence de score');
+context.labelCase={point:{x:200,y:200},width:100,height:28,bounds:{width:600,height:500}};
+context.occupiedLabels=[{left:218,top:180,right:318,bottom:220}];
+let placement=vm.runInContext('chooseLabelPlacement(labelCase.point,labelCase.width,labelCase.height,occupiedLabels,[],labelCase.bounds)',context);
+assert.ok(placement.rect.right<=218 || placement.rect.left>=318 || placement.rect.bottom<=180 || placement.rect.top>=220,'Une étiquette voisine doit être évitée');
+placement=vm.runInContext('chooseLabelPlacement(labelCase.point,labelCase.width,labelCase.height,[],[],labelCase.bounds,true)',context);
+assert.ok(placement.rect.bottom<=170,'Le placement haut garde Montpellier éloigné du littoral');
+context.labelCase.point={x:590,y:250};
+placement=vm.runInContext('chooseLabelPlacement(labelCase.point,labelCase.width,labelCase.height,[],[],labelCase.bounds)',context);
+assert.ok(placement.rect.right<=592 && placement.rect.left>=8,'Une étiquette reste dans la carte près du bord droit');
+console.log('PASS: étiquettes sans collision, Montpellier en hauteur et limites de carte');
