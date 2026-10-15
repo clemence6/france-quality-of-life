@@ -96,6 +96,10 @@ def get_commune_poi_counts(insee_code: str, relation_id: int | None = None) -> d
             response = requests.post(endpoint, data={"data": query}, headers=HEADERS, timeout=(10, 95))
             response.raise_for_status()
             result = parse_commune_counts(response.json(), insee_code)
+            # Une zone peut exister sur une instance dont l'index spatial est vide.
+            # Vérifier avec l'autre serveur avant d'afficher sept zéros trompeurs.
+            if not any(result["counts"].values()):
+                raise ValueError("Comptage entièrement vide : vérification sur une autre instance nécessaire")
             result["api_endpoint"] = endpoint
             return result
         except (requests.RequestException, ValueError, KeyError) as error:
