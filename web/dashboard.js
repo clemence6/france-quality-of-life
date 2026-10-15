@@ -188,7 +188,10 @@ function renderDashboard() {
   renderDashboard();$("dashboardCities").querySelector(`[data-dashboard-city="${code}"]`)?.focus();
  }));
  $("dashboard").querySelectorAll("[data-chart-city]").forEach(point=>{
-  const activate=()=>selectCity(point.dataset.chartCity,false);
+  const activate=()=>{
+   selectCity(point.dataset.chartCity,false);
+   if(point.classList.contains("tradeoff-city"))$("explorer").scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"start"});
+  };
   point.addEventListener("click",activate);point.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();activate();}});
  });
 }
