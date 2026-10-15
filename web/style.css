@@ -13,7 +13,18 @@
 
 @media(max-width:600px){nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}.nav-btn{text-align:center;font-size:12px}}
 
-.marker-button[data-city-code="13055"] .marker-label{transform:translate(-50px,24px)}@media(max-width:900px){.marker-button[data-city-code="67482"] .marker-label,.marker-button[data-city-code="06088"] .marker-label{transform:translate(-115%,-15px)}}
+/* Les repères et les infobulles ont des plans distincts. */
+#map{isolation:isolate;z-index:0}
+.marker-button[data-city-code]{width:26px;height:26px;padding:0;display:block;z-index:1;overflow:visible}
+.marker-button[data-city-code] .marker-dot{position:absolute;left:7.5px;top:7.5px}
+.marker-button[data-city-code] .marker-label{position:absolute;left:31px;top:0;white-space:nowrap;transform:none;line-height:1.5}
+.marker-button[data-city-code]:hover,.marker-button[data-city-code]:focus-visible{z-index:3}
+.marker-button.is-selected{z-index:2}
+.marker-button.is-selected .marker-label{background:var(--accent);border-color:var(--accent);color:white}
+.marker-leader{position:absolute;inset:0;width:26px;height:26px;overflow:visible;pointer-events:none}
+.marker-leader line{stroke:#517d6d;stroke-width:1.25}
+#map .maplibregl-popup{z-index:5;pointer-events:none}
+.city-tooltip .maplibregl-popup-content{box-shadow:0 8px 28px #183f3340;border:1px solid #7ca791}
 
 @media(max-width:600px){nav{grid-template-columns:repeat(3,minmax(0,1fr))}.nav-btn{font-size:11px;padding:8px 4px}}
 

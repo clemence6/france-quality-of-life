@@ -17,6 +17,7 @@ const SOURCE_URLS = {
 const POI = [["poi_pharmacy","Pharmacies"],["poi_hospital","Hôpitaux"],["poi_school","Écoles"],["poi_park","Parcs"],["poi_sport","Centres de fitness"],["poi_supermarket","Supermarchés"],["poi_restaurant","Restaurants"]];
 let cities = [], provenance = {}, audit = {}, map = null, mapReady = false;
 let selectedId = null, currentView = "explore", shortlist = [], markers = [], hub = null, hoverPopup = null;
+let labelFrame = null;
 
 // Des métadonnées anciennes ne doivent jamais certifier une nouvelle ligne.
 function matchingEntry(document, city) {
@@ -127,6 +128,7 @@ function renderList() {
  $("cityList").querySelectorAll("[data-city]").forEach((b)=>b.addEventListener("click",()=>selectCity(b.dataset.city)));
  const visible = new Set(filtered.map(c=>c.insee_code));
  markers.forEach(({city,marker})=>{marker.getElement().hidden=!visible.has(city.insee_code) || (map && map.getZoom()<3.3);});
+ layoutMapLabels();
 }
 function sourceLink(key,label) { return `<a href="${SOURCE_URLS[key]}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`; }
 function badge(label,checked=false) { return `<span class="badge ${checked?"checked":""}">${label}</span>`; }
@@ -141,6 +143,8 @@ function selectCity(code, fly=true) {
  const city = cities.find(c=>c.insee_code===code); if (!city) return;
  if (currentView!=="explore") switchView("explore");
  selectedId=code; renderList();
+ hoverPopup?.remove();
+ markers.forEach(({city,marker})=>marker.getElement().classList.toggle("is-selected",city.insee_code===code));
  if(typeof renderDashboard === "function") renderDashboard();
  const info=information(city), p=priceInfo(city), house=priceInfo(city,"house"), air=airObservation(city);
  const riskList=info.risks?.risks || [];
@@ -165,7 +169,7 @@ function selectCity(code, fly=true) {
  if(map && position && fly) map.flyTo({center:position,zoom:7,bearing:0,pitch:0,duration:reducedMotion?0:1700,padding:{left:window.innerWidth>900?370:0,right:window.innerWidth>1000?390:0,top:30,bottom:40}});
  updateRadius(city);
 }
-function closeCity() {selectedId=null;if(typeof renderDashboard === "function") renderDashboard();$("cityPanel").hidden=true;renderList();if(mapReady) map.getSource("sample-radius")?.setData({type:"FeatureCollection",features:[]});}
+function closeCity() {selectedId=null;hoverPopup?.remove();markers.forEach(({marker})=>marker.getElement().classList.remove("is-selected"));if(typeof renderDashboard === "function") renderDashboard();$("cityPanel").hidden=true;renderList();if(mapReady) map.getSource("sample-radius")?.setData({type:"FeatureCollection",features:[]});}
 function fillCompare() {
  const options=cities.map(c=>`<option value="${escapeHtml(c.insee_code)}">${escapeHtml(c.city_name)}</option>`).join("");
  $("compareCityA").innerHTML=options;$("compareCityB").innerHTML=options;
@@ -234,6 +238,7 @@ function initMap() {
    focusFrance(); addMarkers(); if(selectedId) updateRadius(cities.find(c=>c.insee_code===selectedId));
   });
   map.on("zoom",()=>{ const visible=new Set(filteredCities().map(c=>c.insee_code)); markers.forEach(({city,marker})=>{marker.getElement().hidden=!visible.has(city.insee_code);}); });
+  map.on("move",layoutMapLabels);map.on("resize",layoutMapLabels);
   map.on("error",()=>mapMessage("Une ressource de la carte ne charge pas. Vérifie ta connexion ; les données des villes restent indépendantes du fond de carte."));
   map.on("idle",()=>{if(map.areTilesLoaded())$("mapStatus").hidden=true;});
  } catch(error) {map=null;mapMessage("Ce navigateur ne permet pas d’afficher la carte WebGL. Explore les villes depuis la liste.");}
@@ -248,13 +253,48 @@ function addMarkers() {
  for(const city of cities){
   const position=coords(city);if(!position)continue;
   const element=document.createElement("button");element.className="marker-button";element.dataset.cityCode=city.insee_code;element.setAttribute("aria-label",`Découvrir ${city.city_name}`);
-  element.innerHTML=`<span class="marker-dot"></span><span class="marker-label">${escapeHtml(city.city_name)}</span>`;
+  element.innerHTML=`<svg class="marker-leader" aria-hidden="true"><line x1="13" y1="13" x2="13" y2="13"/></svg><span class="marker-dot"></span><span class="marker-label">${escapeHtml(city.city_name)}</span>`;
   element.addEventListener("click",()=>selectCity(city.insee_code));
-  const show=()=>{hoverPopup?.remove();const p=priceInfo(city);hoverPopup=new maplibregl.Popup({closeButton:false,closeOnClick:false,offset:18}).setLngLat(position).setHTML(`<div class="hover-name">${escapeHtml(city.city_name)}</div><div class="hover-data">${p.value!=null?`${number(p.value)} €/m² · appartements<br>Échantillon DVF ${escapeHtml(information(city).dvf?.year)}`:"Données publiques & périmètres"}<br>Cliquer pour découvrir la fiche ↗</div>`).addTo(map);};
+  const show=()=>{hoverPopup?.remove();const p=priceInfo(city);hoverPopup=new maplibregl.Popup({className:"city-tooltip",closeButton:false,closeOnClick:false,offset:20,maxWidth:"260px"}).setLngLat(position).setHTML(`<div class="hover-name">${escapeHtml(city.city_name)}</div><div class="hover-data">${p.value!=null?`${number(p.value)} €/m² · appartements<br>Échantillon DVF ${escapeHtml(information(city).dvf?.year)}`:"Données publiques & périmètres"}<br>Cliquer pour découvrir la fiche ↗</div>`).addTo(map);};
   element.addEventListener("mouseenter",show);element.addEventListener("focus",show);element.addEventListener("mouseleave",()=>hoverPopup?.remove());element.addEventListener("blur",()=>hoverPopup?.remove());
-  markers.push({city,marker:new maplibregl.Marker({element,anchor:"left",offset:[-13,0]}).setLngLat(position).addTo(map)});
+  markers.push({city,marker:new maplibregl.Marker({element,anchor:"center"}).setLngLat(position).addTo(map)});
  }
  updateMarkerVisibility();renderList();
+}
+// Seules les étiquettes bougent : les points restent aux coordonnées IGN.
+function chooseLabelPlacement(point,width,height,occupied,dots,bounds,above=false) {
+ const right=[18,-height/2],left=[-width-18,-height/2];
+ const top=[-width/2,-height-30],bottom=[-width/2,24];
+ const candidates=above?[top,right,left,bottom]:[right,left,top,bottom];
+ candidates.push([18,-height-16],[-width-18,-height-16],[18,18],[-width-18,18],[-width/2,-height-55],[-width/2,48]);
+ const overlap=(a,b)=>Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+ return candidates.map(([x,y],index)=>{
+  const rect={left:point.x+x,top:point.y+y,right:point.x+x+width,bottom:point.y+y+height};
+  const padded={left:rect.left-4,top:rect.top-4,right:rect.right+4,bottom:rect.bottom+4};
+  const covered=occupied.reduce((n,r)=>n+overlap(padded,r),0)+dots.reduce((n,p)=>n+overlap(padded,{left:p.x-9,top:p.y-9,right:p.x+9,bottom:p.y+9}),0);
+  const outside=width*height-overlap(rect,{left:8,top:8,right:bounds.width-8,bottom:bounds.height-8});
+  return {x,y,rect,score:covered*1000+outside*2000+index};
+ }).sort((a,b)=>a.score-b.score)[0];
+}
+function layoutMapLabels() {
+ if(!mapReady || labelFrame!==null)return;
+ labelFrame=requestAnimationFrame(()=>{
+  labelFrame=null;
+  const bounds=map.getContainer().getBoundingClientRect();
+  const visible=markers.filter(({marker})=>!marker.getElement().hidden).map(item=>({...item,point:map.project(item.marker.getLngLat())}));
+  const dots=visible.map(item=>item.point),occupied=[];
+  // Montpellier est placé en premier pour garder son nom nettement au nord du littoral.
+  visible.sort((a,b)=>(b.city.insee_code==="34172")-(a.city.insee_code==="34172") || a.point.y-b.point.y);
+  for(const {city,marker,point} of visible){
+   const element=marker.getElement(),label=element.querySelector(".marker-label");
+   const placement=chooseLabelPlacement(point,label.offsetWidth,label.offsetHeight,occupied,dots,bounds,city.insee_code==="34172");
+   label.style.left=`${13+placement.x}px`;label.style.top=`${13+placement.y}px`;
+   const line=element.querySelector("line");
+   line.setAttribute("x2",13+Math.max(placement.x,Math.min(0,placement.x+label.offsetWidth)));
+   line.setAttribute("y2",13+Math.max(placement.y,Math.min(0,placement.y+label.offsetHeight)));
+   occupied.push(placement.rect);
+  }
+ });
 }
 function updateMarkerVisibility(){if(hub)hub.getElement().hidden=map.getZoom()>=3.3;}
 function focusFrance(){if(!map)return;closeCity();map.fitBounds([[-5.5,41.2],[9.7,51.3]],{padding:{left:window.innerWidth>900?390:25,right:45,top:40,bottom:55},duration:reducedMotion?0:1300,maxZoom:5});}
