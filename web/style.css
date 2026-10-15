@@ -21,8 +21,6 @@
 .marker-button[data-city-code]:hover,.marker-button[data-city-code]:focus-visible{z-index:3}
 .marker-button.is-selected{z-index:2}
 .marker-button.is-selected .marker-label{background:var(--accent);border-color:var(--accent);color:white}
-.marker-leader{position:absolute;inset:0;width:26px;height:26px;overflow:visible;pointer-events:none}
-.marker-leader line{stroke:#517d6d;stroke-width:1.25}
 #map .maplibregl-popup{z-index:5;pointer-events:none}
 .city-tooltip .maplibregl-popup-content{box-shadow:0 8px 28px #183f3340;border:1px solid #7ca791}
 
