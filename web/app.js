@@ -255,7 +255,7 @@ function addMarkers() {
  for(const city of cities){
   const position=coords(city);if(!position)continue;
   const element=document.createElement("button");element.className="marker-button";element.dataset.cityCode=city.insee_code;element.setAttribute("aria-label",`Découvrir ${city.city_name}`);
-  element.innerHTML=`<svg class="marker-leader" aria-hidden="true"><line x1="13" y1="13" x2="13" y2="13"/></svg><span class="marker-dot"></span><span class="marker-label">${escapeHtml(city.city_name)}</span>`;
+  element.innerHTML=`<span class="marker-dot"></span><span class="marker-label">${escapeHtml(city.city_name)}</span>`;
   element.addEventListener("click",()=>selectCity(city.insee_code));
   const show=()=>{hoverPopup?.remove();const p=priceInfo(city);hoverPopup=new maplibregl.Popup({className:"city-tooltip",closeButton:false,closeOnClick:false,offset:20,maxWidth:"260px"}).setLngLat(position).setHTML(`<div class="hover-name">${escapeHtml(city.city_name)}</div><div class="hover-data">${p.value!=null?`${number(p.value)} €/m² · appartements<br>Échantillon DVF ${escapeHtml(information(city).dvf?.year)}`:"Données publiques & périmètres"}<br>Cliquer pour découvrir la fiche ↗</div>`).addTo(map);};
   element.addEventListener("mouseenter",show);element.addEventListener("focus",show);element.addEventListener("mouseleave",()=>hoverPopup?.remove());element.addEventListener("blur",()=>hoverPopup?.remove());
@@ -265,15 +265,15 @@ function addMarkers() {
 }
 // Seules les étiquettes bougent : les points restent aux coordonnées IGN.
 function chooseLabelPlacement(point,width,height,occupied,dots,bounds,above=false) {
- const right=[18,-height/2],left=[-width-18,-height/2];
- const top=[-width/2,-height-30],bottom=[-width/2,24];
+ const right=[10,-height/2],left=[-width-10,-height/2];
+ const top=[-width/2,-height-10],bottom=[-width/2,10];
  const candidates=above?[top,right,left,bottom]:[right,left,top,bottom];
- candidates.push([18,-height-16],[-width-18,-height-16],[18,18],[-width-18,18],[-width/2,-height-55],[-width/2,48]);
+ candidates.push([10,-height-6],[-width-10,-height-6],[10,6],[-width-10,6],[-width/2,-height-22],[-width/2,22]);
  const overlap=(a,b)=>Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
  return candidates.map(([x,y],index)=>{
   const rect={left:point.x+x,top:point.y+y,right:point.x+x+width,bottom:point.y+y+height};
-  const padded={left:rect.left-4,top:rect.top-4,right:rect.right+4,bottom:rect.bottom+4};
-  const covered=occupied.reduce((n,r)=>n+overlap(padded,r),0)+dots.reduce((n,p)=>n+overlap(padded,{left:p.x-9,top:p.y-9,right:p.x+9,bottom:p.y+9}),0);
+  const padded={left:rect.left-3,top:rect.top-3,right:rect.right+3,bottom:rect.bottom+3};
+  const covered=occupied.reduce((n,r)=>n+overlap(padded,r),0)+dots.reduce((n,p)=>n+overlap(padded,{left:p.x-6,top:p.y-6,right:p.x+6,bottom:p.y+6}),0);
   const outside=width*height-overlap(rect,{left:8,top:8,right:bounds.width-8,bottom:bounds.height-8});
   return {x,y,rect,score:covered*1000+outside*2000+index};
  }).sort((a,b)=>a.score-b.score)[0];
@@ -285,15 +285,12 @@ function layoutMapLabels() {
   const bounds=map.getContainer().getBoundingClientRect();
   const visible=markers.filter(({marker})=>!marker.getElement().hidden).map(item=>({...item,point:map.project(item.marker.getLngLat())}));
   const dots=visible.map(item=>item.point),occupied=[];
-  // Montpellier est placé en premier pour garder son nom nettement au nord du littoral.
+  // Montpellier garde son nom au-dessus du point, à proximité du repère.
   visible.sort((a,b)=>(b.city.insee_code==="34172")-(a.city.insee_code==="34172") || a.point.y-b.point.y);
   for(const {city,marker,point} of visible){
    const element=marker.getElement(),label=element.querySelector(".marker-label");
    const placement=chooseLabelPlacement(point,label.offsetWidth,label.offsetHeight,occupied,dots,bounds,city.insee_code==="34172");
    label.style.left=`${13+placement.x}px`;label.style.top=`${13+placement.y}px`;
-   const line=element.querySelector("line");
-   line.setAttribute("x2",13+Math.max(placement.x,Math.min(0,placement.x+label.offsetWidth)));
-   line.setAttribute("y2",13+Math.max(placement.y,Math.min(0,placement.y+label.offsetHeight)));
    occupied.push(placement.rect);
   }
  });
