@@ -16,6 +16,7 @@ class ServicesCacheTests(unittest.TestCase):
                   "method":"osm-commune-nwr-count-v1","relation_id":123,"area_id":3600000123,
                   "collected_at":"2026-10-14T08:00:00Z",
                   "counts":dict.fromkeys(["sport","park","supermarket","pharmacy","school","restaurant","hospital"],0)}
+        self.poi['counts']['school']=1
 
     def read(self, poi=None):
         self.path.write_text(json.dumps({"cities":{"69123":{"poi_commune":self.poi if poi is None else poi}}}),encoding='utf-8')
@@ -33,6 +34,9 @@ class ServicesCacheTests(unittest.TestCase):
     def test_incomplete_invalid_counts_are_rejected(self):
         for counts in ({'park':0},{**self.poi['counts'],'park':-1},{**self.poi['counts'],'park':True}):
             self.assertEqual(self.read({**self.poi,'counts':counts}),{})
+
+    def test_entirely_empty_collection_is_not_used_as_backup(self):
+        self.assertEqual(self.read({**self.poi,'counts':dict.fromkeys(self.poi['counts'],0)}),{})
 
     def test_newest_valid_collection_wins(self):
         self.read()
