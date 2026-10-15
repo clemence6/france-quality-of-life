@@ -27,6 +27,25 @@ assert.equal(rows.find(r=>r.code==='67482').apartment,null,'DVF absente non inve
 assert.equal(vm.runInContext('medianOfValues([1,4,8,11])',context),6);
 assert.equal(vm.runInContext('finiteMetric(null)',context),null);
 assert.equal(vm.runInContext('finiteMetric(0)',context),0);
+context.tradeoffFixtures=[
+ {code:'a',name:'Alpha',apartment:2000,services:{poi_park:30},info:{dvf:{year:2025},poi:{collected_at:'2026-10-14',retained:true}},apartmentCount:20},
+ {code:'b',name:'Beta',apartment:3000,services:{poi_park:20},info:{dvf:{year:2025},poi:{collected_at:'2026-10-15'}},apartmentCount:30},
+ {code:'c',name:'Gamma',apartment:4000,services:{poi_park:40},info:{dvf:{year:2025},poi:{collected_at:'2026-10-15'}},apartmentCount:40},
+ {code:'d',name:'Delta',apartment:2500,services:{poi_park:0},info:{dvf:{year:2025},poi:{collected_at:'2026-10-15'}},apartmentCount:15},
+ {code:'e',name:'Epsilon',apartment:6000,services:{poi_park:20},info:{dvf:{year:2025},poi:{collected_at:'2026-10-15'}},apartmentCount:10},
+ {code:'f',name:'Inconnue',apartment:1,services:{poi_park:null},info:{dvf:{year:2025}}}
+];
+let tradeoff=vm.runInContext('tradeoffAnalysis(tradeoffFixtures,"poi_park")',context);
+assert.equal(tradeoff.priceMedian,3000,'Les prix manquants ne déplacent pas le repère');
+assert.equal(tradeoff.serviceMedian,20,'Un zéro documenté est conservé');
+assert.equal(tradeoff.matching.map(row=>row.code).join(','),'a','Plus de services exige de dépasser la médiane ; un prix élevé ne satisfait pas le compromis');
+assert.equal(tradeoff.missing.length,1,'Une observation sans services est exclue des deux repères');
+const tradeoffHtml=vm.runInContext('scatterPlot(tradeoffFixtures)',context);
+assert.match(tradeoffHtml,/Alpha/);assert.match(tradeoffHtml,/chiffres précédents conservés/);
+assert.match(tradeoffHtml,/Inconnue/);assert.doesNotMatch(tradeoffHtml,/NaN|Infinity|undefined/);
+assert.equal(vm.runInContext('tradeoffAnalysis(tradeoffFixtures.slice(0,2),"poi_park").status',context),'insufficient');
+assert.equal(vm.runInContext('tradeoffAnalysis(tradeoffFixtures.slice(0,3).map(row=>({...row,apartment:3000,services:{poi_park:20}})),"poi_park").matching.length',context),0,'Des valeurs identiques ne prouvent pas davantage de services');
+assert.equal(vm.runInContext('tradeoffAnalysis(tradeoffFixtures.slice(0,3).map((row,i)=>({...row,info:{dvf:{year:i?2025:2024}}})),"poi_park").status',context),'periods','Ne pas fusionner des millésimes immobiliers différents');
 for(const name of ['priceBars','housingDumbbells','servicesMatrix','scatterPlot','airLollipops','risksMatrix','qualityCoverage']) {
  const html=vm.runInContext(`${name}(dashboardRows())`,context);
  assert.doesNotMatch(html,/NaN|Infinity|undefined/,name+' : rendu numérique valide');
