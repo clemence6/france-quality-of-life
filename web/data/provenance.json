@@ -1342,6 +1342,1027 @@
         "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
         "year": 2025
       }
+    },
+    "29019": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:46:40.2495+00:00",
+        "latitude": 48.406435,
+        "longitude": -4.497735,
+        "avg_price_m2": 2470,
+        "total_transactions": 619,
+        "risks_count": 11,
+        "air_quality_score": 5,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-15T10:46:40.249500+00:00",
+      "geocoding": {
+        "label": "Brest",
+        "latitude": 48.406435,
+        "longitude": -4.497735,
+        "city": "Brest",
+        "postcode": "29200",
+        "score": 0.9580336363636363,
+        "insee_code": "29019"
+      },
+      "risks": {
+        "code_insee": "29019",
+        "commune": "BREST",
+        "total_risks": 11,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Effet de surpression",
+          "Effet thermique",
+          "Effet toxique",
+          "Inondation",
+          "Mouvement de terrain",
+          "Nucléaire",
+          "Par submersion marine",
+          "Radon",
+          "Risque industriel",
+          "Séisme"
+        ]
+      },
+      "air": {
+        "city": "Brest",
+        "station_id": 2162753,
+        "station_name": "Brest Mace",
+        "distance_km": 2.4,
+        "measurements": {
+          "pm10": {
+            "value": 10.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T09:00:00Z",
+            "sensor_id": 7773324
+          },
+          "o3": {
+            "value": 38.8,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T09:00:00Z",
+            "sensor_id": 7774334
+          },
+          "pm25": {
+            "value": 5.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T09:00:00Z",
+            "sensor_id": 7774531
+          },
+          "no2": {
+            "value": 10.1,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T09:00:00Z",
+            "sensor_id": 7775284
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "29019"
+      },
+      "dvf": {
+        "commune": "Brest",
+        "nb_ventes_totales": 619,
+        "prix_m2_median_global": 2470.0,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 2606.3,
+            "sample_count": 238
+          },
+          "house": {
+            "median_price_m2": 2416.67,
+            "sample_count": 381
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 8035,
+        "source_mutations": 3205,
+        "excluded_by_price": 4,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "35238": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:42:47.43601+00:00",
+        "latitude": 48.110899,
+        "longitude": -1.68365,
+        "avg_price_m2": 4411.76,
+        "total_transactions": 667,
+        "risks_count": 6,
+        "air_quality_score": 7.8,
+        "poi_sport": 39,
+        "poi_park": 151,
+        "poi_supermarket": 36,
+        "poi_pharmacy": 57,
+        "poi_school": 173,
+        "poi_restaurant": 377,
+        "poi_hospital": 14
+      },
+      "collected_at": "2026-10-15T10:42:47.436010+00:00",
+      "geocoding": {
+        "label": "Rennes",
+        "latitude": 48.110899,
+        "longitude": -1.68365,
+        "city": "Rennes",
+        "postcode": "35000",
+        "score": 0.960231818181818,
+        "insee_code": "35238"
+      },
+      "risks": {
+        "code_insee": "35238",
+        "commune": "RENNES",
+        "total_risks": 6,
+        "risks": [
+          "Inondation",
+          "Par une crue à débordement lent de cours d'eau",
+          "Phénomène lié à l'atmosphère",
+          "Séisme",
+          "Tempête et grains (vent)",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Rennes",
+        "station_id": 2162748,
+        "station_name": "Rennes Thabor",
+        "distance_km": 0.92,
+        "measurements": {
+          "o3": {
+            "value": 5.6,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 7774200
+          },
+          "pm10": {
+            "value": 9.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 7773016
+          },
+          "pm25": {
+            "value": 7.8,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 7774530
+          },
+          "no2": {
+            "value": 15.7,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 7774882
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "35238",
+        "scope_label": "Rennes",
+        "counts": {
+          "sport": 39,
+          "park": 151,
+          "supermarket": 36,
+          "pharmacy": 57,
+          "school": 173,
+          "restaurant": 377,
+          "hospital": 14
+        },
+        "relation_id": 54517,
+        "area_id": 3600054517,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/54517",
+        "collected_at": "2026-10-15T10:42:44.811887+00:00",
+        "source_timestamp": "2026-07-28T02:16:18Z",
+        "api_endpoint": "https://overpass.private.coffee/api/interpreter"
+      },
+      "dvf": {
+        "commune": "Rennes",
+        "nb_ventes_totales": 667,
+        "prix_m2_median_global": 4411.76,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 4352.48,
+            "sample_count": 366
+          },
+          "house": {
+            "median_price_m2": 4493.98,
+            "sample_count": 301
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 10418,
+        "source_mutations": 4555,
+        "excluded_by_price": 7,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "14118": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:43:14.540864+00:00",
+        "latitude": 49.184316,
+        "longitude": -0.37193,
+        "avg_price_m2": 3529.41,
+        "total_transactions": 425,
+        "risks_count": 7,
+        "air_quality_score": 6.7,
+        "poi_sport": 15,
+        "poi_park": 72,
+        "poi_supermarket": 20,
+        "poi_pharmacy": 32,
+        "poi_school": 86,
+        "poi_restaurant": 252,
+        "poi_hospital": 13
+      },
+      "collected_at": "2026-10-15T10:43:14.540864+00:00",
+      "geocoding": {
+        "label": "Caen",
+        "latitude": 49.184316,
+        "longitude": -0.37193,
+        "city": "Caen",
+        "postcode": "14000",
+        "score": 0.9568372727272727,
+        "insee_code": "14118"
+      },
+      "risks": {
+        "code_insee": "14118",
+        "commune": "CAEN",
+        "total_risks": 7,
+        "risks": [
+          "Inondation",
+          "Par remontées de nappes naturelles",
+          "Par une crue à débordement lent de cours d'eau",
+          "Phénomène lié à l'atmosphère",
+          "Séisme",
+          "Tempête et grains (vent)",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Caen",
+        "station_id": 3690,
+        "station_name": "Caen Chemin-Vert",
+        "distance_km": 1.65,
+        "measurements": {
+          "no2": {
+            "value": 11.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 8194
+          },
+          "o3": {
+            "value": 26.6,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 8195
+          },
+          "pm10": {
+            "value": 12.1,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 24323
+          },
+          "pm25": {
+            "value": 6.7,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 8196
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "14118",
+        "scope_label": "Caen",
+        "counts": {
+          "sport": 15,
+          "park": 72,
+          "supermarket": 20,
+          "pharmacy": 32,
+          "school": 86,
+          "restaurant": 252,
+          "hospital": 13
+        },
+        "relation_id": 149197,
+        "area_id": 3600149197,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/149197",
+        "collected_at": "2026-10-15T10:43:12.408969+00:00",
+        "source_timestamp": "2026-10-15T10:41:24Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+      },
+      "dvf": {
+        "commune": "Caen",
+        "nb_ventes_totales": 425,
+        "prix_m2_median_global": 3529.41,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 3579.45,
+            "sample_count": 266
+          },
+          "house": {
+            "median_price_m2": 3422.22,
+            "sample_count": 159
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 6209,
+        "source_mutations": 2659,
+        "excluded_by_price": 1,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "76540": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:43:47.241481+00:00",
+        "latitude": 49.440051,
+        "longitude": 1.093912,
+        "avg_price_m2": 2893.75,
+        "total_transactions": 869,
+        "risks_count": 16,
+        "air_quality_score": 7.9,
+        "poi_sport": 21,
+        "poi_park": 55,
+        "poi_supermarket": 31,
+        "poi_pharmacy": 36,
+        "poi_school": 95,
+        "poi_restaurant": 291,
+        "poi_hospital": 9
+      },
+      "collected_at": "2026-10-15T10:43:47.241481+00:00",
+      "geocoding": {
+        "label": "Rouen",
+        "latitude": 49.440051,
+        "longitude": 1.093912,
+        "city": "Rouen",
+        "postcode": "76000",
+        "score": 0.9571681818181818,
+        "insee_code": "76540"
+      },
+      "risks": {
+        "code_insee": "76540",
+        "commune": "ROUEN",
+        "total_risks": 16,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Affaissements et effondrements d'origine naturelle (cavités souterraines)",
+          "Eboulement ou chutes de pierres et de blocs",
+          "Effet de surpression",
+          "Effet thermique",
+          "Effet toxique",
+          "Engins de guerre",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par remontées de nappes naturelles",
+          "Par ruissellement et coulée de boue",
+          "Par une crue torrentielle ou à montée rapide de cours d'eau",
+          "Par une crue à débordement lent de cours d'eau",
+          "Risque industriel",
+          "Tassements différentiels",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Rouen",
+        "station_id": 4160643,
+        "station_name": "Petit Quevilly",
+        "distance_km": 2.91,
+        "measurements": {
+          "no2": {
+            "value": 28.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 12865726
+          },
+          "pm10": {
+            "value": 13.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 12865724
+          },
+          "pm25": {
+            "value": 7.9,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 12865725
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "76540",
+        "scope_label": "Rouen",
+        "counts": {
+          "sport": 21,
+          "park": 55,
+          "supermarket": 31,
+          "pharmacy": 36,
+          "school": 95,
+          "restaurant": 291,
+          "hospital": 9
+        },
+        "relation_id": 75628,
+        "area_id": 3600075628,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/75628",
+        "collected_at": "2026-10-15T10:43:44.918192+00:00",
+        "source_timestamp": "2026-10-15T10:42:24Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+      },
+      "dvf": {
+        "commune": "Rouen",
+        "nb_ventes_totales": 869,
+        "prix_m2_median_global": 2893.75,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 2928.57,
+            "sample_count": 707
+          },
+          "house": {
+            "median_price_m2": 2567.31,
+            "sample_count": 162
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 6663,
+        "source_mutations": 2901,
+        "excluded_by_price": 0,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "49007": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:47:02.388072+00:00",
+        "latitude": 47.467471,
+        "longitude": -0.561615,
+        "avg_price_m2": 3529.41,
+        "total_transactions": 591,
+        "risks_count": 16,
+        "air_quality_score": 5.1,
+        "poi_sport": 20,
+        "poi_park": 120,
+        "poi_supermarket": 33,
+        "poi_pharmacy": 42,
+        "poi_school": 111,
+        "poi_restaurant": 264,
+        "poi_hospital": 6
+      },
+      "collected_at": "2026-10-15T10:47:02.388072+00:00",
+      "geocoding": {
+        "label": "Angers",
+        "latitude": 47.467471,
+        "longitude": -0.561615,
+        "city": "Angers",
+        "postcode": "49000",
+        "score": 0.9585372727272727,
+        "insee_code": "49007"
+      },
+      "risks": {
+        "code_insee": "49007",
+        "commune": "ANGERS",
+        "total_risks": 16,
+        "risks": [
+          "Affaissement minier",
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Affaissements et effondrements d'origine naturelle (cavités souterraines)",
+          "Eboulement ou chutes de pierres et de blocs",
+          "Effondrements généralisés",
+          "Foudre",
+          "Grêle",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par une crue à débordement lent de cours d'eau",
+          "Phénomène lié à l'atmosphère",
+          "Radon",
+          "Séisme",
+          "Tassements différentiels",
+          "Tempête et grains (vent)",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Angers",
+        "station_id": 6159394,
+        "station_name": "BEAUX ARTS",
+        "distance_km": 0.44,
+        "measurements": {
+          "no2": {
+            "value": 4.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T03:00:00Z",
+            "sensor_id": 14850173
+          },
+          "pm10": {
+            "value": 6.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T03:00:00Z",
+            "sensor_id": 14850174
+          },
+          "pm25": {
+            "value": 5.1,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T03:00:00Z",
+            "sensor_id": 14850167
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "49007",
+        "scope_label": "Angers",
+        "counts": {
+          "sport": 20,
+          "park": 120,
+          "supermarket": 33,
+          "pharmacy": 42,
+          "school": 111,
+          "restaurant": 264,
+          "hospital": 6
+        },
+        "relation_id": 178351,
+        "area_id": 3600178351,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/178351",
+        "collected_at": "2026-10-15T10:47:01.334135+00:00",
+        "source_timestamp": "2026-10-15T10:45:31Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+      },
+      "dvf": {
+        "commune": "Angers",
+        "nb_ventes_totales": 591,
+        "prix_m2_median_global": 3529.41,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 3886.27,
+            "sample_count": 305
+          },
+          "house": {
+            "median_price_m2": 3162.64,
+            "sample_count": 286
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 7868,
+        "source_mutations": 3171,
+        "excluded_by_price": 2,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "37261": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:44:34.808274+00:00",
+        "latitude": 47.395476,
+        "longitude": 0.695848,
+        "avg_price_m2": 3107.14,
+        "total_transactions": 675,
+        "risks_count": 3,
+        "air_quality_score": 3,
+        "poi_sport": 25,
+        "poi_park": 141,
+        "poi_supermarket": 28,
+        "poi_pharmacy": 48,
+        "poi_school": 134,
+        "poi_restaurant": 260,
+        "poi_hospital": 3
+      },
+      "collected_at": "2026-10-15T10:44:34.808274+00:00",
+      "geocoding": {
+        "label": "Tours",
+        "latitude": 47.395476,
+        "longitude": 0.695848,
+        "city": "Tours",
+        "postcode": "37000",
+        "score": 0.9579345454545454,
+        "insee_code": "37261"
+      },
+      "risks": {
+        "code_insee": "37261",
+        "commune": "TOURS",
+        "total_risks": 3,
+        "risks": [
+          "Inondation",
+          "Mouvement de terrain",
+          "Séisme"
+        ]
+      },
+      "air": {
+        "city": "Tours",
+        "station_id": 4008,
+        "station_name": "La Bruyère",
+        "distance_km": 2.8,
+        "measurements": {
+          "no2": {
+            "value": 13.1,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 5078646
+          },
+          "pm10": {
+            "value": 5.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 11793398
+          },
+          "pm25": {
+            "value": 3.0,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 12119642
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "37261",
+        "scope_label": "Tours",
+        "counts": {
+          "sport": 25,
+          "park": 141,
+          "supermarket": 28,
+          "pharmacy": 48,
+          "school": 134,
+          "restaurant": 260,
+          "hospital": 3
+        },
+        "relation_id": 76306,
+        "area_id": 3600076306,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/76306",
+        "collected_at": "2026-10-15T10:44:32.740507+00:00",
+        "source_timestamp": "2026-10-15T10:43:25Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+      },
+      "dvf": {
+        "commune": "Tours",
+        "nb_ventes_totales": 675,
+        "prix_m2_median_global": 3107.14,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 3051.59,
+            "sample_count": 412
+          },
+          "house": {
+            "median_price_m2": 3166.67,
+            "sample_count": 263
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 6680,
+        "source_mutations": 3072,
+        "excluded_by_price": 2,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "21231": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:47:25.907077+00:00",
+        "latitude": 47.331953,
+        "longitude": 5.033601,
+        "avg_price_m2": 3076.92,
+        "total_transactions": 615,
+        "risks_count": 12,
+        "air_quality_score": null,
+        "poi_sport": 21,
+        "poi_park": 171,
+        "poi_supermarket": 16,
+        "poi_pharmacy": 51,
+        "poi_school": 138,
+        "poi_restaurant": 313,
+        "poi_hospital": 14
+      },
+      "collected_at": "2026-10-15T10:47:25.907077+00:00",
+      "geocoding": {
+        "label": "Dijon",
+        "latitude": 47.331953,
+        "longitude": 5.033601,
+        "city": "Dijon",
+        "postcode": "21000",
+        "score": 0.9586172727272726,
+        "insee_code": "21231"
+      },
+      "risks": {
+        "code_insee": "21231",
+        "commune": "DIJON",
+        "total_risks": 12,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Eboulement ou chutes de pierres et de blocs",
+          "Effet de surpression",
+          "Effet thermique",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par ruissellement et coulée de boue",
+          "Par une crue à débordement lent de cours d'eau",
+          "Risque industriel",
+          "Rupture de barrage",
+          "Tassements différentiels",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Dijon",
+        "measurements": {}
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "21231",
+        "scope_label": "Dijon",
+        "counts": {
+          "sport": 21,
+          "park": 171,
+          "supermarket": 16,
+          "pharmacy": 51,
+          "school": 138,
+          "restaurant": 313,
+          "hospital": 14
+        },
+        "relation_id": 74090,
+        "area_id": 3600074090,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/74090",
+        "collected_at": "2026-10-15T10:47:25.209841+00:00",
+        "source_timestamp": "2026-10-15T10:46:33Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+      },
+      "dvf": {
+        "commune": "Dijon",
+        "nb_ventes_totales": 615,
+        "prix_m2_median_global": 3076.92,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 3058.82,
+            "sample_count": 407
+          },
+          "house": {
+            "median_price_m2": 3114.29,
+            "sample_count": 208
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-30",
+        "source_rows": 9295,
+        "source_mutations": 4011,
+        "excluded_by_price": 8,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "63113": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:47:32.71733+00:00",
+        "latitude": 45.786671,
+        "longitude": 3.107055,
+        "avg_price_m2": 2432.58,
+        "total_transactions": 368,
+        "risks_count": 16,
+        "air_quality_score": 3.6,
+        "poi_sport": null,
+        "poi_park": null,
+        "poi_supermarket": null,
+        "poi_pharmacy": null,
+        "poi_school": null,
+        "poi_restaurant": null,
+        "poi_hospital": null
+      },
+      "collected_at": "2026-10-15T10:47:32.717330+00:00",
+      "geocoding": {
+        "label": "Clermont-Ferrand",
+        "latitude": 45.786671,
+        "longitude": 3.107055,
+        "city": "Clermont-Ferrand",
+        "postcode": "63000",
+        "score": 0.9581599999999999,
+        "insee_code": "63113"
+      },
+      "risks": {
+        "code_insee": "63113",
+        "commune": "CLERMONT-FERRAND",
+        "total_risks": 16,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Effet de surpression",
+          "Effet thermique",
+          "Feu de forêt",
+          "Glissement de terrain",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par ruissellement et coulée de boue",
+          "Par une crue à débordement lent de cours d'eau",
+          "Phénomène lié à l'atmosphère",
+          "Radon",
+          "Risque industriel",
+          "Séisme",
+          "Tassements différentiels",
+          "Tempête et grains (vent)",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Clermont-Ferrand",
+        "station_id": 3727,
+        "station_name": "Montferrand",
+        "distance_km": 1.29,
+        "measurements": {
+          "no2": {
+            "value": 32.5,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T09:00:00Z",
+            "sensor_id": 8310
+          },
+          "o3": {
+            "value": 2.7,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T09:00:00Z",
+            "sensor_id": 8311
+          },
+          "pm25": {
+            "value": 3.6,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T09:00:00Z",
+            "sensor_id": 8313
+          },
+          "pm10": {
+            "value": 9.4,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T09:00:00Z",
+            "sensor_id": 8312
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "unavailable",
+        "scope": "commune",
+        "insee_code": "63113"
+      },
+      "dvf": {
+        "commune": "Clermont-Ferrand",
+        "nb_ventes_totales": 368,
+        "prix_m2_median_global": 2432.58,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 2436.67,
+            "sample_count": 218
+          },
+          "house": {
+            "median_price_m2": 2394.73,
+            "sample_count": 150
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 7561,
+        "source_mutations": 2997,
+        "excluded_by_price": 2,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
+    },
+    "38185": {
+      "snapshot": {
+        "updated_at": "2026-10-15T10:45:31.947156+00:00",
+        "latitude": 45.182828,
+        "longitude": 5.724301,
+        "avg_price_m2": 2800,
+        "total_transactions": 385,
+        "risks_count": 12,
+        "air_quality_score": 12.3,
+        "poi_sport": 30,
+        "poi_park": 143,
+        "poi_supermarket": 25,
+        "poi_pharmacy": 57,
+        "poi_school": 147,
+        "poi_restaurant": 426,
+        "poi_hospital": 4
+      },
+      "collected_at": "2026-10-15T10:45:31.947156+00:00",
+      "geocoding": {
+        "label": "Grenoble",
+        "latitude": 45.182828,
+        "longitude": 5.724301,
+        "city": "Grenoble",
+        "postcode": "38000",
+        "score": 0.9584545454545453,
+        "insee_code": "38185"
+      },
+      "risks": {
+        "code_insee": "38185",
+        "commune": "GRENOBLE",
+        "total_risks": 12,
+        "risks": [
+          "Affaissements et effondrements d'origine anthropique (anciennes carrières souterraines, hors mines)",
+          "Effet thermique",
+          "Feu de forêt",
+          "Inondation",
+          "Mouvement de terrain",
+          "Par ruissellement et coulée de boue",
+          "Par une crue torrentielle ou à montée rapide de cours d'eau",
+          "Par une crue à débordement lent de cours d'eau",
+          "Risque industriel",
+          "Rupture de barrage",
+          "Séisme",
+          "Transport de marchandises dangereuses"
+        ]
+      },
+      "air": {
+        "city": "Grenoble",
+        "station_id": 3720,
+        "station_name": "St Martin d'Heres",
+        "distance_km": 2.26,
+        "measurements": {
+          "pm10": {
+            "value": 26.8,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 8294
+          },
+          "pm25": {
+            "value": 12.3,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 40645
+          },
+          "o3": {
+            "value": 5.1,
+            "unit": "µg/m³",
+            "measured_at": "2026-10-15T08:00:00Z",
+            "sensor_id": 8295
+          }
+        }
+      },
+      "poi_commune": {
+        "status": "available",
+        "scope": "commune",
+        "insee_code": "38185",
+        "scope_label": "Grenoble",
+        "counts": {
+          "sport": 30,
+          "park": 143,
+          "supermarket": 25,
+          "pharmacy": 57,
+          "school": 147,
+          "restaurant": 426,
+          "hospital": 4
+        },
+        "relation_id": 80348,
+        "area_id": 3600080348,
+        "method": "osm-commune-nwr-count-v1",
+        "source": "https://www.openstreetmap.org/relation/80348",
+        "collected_at": "2026-10-15T10:45:27.228917+00:00",
+        "source_timestamp": "2026-10-15T10:44:29Z",
+        "api_endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+      },
+      "dvf": {
+        "commune": "Grenoble",
+        "nb_ventes_totales": 385,
+        "prix_m2_median_global": 2800.0,
+        "by_type": {
+          "apartment": {
+            "median_price_m2": 2800.0,
+            "sample_count": 360
+          },
+          "house": {
+            "median_price_m2": 3454.55,
+            "sample_count": 25
+          }
+        },
+        "period_start": "2025-01-02",
+        "period_end": "2025-12-31",
+        "source_rows": 7026,
+        "source_mutations": 3185,
+        "excluded_by_price": 0,
+        "method": "single-row-sale-v2",
+        "limitations": "Ventes à une seule ligne ; mutations complexes exclues. Seuil de 200 à 20 000 €/m². Médiane masquée si moins de 10 observations. Échantillon non représentatif du marché total.",
+        "year": 2025
+      }
     }
   }
 }
