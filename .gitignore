@@ -2,7 +2,12 @@ venv/
 __pycache__/
 *.pyc
 .env
+.firebase/
+.tools/
+firebase-debug*.log
+docs/local-server*.log
 data/pipeline-run.json
+data/expanded-cities-run.json
 data/raw/*
 data/processed/*
 !data/raw/.gitkeep
