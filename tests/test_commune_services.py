@@ -70,6 +70,20 @@ class CommuneServicesTests(unittest.TestCase):
             self.assertEqual(result["api_endpoint"],OVERPASS_ENDPOINTS[1])
             self.assertEqual(post.call_count,2)
 
+    def test_entirely_empty_spatial_index_is_checked_on_backup(self):
+        empty=self.response()
+        for element in empty["elements"]:
+            if element["type"]=="count":
+                element["tags"]["total"]="0"
+        first,second=Mock(),Mock()
+        first.json.return_value=empty
+        second.json.return_value=self.response()
+        with patch("src.extract.overpass_osm.requests.post",side_effect=[first,second]) as post:
+            result=get_commune_poi_counts("69123")
+            self.assertEqual(post.call_count,2)
+            self.assertEqual(result["counts"]["hospital"],6)
+            self.assertEqual(result["api_endpoint"],OVERPASS_ENDPOINTS[1])
+
 
 if __name__ == "__main__":
     unittest.main()
