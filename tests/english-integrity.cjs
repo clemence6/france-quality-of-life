@@ -27,7 +27,7 @@ for(const name of ['priceBars','housingDumbbells','servicesMatrix','scatterPlot'
 const english=fs.readFileSync(path.join(root,'en/index.html'),'utf8');
 assert.match(english,/<html lang="en">/);
 assert.match(english,/<base href="\.\.\/">/);
-assert.match(english,/src="en\/app.js\?v=12"/);
+assert.match(english,/src="en\/app.js\?v=13"/);
 assert.match(english,/Find the city that suits you/);
 assert.match(english,/Sources & methodology/);
 assert.doesNotMatch(english,/11 villes|Connexion aux données|Quel budget|La qualité/);
