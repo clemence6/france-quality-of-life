@@ -3,7 +3,7 @@ const vm = require('node:vm');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const root = path.join(__dirname, '../web');
-const elements = {priceType:{value:'apartment'},scatterMetric:{value:'poi_park'},riskCategory:{value:'all'}};
+const elements = {priceType:{value:'apartment'},scatterMetric:{value:'poi_park'},budgetMax:{value:'3000'},riskCategory:{value:'all'}};
 const context = vm.createContext({
  document:{getElementById(id){return elements[id] ||= {value:'',textContent:''};}},
  window:{matchMedia(){return {matches:false};}}, Intl,Date,Number,String,URL,
@@ -35,18 +35,22 @@ context.tradeoffFixtures=[
  {code:'e',name:'Epsilon',apartment:6000,services:{poi_park:20},info:{dvf:{year:2025},poi:{collected_at:'2026-10-15'}},apartmentCount:10},
  {code:'f',name:'Inconnue',apartment:1,services:{poi_park:null},info:{dvf:{year:2025}}}
 ];
-let tradeoff=vm.runInContext('tradeoffAnalysis(tradeoffFixtures,"poi_park")',context);
-assert.equal(tradeoff.priceMedian,3000,'Les prix manquants ne déplacent pas le repère');
-assert.equal(tradeoff.serviceMedian,20,'Un zéro documenté est conservé');
-assert.equal(tradeoff.matching.map(row=>row.code).join(','),'a','Plus de services exige de dépasser la médiane ; un prix élevé ne satisfait pas le compromis');
-assert.equal(tradeoff.missing.length,1,'Une observation sans services est exclue des deux repères');
-const tradeoffHtml=vm.runInContext('scatterPlot(tradeoffFixtures)',context);
-assert.match(tradeoffHtml,/Alpha/);assert.match(tradeoffHtml,/chiffres précédents conservés/);
-assert.match(tradeoffHtml,/Inconnue/);assert.doesNotMatch(tradeoffHtml,/NaN|Infinity|undefined/);
-assert.equal(vm.runInContext('tradeoffAnalysis(tradeoffFixtures.slice(0,2),"poi_park").status',context),'insufficient');
-assert.equal(vm.runInContext('tradeoffAnalysis(tradeoffFixtures.slice(0,3).map(row=>({...row,apartment:3000,services:{poi_park:20}})),"poi_park").matching.length',context),0,'Des valeurs identiques ne prouvent pas davantage de services');
-assert.equal(vm.runInContext('tradeoffAnalysis(tradeoffFixtures.slice(0,3).map((row,i)=>({...row,info:{dvf:{year:i?2025:2024}}})),"poi_park").status',context),'periods','Ne pas fusionner des millésimes immobiliers différents');
-for(const name of ['priceBars','housingDumbbells','servicesMatrix','scatterPlot','airLollipops','risksMatrix','qualityCoverage']) {
+let choices=vm.runInContext('budgetAnalysis(tradeoffFixtures,"poi_park",3000)',context);
+assert.equal(choices.top.map(row=>row.code).join(','),'a,b,d','Le budget exclut les villes trop chères ; le classement suit les services, zéro documenté compris');
+assert.equal(choices.eligible.length,3,'Le prix égal au budget est accepté');
+assert.equal(choices.missing.length,1,'Une ville sans services reste inconnue');
+assert.equal(vm.runInContext('budgetAnalysis(tradeoffFixtures,"poi_park",6000).top.map(row=>row.code).join(",")',context),'c,a,b','Trois propositions au maximum ; à égalité, le prix le plus bas est prioritaire');
+assert.equal(vm.runInContext('budgetAnalysis(tradeoffFixtures,"poi_park",1000).top.length',context),0,'Aucune ville hors budget ne complète les résultats');
+assert.equal(vm.runInContext('budgetAnalysis(tradeoffFixtures.slice(0,1),"poi_park",3000).top.length',context),1,'Un seul résultat reste affichable');
+assert.equal(vm.runInContext('budgetAnalysis(tradeoffFixtures,"poi_park",2999.99).top.length',context),2,'Le budget décimal reste précis');
+assert.equal(vm.runInContext('budgetAnalysis(tradeoffFixtures,"poi_park",NaN).status',context),'invalid');
+assert.equal(vm.runInContext('budgetAnalysis(tradeoffFixtures,"poi_park",Infinity).status',context),'invalid');
+assert.equal(vm.runInContext('budgetAnalysis(tradeoffFixtures,"poi_park",0).status',context),'invalid');
+const budgetHtml=vm.runInContext('budgetRecommendations(tradeoffFixtures)',context);
+assert.match(budgetHtml,/Alpha/);assert.match(budgetHtml,/chiffres précédents conservés/);
+assert.match(budgetHtml,/Inconnue/);assert.doesNotMatch(budgetHtml,/NaN|Infinity|undefined/);
+assert.equal(vm.runInContext('budgetAnalysis(tradeoffFixtures.slice(0,3).map((row,i)=>({...row,info:{dvf:{year:i?2025:2024}}})),"poi_park",3000).status',context),'periods','Ne pas classer ensemble des prix de millésimes différents');
+for(const name of ['priceBars','housingDumbbells','servicesMatrix','budgetRecommendations','airLollipops','risksMatrix','qualityCoverage']) {
  const html=vm.runInContext(`${name}(dashboardRows())`,context);
  assert.doesNotMatch(html,/NaN|Infinity|undefined/,name+' : rendu numérique valide');
  assert.ok(html.length>100);
@@ -59,4 +63,4 @@ elements.priceType.value='house';
 assert.match(vm.runInContext('priceBars(selectedDashboardRows())',context),/5[\s\u202f]*000/);
 elements.riskCategory.value='water';
 assert.doesNotMatch(vm.runInContext('risksMatrix(selectedDashboardRows())',context),/Radon/);
-console.log('PASS : couvertures réelles, manquants exclus, filtres, médianes, 7 graphiques et sélections vides');
+console.log('PASS : couvertures réelles, manquants exclus, filtres, médianes, graphiques, sélection par budget et états vides');
