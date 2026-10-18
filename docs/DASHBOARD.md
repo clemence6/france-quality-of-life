@@ -9,8 +9,7 @@ du visiteur, sans fabriquer un classement global à partir d'unités différente
 - Les boutons de villes définissent le périmètre commun à tous les graphiques.
 - « Toutes les villes » réinitialise ce périmètre.
 - Le sélecteur immobilier distingue maisons et appartements.
-- Le nuage de points croise le prix des appartements avec une catégorie de services OpenStreetMap
-  choisie : parcs, pharmacies, restaurants ou écoles.
+- Le module budget filtre les villes selon un prix maximum pour les appartements, puis propose jusqu’à trois villes classées selon le service prioritaire choisi.
 - Un clic sur une barre ou un point sélectionne la ville et la met en évidence
   dans les graphiques de prix et de compromis. Sa fiche est ouverte sur la carte.
 - Les infobulles et les tableaux accessibles donnent les valeurs, les effectifs,
@@ -20,24 +19,22 @@ du visiteur, sans fabriquer un classement global à partir d'unités différente
 
 ## Choix analytiques
 
-### Prix modéré et services référencés
+### Budget maximum et priorité de service
 
-Le module « Quelles villes combinent un prix immobilier modéré et davantage de services référencés ? » compare les appartements et une seule catégorie de services à la fois. Il suit les filtres de villes du dashboard et propose les sept catégories OSM disponibles.
+Le module « Votre budget, vos priorités : quelles villes explorer ? » utilise le budget maximum saisi pour les appartements et une catégorie de services au choix. Le budget initial est de 3 000 €/m² ; les filtres de villes du dashboard restent applicables.
 
-Les deux repères sont calculés sur le même ensemble de villes : uniquement celles ayant un prix d'appartement et un comptage communal documentés pour le service choisi. Les prix doivent porter sur le même millésime DVF ; des années différentes bloquent l'analyse commune. Il faut au moins trois villes exploitables.
+Les villes doivent avoir un prix d'appartement et un comptage communal documentés pour le service choisi. Le prix médian doit être inférieur ou égal au budget. Les villes admissibles sont triées par nombre de services décroissant, puis par prix croissant en cas d'égalité, puis par nom. Seules les trois premières sont proposées. Un ou deux résultats sont possibles ; aucun résultat hors budget n'est ajouté. Les années de prix doivent être identiques parmi les villes admissibles.
 
-Une ville satisfait les critères si son prix médian d'appartement est inférieur ou égal à la médiane des prix des villes comparables et si son nombre de services est strictement supérieur à la médiane des comptages de ces mêmes villes. Une égalité sur les services ne satisfait pas « davantage ». Un zéro documenté reste valide ; une valeur inconnue est exclue des deux calculs.
+Un zéro documenté est accepté, une valeur manquante est exclue. Les dates de collecte et le nombre de ventes analysées restent visibles. Les comptages bruts favorisent potentiellement les grandes communes et ne mesurent ni l'accessibilité depuis un quartier, ni la qualité des équipements. Ce classement concerne uniquement le service choisi parmi les villes dans le budget, sans score global de qualité de vie.
 
-La zone verte du graphique matérialise ce compromis. Les fiches de résultats, en ordre alphabétique, affichent prix, nombre de ventes, service choisi et date de collecte, y compris lorsqu'une collecte précédente est conservée. Les villes non évaluées sont nommées. Les seuils évoluent avec les filtres : ils ne définissent pas un prix abordable universel.
-
-Les comptages bruts favorisent potentiellement les grandes communes et ne mesurent ni l'accessibilité depuis un quartier, ni la qualité des équipements, ni la complétude d'OSM. Aucun score synthétique ni classement général n'est produit.
+Le libellé scolaire est « Établissements scolaires » car le tag OSM couvre l'enseignement primaire et secondaire. Le total d'objets OSM ne certifie pas un nombre d'établissements uniques. Voir le contrôle de Marseille du 18 octobre 2026 dans `CONTROLE_ECOLES_MARSEILLE.md`.
 
 | Vue | Question | Précaution |
 | --- | --- | --- |
 | Barres de prix | Quel budget au m² dans l'échantillon ? | Axe commençant à zéro ; même type de logement ; effectifs et dates conservés |
 | Points reliés | Comment diffèrent les médianes maisons/appartements ? | Deux marchés distincts ; l'écart ne prédit pas le prix d'un même bien |
 | Matrice de services | Quels objets sont cartographiés dans les limites de la commune ? | Valeurs brutes ; couleur propre à chaque colonne de la sélection ; manquants hachurés |
-| Nuage de points | Quels compromis entre prix et services dans la commune ? | Aucun lien causal ou score de qualité de vie déduit ; données documentées sur les deux axes |
+| Budget et priorité | Quelles villes ont le plus de services choisis dans ce budget ? | Prix médian des appartements ; comptages OSM bruts ; données manquantes exclues ; au plus trois propositions |
 | Relevés PM2.5 | Que disent les dernières observations de stations ? | Ordre alphabétique ; unité identique ; horaires et distances visibles ; pas de classement sanitaire |
 | Matrice GASPAR | Quels libellés sont recensés par commune ? | Catégories non additionnées ; présence différente de probabilité ou de gravité |
 | Couverture | Quelles données peut-on effectivement examiner ? | Chaque source a son dénominateur et ses limites ; absence différente de zéro |
