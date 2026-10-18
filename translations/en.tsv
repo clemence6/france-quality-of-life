@@ -74,9 +74,9 @@ Garder des indicateurs séparés|||Keep indicators separate
 Un prix, un relevé d’air et une liste de risques ne décrivent pas la même chose. Les graphiques permettent de les croiser sans fabriquer une note de « meilleure ville ».|||A price, an air measurement and a list of hazards describe different things. The charts bring them together without inventing a single best-city score.
 Comment les prix immobiliers sont-ils calculés ?|||How are property prices calculated?
 Un prix médian est un repère :|||The median price is a reference point:
-la moitié des ventes retenues a un prix au m² inférieur, l’autre moitié un prix supérieur. Le calcul est fait séparément pour les maisons et les appartements, dans chaque ville.|||half of the retained transactions have a lower price per square metre, and half a higher one. Houses and apartments are calculated separately for each city.
-Seules les ventes de maisons ou d’appartements décrites sur une seule ligne sont conservées. Le prix et la surface doivent être renseignés et positifs. Les prix inférieurs à 200 ou supérieurs à 20 000 €/m² sont écartés pour limiter les valeurs extrêmes. Il faut au moins 10 ventes retenues pour afficher un prix médian.|||Only house or apartment sales recorded on a single row are retained. Price and floor area must be present and positive. Prices below 200 or above 20,000 €/m² are excluded to limit extreme values. A median is shown only when at least 10 transactions remain.
-Ces filtres excluent une partie des ventes, y compris des transactions réelles. Le résultat donne un repère sur les ventes retenues, pas une estimation de tous les logements de la ville. La période et le nombre de ventes restent accessibles dans les fiches et les graphiques.|||These filters exclude some sales, including genuine transactions. The result is a reference for the retained sample, not a valuation of every home in the city. Dates and sample sizes remain available in city profiles and charts.
+la moitié des ventes analysées a un prix au m² inférieur, l’autre moitié un prix supérieur. Le calcul est fait séparément pour les maisons et les appartements, dans chaque ville.|||half of the retained transactions have a lower price per square metre, and half a higher one. Houses and apartments are calculated separately for each city.
+Seules les ventes de maisons ou d’appartements décrites sur une seule ligne sont conservées. Le prix et la surface doivent être renseignés et positifs. Les prix inférieurs à 200 ou supérieurs à 20 000 €/m² sont écartés pour limiter les valeurs extrêmes. Il faut au moins 10 ventes analysées pour afficher un prix médian.|||Only house or apartment sales recorded on a single row are retained. Price and floor area must be present and positive. Prices below 200 or above 20,000 €/m² are excluded to limit extreme values. A median is shown only when at least 10 transactions remain.
+Ces filtres excluent une partie des ventes, y compris des transactions réelles. Le résultat donne un repère sur les ventes analysées, pas une estimation de tous les logements de la ville. La période et le nombre de ventes restent accessibles dans les fiches et les graphiques.|||These filters exclude some sales, including genuine transactions. The result is a reference for the retained sample, not a valuation of every home in the city. Dates and sample sizes remain available in city profiles and charts.
 Comment les contrôles peuvent-ils être vérifiés ?|||How can the checks be reviewed?
 Les scripts conservent la source, la date de collecte, la commune et les informations utiles au calcul. Un rapport permet de retrouver les filtres immobiliers, les stations de mesure et les réponses des API. Des tests vérifient notamment les ventes sur plusieurs lignes, les unités de l’air et les limites communales.|||Scripts retain the source, collection date, municipality and calculation details. A report records property filters, monitoring stations and API responses. Tests cover multi-row transactions, air measurement units and municipal boundaries.
 Une vérification technique ne garantit pas que toutes les données sont complètes. Par exemple, un service absent d’OpenStreetMap peut exister dans la réalité.|||Technical checks cannot guarantee complete data. For example, a service missing from OpenStreetMap may still exist in reality.
@@ -113,7 +113,7 @@ Quel budget pour acheter ?|||What budget do you need to buy?
 Type de logement du graphique de prix|||Property type for the price chart
 Appartements|||Apartments
 Maisons|||Houses
-Comparez les prix médians au m² des ventes retenues dans chaque ville, du moins cher au plus cher.|||Compare median prices per square metre in the retained sales sample, from the lowest to the highest.
+Comparez les prix médians au m² des ventes analysées dans chaque ville, du moins cher au plus cher.|||Compare median prices per square metre in the analysed sales sample, from the lowest to the highest.
 02 / TYPES DE LOGEMENT|||02 / PROPERTY TYPES
 Appartement ou maison ?|||Apartment or house?
 Prix médians|||Median prices
@@ -161,7 +161,7 @@ Revenir à la carte ↑|||Back to the map ↑
 OÙ HABITER ? · DES DONNÉES POUR CHOISIR SON LIEU DE VIE.|||WHERE TO LIVE? · DATA TO HELP YOU CHOOSE YOUR NEXT HOME.
 France métropolitaine · villes documentées|||Metropolitan France · documented cities
 Ancien calcul retiré · à recalculer|||Previous calculation removed · recalculation needed
-ventes retenues|||retained sales
+ventes analysées|||analysed sales
 Renseigne l’URL et la clé publique dans config.js.|||Set the Supabase URL and public key in config.js.
 Réponse Supabase inattendue.|||Unexpected response from Supabase.
 Aucune ville accessible. Vérifie l’alimentation de la table et sa policy RLS de lecture.|||No cities are accessible. Check that the table contains data and permits public read access.
@@ -185,10 +185,10 @@ Prix indisponible|||Price unavailable
 Prix médian ·|||Median price ·
 Immobilier|||Property prices
 Maisons · prix médian|||Houses · median price
-Un repère calculé sur une sélection de ventes, pas sur tous les logements. Aucun prix n’est affiché avec moins de 10 ventes retenues.|||A reference based on a selection of transactions, not every home. No price is shown with fewer than 10 retained sales.
+Un repère calculé sur une sélection de ventes, pas sur tous les logements. Aucun prix n’est affiché avec moins de 10 ventes analysées.|||A reference based on a selection of transactions, not every home. No price is shown with fewer than 10 analysed sales.
 Les données disponibles ne permettent pas encore de calculer un prix fiable pour cette ville.|||Available data does not yet support a reliable price calculation for this city.
 Que signifie « prix médian » ?|||What does median price mean?
-La moitié des ventes retenues a un prix au m² plus bas, l’autre moitié un prix plus élevé. Les maisons et les appartements sont étudiés séparément.|||Half of the retained sales have a lower price per square metre, and half a higher one. Houses and apartments are analysed separately.
+La moitié des ventes analysées a un prix au m² plus bas, l’autre moitié un prix plus élevé. Les maisons et les appartements sont étudiés séparément.|||Half of the analysed sales have a lower price per square metre, and half a higher one. Houses and apartments are analysed separately.
 La sélection des ventes et les filtres de prix sont expliqués dans « Sources & méthode ».|||Transaction selection and price filters are explained in Sources & methodology.
 Les services dans la ville|||Services across the city
 Dernière collecte du|||Last collected on
@@ -238,7 +238,7 @@ Indicateur|||Indicator
 DVF · quel budget pour acheter ?|||DVF · what budget do you need to buy?
 Fichiers CSV · ventes immobilières|||CSV files · property transactions
 Les fichiers de ventes publiés par la DGFiP fournissent le prix, la surface et le type de logement. Python et pandas sélectionnent les ventes utilisables et calculent le prix médian au m² par ville, pour les maisons et les appartements séparément.|||Transaction files published by the French tax authority provide prices, floor areas and property types. Python and pandas select usable sales and calculate median prices per square metre for each city, separately for houses and apartments.
-Ces prix décrivent les ventes retenues. Strasbourg n’a pas de prix DVF : cette source ne couvre pas le Bas-Rhin.|||These prices describe the retained sales sample. Strasbourg has no DVF price because this source does not cover the Bas-Rhin department.
+Ces prix décrivent les ventes analysées. Strasbourg n’a pas de prix DVF : cette source ne couvre pas le Bas-Rhin.|||These prices describe the analysed sales sample. Strasbourg has no DVF price because this source does not cover the Bas-Rhin department.
 OpenStreetMap · quels services au quotidien ?|||OpenStreetMap · which everyday services are mapped?
 API Overpass · services cartographiés|||Overpass API · mapped services
 Une requête récupère les services référencés dans les limites de chaque commune : pharmacies, hôpitaux, écoles, parcs, centres de fitness, supermarchés et restaurants. Le code INSEE permet de sélectionner le bon territoire.|||A query retrieves mapped services within each municipality: pharmacies, hospitals, schools, parks, fitness centres, supermarkets and restaurants. The INSEE code identifies the correct territory.
@@ -271,11 +271,11 @@ Cliquer pour découvrir la fiche ↗|||Select to open the city profile ↗
 Lire les valeurs en tableau|||Read values in a table
 villes avec un prix disponible. Survolez une barre pour voir le nombre de ventes et la période. Le calcul est expliqué dans « Sources & méthode ».|||cities with available prices. Hover over a bar to see the sample size and dates. The calculation is explained in Sources & methodology.
 Aucune médiane documentée pour ce type de logement dans la sélection.|||No documented median is available for this property type in the selection.
-ventes retenues,|||retained sales,
+ventes analysées,|||analysed sales,
 Cliquez pour sélectionner cette ville.|||Select to highlight this city.
 Médianes des prix au mètre carré par ville, ordre croissant|||Median property prices per square metre by city, ascending order
 Médiane €/m²|||Median €/m²
-Ventes retenues|||Retained sales
+Ventes analysées|||Analysed sales
 Période|||Period
 Ville|||City
 Aucune ville ne dispose de deux médianes documentées dans cette sélection.|||No city in this selection has two documented medians.
@@ -393,3 +393,32 @@ Faire ressortir un compromis lisible.|||Highlight a clear trade-off.
 La sélection retient un prix inférieur ou égal au repère et un nombre de services strictement supérieur au sien. Les filtres recalculent les repères et la sélection ; les villes retenues sont présentées par ordre alphabétique.|||The selection requires a price at or below its benchmark and a service count strictly above its own benchmark. Filters recalculate the benchmarks and the selection; qualifying cities are listed alphabetically.
 Le choix de la médiane limite l’influence des valeurs extrêmes. Un prix « modéré » reste relatif aux villes sélectionnées : ce seuil ne définit pas un budget accessible à tous.|||Using the median limits the influence of extreme values. A moderate price remains relative to the selected cities: this threshold does not define a budget everyone can afford.
 Les valeurs manquantes sont exclues des deux calculs. Lorsqu’une collecte de services échoue, des chiffres précédents peuvent être conservés pendant sept jours au maximum, avec leur date d’origine.|||Missing values are excluded from both calculations. When service collection fails, previous figures may be retained for up to seven days, with their original date.
+04 / VOTRE SÉLECTION|||04 / YOUR SELECTION
+Votre budget, vos priorités : quelles villes explorer ?|||Your budget, your priorities: which cities could suit you?
+Budget maximum · appartements|||Maximum budget · apartments
+Votre priorité de service|||Your service priority
+Établissements scolaires|||Schools (OSM)
+Choisissez votre budget au m² et le service qui compte le plus. Découvrez jusqu’à trois villes dans votre budget, avec le plus de services référencés pour cette priorité.|||Choose your budget per square metre and the service that matters most. Discover up to three cities within your budget with the most mapped services for that priority.
+Indiquez un budget maximum entre 200 et 20 000 €/m².|||Enter a maximum budget between 200 and 20,000 €/m².
+Les prix dans ce budget couvrent des années différentes. Choisissez des villes avec le même millésime immobilier.|||Prices within this budget cover different years. Choose cities with property prices from the same year.
+Villes dans votre budget de ${number(budget)} €/m² maximum : ${eligible.length}.|||Cities within your maximum budget of ${number(budget)} €/m²: ${eligible.length}.
+Votre priorité : ${escapeHtml(label.toLowerCase())}. Les résultats sont classés par nombre de services référencés.|||Your priority: ${escapeHtml(label.toLowerCase())}. Results are ordered by the number of mapped services.
+Aucune ville documentée ne correspond à ce budget. Augmentez-le ou modifiez les villes sélectionnées.|||No documented city matches this budget. Increase it or change the selected cities.
+ville(s) non évaluée(s), données incomplètes|||cities not assessed because of incomplete data
+Sources et méthode de cette sélection|||Sources and method behind this selection
+Votre budget fixe la première sélection.|||Your budget determines the first selection.
+Le prix médian des appartements doit être inférieur ou égal au montant indiqué. Ce prix est calculé à partir des ventes DVF analysées, avec au moins 10 ventes par ville.|||The median apartment price must be at or below your budget. It is calculated from analysed DVF sales, with at least 10 sales per city.
+Votre priorité détermine le classement.|||Your priority determines the order.
+Les villes sont triées par nombre décroissant de services référencés dans la catégorie choisie. À égalité, le prix le plus bas passe en premier, puis l’ordre alphabétique. Jusqu’à trois villes sont proposées, sans ajouter de ville hors budget.|||Cities are ordered by mapped service count, highest first, for your chosen category. Ties are resolved by lower property price, then alphabetically. Up to three cities are suggested, without adding cities outside your budget.
+Les mêmes données sont utilisées pour tous les résultats.|||The same data rules apply to all results.
+Le code INSEE relie les ventes et les comptages de chaque commune.|||The INSEE code links sales and service counts for each municipality.
+Les prix comparés portent sur le même millésime immobilier|||Compared property prices cover the same year
+Une ville sans prix ou sans comptage documenté est exclue.|||Cities without a documented price or service count are excluded.
+Le budget porte sur une médiane au m², pas sur le prix de chaque appartement. Le comptage des services couvre toute la commune et peut favoriser les grandes villes. Il ne mesure ni leur qualité, ni leur proximité depuis un logement.|||The budget applies to a median price per square metre, not to every apartment. Service counts cover the whole municipality and may favour larger cities. They measure neither quality nor proximity to a home.
+Les scripts Python préparent les données ; Supabase stocke les résultats et leur provenance ; les filtres JavaScript construisent cette sélection. Les dates de collecte restent visibles, y compris lorsqu’une observation précédente est conservée.|||Python scripts prepare the data; Supabase stores results and provenance; JavaScript filters build this selection. Collection dates remain visible, including when a previous observation is retained.
+Nombre de ventes de maisons et d’appartements étudiées|||Number of house and apartment sales analysed
+Plus la couleur est soutenue, plus le nombre est élevé pour ce service.|||Darker colours indicate higher counts for that service.
+Parcs, pharmacies, établissements scolaires, commerces : comparez les services référencés dans l’ensemble de chaque commune.|||Parks, pharmacies, schools and shops: compare mapped services across each municipality.
+Le compteur scolaire OSM inclut les écoles, collèges et lycées cartographiés. Il ne garantit pas un nombre d’établissements uniques.|||The OSM school count includes mapped primary and secondary schools. It does not guarantee a count of unique institutions.
+Ce comptage OSM inclut les écoles, collèges et lycées, publics ou privés. Un établissement peut être représenté plusieurs fois ; ce total ne constitue pas un annuaire officiel.|||This OSM count includes public and private primary and secondary schools. An institution may be represented more than once; the total is not an official directory count.
+Villes non évaluées : ${missing.length} · données incomplètes|||Cities not assessed: ${missing.length} · incomplete data
