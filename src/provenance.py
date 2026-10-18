@@ -69,9 +69,11 @@ def save_metadata(code, row, metadata):
     temporary.replace(path)
 
 
-def publish_metadata(client, path=None):
+def publish_metadata(client, path=None, *, object_name="provenance.json"):
     """Publie uniquement le JSON public, pour synchroniser aussi les sites locaux."""
     path = PUBLIC_DIR / "provenance.json" if path is None else Path(path)
+    if object_name not in {"provenance.json", "audit.json"}:
+        raise ValueError("Nom de document public invalide")
     content = path.read_bytes()
     document = json.loads(content)
     if not isinstance(document.get("cities"), dict):
@@ -84,6 +86,6 @@ def publish_metadata(client, path=None):
     elif not bucket.public:
         raise RuntimeError("Le bucket de métadonnées existant est privé : configuration à vérifier")
     client.storage.from_(PUBLIC_METADATA_BUCKET).upload(
-        "provenance.json", content,
+        object_name, content,
         file_options={"content-type": "application/json", "cache-control": "60", "upsert": "true"},
     )
