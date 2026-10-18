@@ -82,6 +82,7 @@
 
 /* Language choice stays visible alongside the navigation. */
 .header-actions{display:flex;align-items:center;gap:14px}.language-switch{display:flex;align-items:center;flex-shrink:0}.language-switch select{border:1px solid #b6cdbf;background:#fffef9;color:var(--accent);border-radius:8px;padding:9px 24px 9px 10px;font-size:13px;max-width:115px}.topbar{gap:14px}.brand-sub{margin-left:8px}
+.brand .brand-copy{display:flex;flex-direction:column;gap:4px;line-height:1.15}.brand .brand-sub{display:block;margin:0;font-size:9px;letter-spacing:.6px;line-height:1.5;font-weight:500}
 @media(max-width:1200px){.brand-sub{display:none}.topbar{padding-inline:24px}.header-actions{gap:8px}.nav-btn{padding-inline:10px}}
 @media(max-width:700px){.topbar{flex-wrap:wrap;padding:12px 16px;gap:8px}.brand{font-size:25px}.header-actions{display:contents}.language-switch{margin-left:auto;order:1}.header-actions nav{order:2;width:100%;justify-content:space-between}.nav-btn{padding:8px 10px;font-size:12px}.city-panel{top:125px;max-height:calc(100dvh - 150px)}}
 @media(max-width:600px){.city-panel{top:auto;bottom:14px;max-height:76dvh}}
