@@ -1,20 +1,51 @@
 {
   "hosting": {
-    "predeploy": ["python scripts/build_english.py", "node tests/frontend-integrity.cjs", "node tests/dashboard-integrity.cjs", "node tests/english-integrity.cjs"],
+    "predeploy": [
+      "python scripts/build_english.py",
+      "node tests/frontend-integrity.cjs",
+      "node tests/dashboard-integrity.cjs",
+      "node tests/english-integrity.cjs"
+    ],
     "public": "web",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/*.map"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/*.map"
+    ],
     "headers": [
       {
         "source": "**",
         "headers": [
-          {"key": "Cache-Control", "value": "no-cache"},
-          {"key": "X-Content-Type-Options", "value": "nosniff"},
-          {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"}
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          }
         ]
       },
       {
         "source": "/data/**",
-        "headers": [{"key": "Cache-Control", "value": "no-store"}]
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store"
+          }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/data/audit.json",
+        "destination": "https://nkvvwkuahsqkxzqrorkh.supabase.co/storage/v1/object/public/qol-public-metadata/audit.json",
+        "type": 302
       }
     ]
   }
