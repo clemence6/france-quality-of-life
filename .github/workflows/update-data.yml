@@ -61,6 +61,15 @@ jobs:
         # Le runner repart sans les caches DVF : les fichiers sont retéléchargés.
         run: python -m src.main_pipeline
 
+      - name: Contrôler les données publiées et actualiser le rapport public
+        id: audit
+        if: always() && (steps.collect.outcome == 'success' || steps.collect.outcome == 'failure')
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python -m src.daily_audit --publish
+
       - name: Présenter le bilan dans GitHub Actions
         if: always() && (steps.collect.outcome == 'success' || steps.collect.outcome == 'failure')
         run: |
@@ -79,6 +88,15 @@ jobs:
                   text += f"\n- Actualisation indisponible : {error['city']} · {error['source']} ({error['error']}){retained}"
           else:
               text = '## Mise à jour interrompue\n\nAucun bilan de collecte disponible. Consulter les logs.\n'
+          audit_path = Path('data/daily-audit.json')
+          if audit_path.exists():
+              audit = json.loads(audit_path.read_text(encoding='utf-8'))
+              totals = audit['summary']
+              text += f"\n## Contrôle automatique\n\n{totals['passed']} / {totals['total']} villes conformes ; {totals['failed']} à vérifier ; {totals['warnings']} remarques.\n"
+              for code, city in audit['cities'].items():
+                  for check in city['checks']:
+                      if not check['passed']:
+                          text += f"\n- {city['city']} ({code}) : {check['name']}"
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
               summary.write(text)
           PY
@@ -117,12 +135,13 @@ jobs:
           name: data-refresh-${{ github.run_id }}
           path: |
             data/pipeline-run.json
+            data/daily-audit.json
             web/data/provenance.json
           retention-days: 30
           if-no-files-found: warn
 
       - name: Signaler une collecte incomplète
-        if: always() && steps.collect.outcome == 'failure'
+        if: always() && (steps.collect.outcome == 'failure' || steps.audit.outcome == 'failure')
         run: |
-          echo 'La collecte est incomplète. Les données disponibles ont été publiées ; consulter le bilan.'
+          echo 'La collecte ou le contrôle est incomplet. Consulter le bilan et le rapport de contrôle.'
           exit 1
