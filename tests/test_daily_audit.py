@@ -8,7 +8,7 @@ from unittest.mock import Mock
 
 import pandas as pd
 
-from src.daily_audit import build_report
+from src.daily_audit import build_report, source_warnings
 from src.extract.dvf import get_commune_stats
 from src.provenance import snapshot, publish_metadata
 
@@ -64,6 +64,11 @@ class DailyAuditTests(unittest.TestCase):
         self.metadata = original
         self.metadata["poi_commune"]["collected_at"] = "2026-10-01T10:00:00+00:00"
         self.assertFalse(self.report()["success"])
+
+    def test_recent_call_does_not_hide_old_osm_database(self):
+        self.assertTrue(source_warnings({"source_timestamp": "2026-07-24T11:00:00Z"}, self.now))
+        self.assertEqual(source_warnings({"source_timestamp": "2026-10-18T10:00:00Z"}, self.now), [])
+        self.assertTrue(source_warnings({}, self.now))
 
     def test_report_can_publish_to_separate_public_object(self):
         with tempfile.TemporaryDirectory() as tmp:
