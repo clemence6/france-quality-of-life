@@ -6,7 +6,7 @@ const date = (value) => value && !Number.isNaN(Date.parse(value)) ? new Intl.Dat
 const dateTime = (value) => value && !Number.isNaN(Date.parse(value)) ? new Intl.DateTimeFormat("fr-FR", {dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Paris"}).format(new Date(value)) + " (Paris)" : "date inconnue";
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 // URL publique du profil de l’autrice du portfolio.
-const PORTFOLIO_LINKEDIN_URL = "";
+const PORTFOLIO_LINKEDIN_URL = "https://www.linkedin.com/in/clemence-core-462648216/";
 const SOURCE_URLS = {
  dvf:"https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres-geolocalisees",
  risks:"https://www.georisques.gouv.fr/donnees/bases-de-donnees/procedures-administratives-relatives-aux-risques",
@@ -102,7 +102,7 @@ async function loadCities() {
   $("statusArea").hidden = true;
   $("studyCityCount").textContent = `${cities.length} villes françaises`;
   $("dataFreshness").textContent = `${cities.length} villes documentées · France métropolitaine`;
-  $("auditCaption").textContent = audit.audited_at ? `Rapport de contrôle du ${date(audit.audited_at)}. Les prix sont recalculés à partir des fichiers DVF déjà téléchargés ; chaque collecte d’API conserve sa propre date.` : "Le rapport de contrôle n’est pas disponible pour cette version.";
+  $("auditCaption").textContent = audit.audited_at ? `Rapport de contrôle du ${date(audit.audited_at)}. Actualisé automatiquement après la collecte quotidienne, il compare les valeurs enregistrées à leurs sources et recalcule les prix à partir des fichiers DVF. Chaque source conserve sa propre date.` : "Le rapport de contrôle n’est pas disponible pour cette version.";
   fillCompare(); renderList(); addMarkers(); renderCompare();
   window.dispatchEvent(new Event("cities:loaded"));
  } catch (error) {
@@ -218,7 +218,7 @@ function renderSources() {
  ["OpenAQ · que mesure l’air à proximité ?","air","API OpenAQ v3 · mesures de particules fines","Le script cherche une station fixe de référence à moins de 25 km et récupère un relevé de particules fines PM2.5. Il garde la station, la distance, l’heure et l’unité de mesure. À la collecte, seuls les relevés de moins de 48 heures sont retenus.","Le graphique présente la concentration de PM2.5 en µg/m³ mesurée près de chaque ville. La station, sa distance et la date du relevé accompagnent la valeur pour situer précisément l’observation."],
  ["IGN · où placer la ville sur la carte ?","ign","API de géocodage · coordonnées de la commune","Le service IGN fournit les coordonnées de la commune. Le code renvoyé est vérifié pour éviter de placer sur la carte une autre ville portant le même nom.","Les coordonnées positionnent les villes sur la carte interactive. Elles servent aussi à rechercher les stations de mesure de l’air à proximité et à calculer leur distance à la ville."],
  ];
- $("sourceCards").innerHTML=sources.map(([title,key,format,text,scope])=>`<article class="source-card"><span class="source-format">${format}</span><h4>${title}${sourceLink(key,"Voir la source")}</h4><p>${text}</p><p class="source-scope"><strong>Dans le site.</strong> ${scope}</p></article>`).join("");
+ $("sourceCards").innerHTML=sources.map(([title,key,format,text,scope])=>`<article class="source-card"><span class="source-format">${format}</span><h4>${title}${sourceLink(key,"Voir la source")}</h4><p>${text} ${scope}</p></article>`).join("");
 }
 function mapMessage(message) {$("mapStatus").hidden=false;$("mapStatus").textContent=message;}
 function initMap() {
