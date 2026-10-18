@@ -51,9 +51,9 @@ function priceBars(rows) {
  present.forEach((row,i)=>{
   const y=12+i*29, length=row[type]/max*plot, selected=row.code===selectedId;
   const p=priceInfo(row.city,type), count=type==="apartment"?row.apartmentCount:row.houseCount;
-  body+=chartCity(row,`<text x="0" y="${y+13}" class="chart-label">${escapeHtml(row.name)}</text><rect x="${left}" y="${y}" width="${length}" height="18" rx="4" fill="${selected?CHART_COLORS.orange:CHART_COLORS.teal}" opacity="${selected?1:.85}"/><text x="${left+length+7}" y="${y+13}" class="chart-value">${number(row[type])}</text>`,`${row.name} : ${number(row[type])} €/m², ${number(count)} ventes retenues, ${p.period}. Cliquez pour sélectionner cette ville.`);
+  body+=chartCity(row,`<text x="0" y="${y+13}" class="chart-label">${escapeHtml(row.name)}</text><rect x="${left}" y="${y}" width="${length}" height="18" rx="4" fill="${selected?CHART_COLORS.orange:CHART_COLORS.teal}" opacity="${selected?1:.85}"/><text x="${left+length+7}" y="${y+13}" class="chart-value">${number(row[type])}</text>`,`${row.name} : ${number(row[type])} €/m², ${number(count)} ventes analysées, ${p.period}. Cliquez pour sélectionner cette ville.`);
  });
- return svgChart("Médianes des prix au mètre carré par ville, ordre croissant",w,h,body)+dataTable(["Ville","Médiane €/m²","Ventes retenues","Période"],present.map(row=>[row.name,number(row[type]),number(type==="apartment"?row.apartmentCount:row.houseCount),priceInfo(row.city,type).period]));
+ return svgChart("Médianes des prix au mètre carré par ville, ordre croissant",w,h,body)+dataTable(["Ville","Médiane €/m²","Ventes analysées","Période"],present.map(row=>[row.name,number(row[type]),number(type==="apartment"?row.apartmentCount:row.houseCount),priceInfo(row.city,type).period]));
 }
 function housingDumbbells(rows) {
  const present=rows.filter(row=>row.apartment!=null&&row.house!=null);
@@ -79,44 +79,30 @@ function servicesMatrix(rows) {
  }).join("")}</tr>`).join("");
  return `<div class="matrix-scroll"><table class="services-table"><caption class="sr-only">Services référencés par catégorie et par commune</caption><thead><tr><th scope="col">Ville</th>${header}</tr></thead><tbody>${body}</tbody></table></div><div class="matrix-legend"><span>Moins de services</span><span class="legend-ramp"></span><span>Plus de services</span></div>`;
 }
-function tradeoffAnalysis(rows,key) {
+function budgetAnalysis(rows,key,budget) {
+ if(!Number.isFinite(budget)||budget<200||budget>20000)return {status:"invalid",present:[],missing:[],eligible:[],top:[]};
  const present=rows.filter(row=>finiteMetric(row.apartment)>0 && finiteMetric(row.services[key])!=null && Number.isInteger(Number(row.info.dvf?.year)) && Number(row.info.dvf.year)>=2000);
  const codes=new Set(present.map(row=>row.code)),missing=rows.filter(row=>!codes.has(row.code));
- const years=[...new Set(present.map(row=>Number(row.info.dvf.year)))];
- if(years.length>1)return {status:"periods",present,missing};
- if(present.length<3)return {status:"insufficient",present,missing};
- const priceMedian=medianOfValues(present.map(row=>row.apartment));
- const serviceMedian=medianOfValues(present.map(row=>row.services[key]));
- const matching=present.filter(row=>row.apartment<=priceMedian && row.services[key]>serviceMedian).sort((a,b)=>a.name.localeCompare(b.name,"fr"));
- return {status:"ready",present,missing,priceMedian,serviceMedian,matching,year:years[0]};
+ const eligible=present.filter(row=>row.apartment<=budget);
+ const years=[...new Set(eligible.map(row=>Number(row.info.dvf.year)))];
+ if(years.length>1)return {status:"periods",present,missing,eligible,top:[]};
+ eligible.sort((a,b)=>b.services[key]-a.services[key] || a.apartment-b.apartment || a.name.localeCompare(b.name,"fr"));
+ return {status:"ready",present,missing,eligible,top:eligible.slice(0,3),year:years[0]};
 }
-function tradeoffMethod(year) {
- return `<section class="tradeoff-provenance" aria-label="Sources et construction du graphique"><h4>Deux sources, un travail de préparation commun</h4><p>La collecte, le nettoyage et les calculs développés pour ce projet relient les ventes immobilières aux services de chaque commune.</p><div class="tradeoff-source-grid"><article><h5>${sourceLink("dvf","Ventes immobilières · DVF")}</h5><p>Fichiers départementaux publiés par la DGFiP, millésime ${escapeHtml(year)}. Les scripts Python sélectionnent les ventes d’appartements exploitables et calculent un prix médian au m² pour chaque ville.</p></article><article><h5>${sourceLink("osm","Services cartographiés · OpenStreetMap")}</h5><p>Les requêtes Overpass comptent les objets référencés dans les limites de la commune, identifiée par son code INSEE. Une catégorie est étudiée à la fois ; les dates de collecte restent visibles dans les fiches et le tableau.</p></article></div></section><details class="tradeoff-method"><summary>Comment ce graphique a-t-il été construit ?</summary><ol><li><strong>Relier les données à la bonne ville.</strong> Le code INSEE sert de référence commune aux sources. Les résultats préparés en Python sont stockés dans Supabase, puis chargés par le graphique.</li><li><strong>Calculer un prix comparable.</strong> Pour chaque appartement retenu, le prix de vente est divisé par la surface. La médiane de ces prix au m² donne la valeur de la ville. Les ventes complexes sont écartées et au moins 10 ventes sont nécessaires pour afficher ce prix.</li><li><strong>Définir deux repères sur les mêmes villes.</strong> Seules les villes disposant des deux indicateurs et du même millésime immobilier entrent dans le calcul. Il en faut au moins trois. Une médiane est calculée entre les prix des villes, puis une autre entre leurs nombres de services. Chaque ville compte une fois, quel que soit son nombre de ventes.</li><li><strong>Faire ressortir un compromis lisible.</strong> La sélection retient un prix inférieur ou égal au repère et un nombre de services strictement supérieur au sien. Les filtres recalculent les repères et la sélection ; les villes retenues sont présentées par ordre alphabétique.</li></ol><p>Le choix de la médiane limite l’influence des valeurs extrêmes. Un prix « modéré » reste relatif aux villes sélectionnées : ce seuil ne définit pas un budget accessible à tous.</p><p>Les services sont comparés une catégorie à la fois, en nombre brut dans la commune. Une grande ville peut en compter davantage ; cela ne mesure ni la proximité depuis un quartier, ni la qualité, ni l’exhaustivité du recensement. Cette sélection ne constitue pas un classement de qualité de vie.</p><p>Les valeurs manquantes sont exclues des deux calculs. Lorsqu’une collecte de services échoue, des chiffres précédents peuvent être conservés pendant sept jours au maximum, avec leur date d’origine.</p></details>`;
+function budgetMethod(year) {
+ return `<details class="tradeoff-method"><summary>Sources et méthode de cette sélection</summary><p>${sourceLink("dvf","Ventes immobilières · DVF")} · ${sourceLink("osm","Services cartographiés · OpenStreetMap")}</p><ol><li><strong>Votre budget fixe la première sélection.</strong> Le prix médian des appartements doit être inférieur ou égal au montant indiqué. Ce prix est calculé à partir des ventes DVF analysées, avec au moins 10 ventes par ville.</li><li><strong>Votre priorité détermine le classement.</strong> Les villes sont triées par nombre décroissant de services référencés dans la catégorie choisie. À égalité, le prix le plus bas passe en premier, puis l’ordre alphabétique. Jusqu’à trois villes sont proposées, sans ajouter de ville hors budget.</li><li><strong>Les mêmes données sont utilisées pour tous les résultats.</strong> Le code INSEE relie les ventes et les comptages de chaque commune. Les prix comparés portent sur le même millésime immobilier${year?` : ${escapeHtml(year)}`:""}. Une ville sans prix ou sans comptage documenté est exclue.</li></ol><p>Le budget porte sur une médiane au m², pas sur le prix de chaque appartement. Le comptage des services couvre toute la commune et peut favoriser les grandes villes. Il ne mesure ni leur qualité, ni leur proximité depuis un logement.</p><p>Les scripts Python préparent les données ; Supabase stocke les résultats et leur provenance ; les filtres JavaScript construisent cette sélection. Les dates de collecte restent visibles, y compris lorsqu’une observation précédente est conservée.</p></details>`;
 }
-function scatterPlot(rows) {
- const key=$("scatterMetric").value,label=POI.find(([k])=>k===key)[1];
- const analysis=tradeoffAnalysis(rows,key),{present,missing}=analysis;
- const exclusions=missing.length?`<p class="tradeoff-exclusions">Villes non évaluées, données incomplètes : ${missing.map(row=>escapeHtml(row.name)).join(", ")}. Les valeurs manquantes ne sont pas remplacées par zéro.</p>`:"";
- if(analysis.status!=="ready")return chartEmpty(analysis.status==="periods"?"Les prix couvrent des années différentes. Sélectionnez des villes avec le même millésime immobilier pour établir les repères.":"Sélectionnez au moins trois villes avec un prix d’appartement et ce service documentés pour faire apparaître l’analyse.")+exclusions;
- const {priceMedian,serviceMedian,matching,year}=analysis;
- const matchingCodes=new Set(matching.map(row=>row.code));
- const w=560,h=340,left=58,right=28,top=28,bottom=65,plotW=w-left-right,plotH=h-top-bottom;
- const xMax=niceMaximum(Math.max(...present.map(r=>r.apartment))),yMax=Math.max(4,niceMaximum(Math.max(...present.map(r=>r.services[key]))));
- const medianX=left+priceMedian/xMax*plotW,medianY=top+plotH-serviceMedian/yMax*plotH;
- let body=`<rect x="${left}" y="${top}" width="${medianX-left}" height="${medianY-top}" fill="#e4f2e7"/>`;
- for(let i=0;i<=4;i++){
-  const x=left+plotW*i/4,y=top+plotH-plotH*i/4;
-  body+=`<line x1="${x}" y1="${top}" x2="${x}" y2="${top+plotH}" class="chart-gridline"/><text x="${x}" y="${h-42}" text-anchor="middle" class="chart-axis">${number(xMax*i/4)}</text><line x1="${left}" y1="${y}" x2="${w-right}" y2="${y}" class="chart-gridline"/><text x="${left-10}" y="${y+4}" text-anchor="end" class="chart-axis">${number(yMax*i/4,1)}</text>`;
- }
- body+=`<line x1="${medianX}" y1="${top}" x2="${medianX}" y2="${top+plotH}" stroke="#57796b" stroke-dasharray="5 5"/><line x1="${left}" y1="${medianY}" x2="${w-right}" y2="${medianY}" stroke="#57796b" stroke-dasharray="5 5"/>`;
- body+=`<text x="${left}" y="14" class="chart-axis">${label} · nombre dans la ville</text><text x="${left+plotW/2}" y="${h-13}" text-anchor="middle" class="chart-axis">Appartements · €/m²</text>`;
- present.forEach(row=>{
-  const x=left+row.apartment/xMax*plotW,y=top+plotH-row.services[key]/yMax*plotH,selected=row.code===selectedId,match=matchingCodes.has(row.code);
-  body+=chartCity(row,`<circle cx="${x}" cy="${y}" r="${selected?9:7}" fill="${selected?CHART_COLORS.orange:match?CHART_COLORS.teal:"#829b95"}" stroke="white" stroke-width="2" opacity=".9"/>${selected?`<text x="${x-10}" y="${y-12}" text-anchor="end" class="chart-label">${escapeHtml(row.name)}</text>`:""}`,`${row.name} : ${number(row.apartment)} €/m² et ${number(row.services[key])} services ${label.toLowerCase()} dans la commune. Cliquez pour sélectionner cette ville.`);
- });
- const summary=`<div class="tradeoff-summary" role="status"><p><strong>${matching.length} / ${present.length} villes répondent aux deux critères.</strong> Un prix au plus égal au repère de la sélection et un nombre de services supérieur au repère.</p><div class="tradeoff-benchmarks"><div><span>Prix repère · appartements</span><strong>${number(priceMedian)} €/m²</strong><small>Ventes ${escapeHtml(year)}</small></div><div><span>Services repères · ${escapeHtml(label.toLowerCase())}</span><strong>${number(serviceMedian,1)}</strong><small>Objets référencés par commune</small></div></div></div>`;
- const cards=matching.length?`<div class="tradeoff-shortlist">${matching.map(row=>`<button class="tradeoff-city" data-chart-city="${escapeHtml(row.code)}"><strong>${escapeHtml(row.name)} ↗</strong><span>${number(row.apartment)} €/m² · ${number(row.apartmentCount)} ventes retenues</span><span>${escapeHtml(label)} : ${number(row.services[key])}</span><small>Services collectés le ${date(row.info.poi.collected_at)}${row.info.poi.retained?" · chiffres précédents conservés":""}</small></button>`).join("")}</div>`:chartEmpty("Aucune ville ne réunit les deux critères dans cette sélection. Changez de service ou de périmètre pour explorer un autre compromis.");
- return summary+`<div class="tradeoff-layout"><div><div class="chart-legend"><span><i style="background:#248474"></i>Deux critères remplis</span><span><i style="background:#829b95"></i>Autres villes</span></div>`+svgChart(`Prix des appartements et nombre de ${label.toLowerCase()} par commune pour ${present.length} villes`,w,h,body)+`<p class="chart-footnote">La zone verte associe les prix les plus modérés et davantage de services, par rapport aux repères de cette sélection.</p></div><div><h4>Les villes à examiner</h4>${cards}</div></div>`+exclusions+tradeoffMethod(year)+dataTable(["Ville","Prix appartements €/m²",`${label} · nombre dans la ville`,"Ventes retenues","Collecte des services"],present.map(r=>[r.name,number(r.apartment),number(r.services[key]),number(r.apartmentCount),date(r.info.poi.collected_at)]));
+function budgetRecommendations(rows) {
+ const key=$("scatterMetric").value,label=POI.find(([k])=>k===key)[1],budget=Number($("budgetMax").value);
+ const result=budgetAnalysis(rows,key,budget);
+ if(result.status==="invalid")return chartEmpty("Indiquez un budget maximum entre 200 et 20 000 €/m².");
+ if(result.status==="periods")return chartEmpty("Les prix dans ce budget couvrent des années différentes. Choisissez des villes avec le même millésime immobilier.");
+ const {top,eligible,missing,year}=result;
+ const summary=`<div class="budget-summary" role="status"><strong>Villes dans votre budget de ${number(budget)} €/m² maximum : ${eligible.length}.</strong><p>${top.length?`Votre priorité : ${escapeHtml(label.toLowerCase())}. Les résultats sont classés par nombre de services référencés.`:"Aucune ville documentée ne correspond à ce budget. Augmentez-le ou modifiez les villes sélectionnées."}</p></div>`;
+ const cards=top.length?`<div class="budget-shortlist">${top.map((row,i)=>`<button class="tradeoff-city budget-city" data-chart-city="${escapeHtml(row.code)}"><span class="budget-rank">${i+1}</span><strong>${escapeHtml(row.name)} ↗</strong><span class="budget-service-count">${number(row.services[key])} <small>${escapeHtml(label.toLowerCase())}</small></span><span>${number(row.apartment)} €/m² · appartements</span><small>DVF ${escapeHtml(row.info.dvf.year)} · ${number(row.apartmentCount)} ventes analysées</small><small>Services collectés le ${date(row.info.poi.collected_at)}${row.info.poi.retained?" · chiffres précédents conservés":""}</small></button>`).join("")}</div>`:"";
+ const schoolNote=key==="poi_school"?`<p class="tradeoff-exclusions">${escapeHtml(SCHOOL_COUNT_NOTE)}</p>`:"";
+ const exclusions=missing.length?`<details class="budget-exclusions"><summary>Villes non évaluées : ${missing.length} · données incomplètes</summary><p>${missing.map(row=>escapeHtml(row.name)).join(", ")}. Les valeurs manquantes ne sont pas remplacées par zéro.</p></details>`:"";
+ return summary+cards+schoolNote+exclusions+budgetMethod(year);
 }
 function airLollipops(rows) {
  const present=rows.filter(row=>row.air!=null);
@@ -167,7 +153,7 @@ function renderDashboard() {
  if(!cities.length){
   $("dashboardDate").textContent="En attente de la connexion aux données";
   $("analysisInsight").textContent="Les graphiques apparaîtront après le chargement des villes. Le statut de connexion est indiqué au-dessus de la carte.";
-  $("kpiGrid").innerHTML=["Villes dans l’analyse","Prix immobiliers disponibles","Ventes retenues","Collectes de services"].map(label=>`<div class="kpi-card"><div class="kpi-top">${label}</div><div class="kpi-value">—</div><div class="kpi-note">En attente des données</div></div>`).join("");
+  $("kpiGrid").innerHTML=["Villes dans l’analyse","Prix immobiliers disponibles","Ventes analysées","Collectes de services"].map(label=>`<div class="kpi-card"><div class="kpi-top">${label}</div><div class="kpi-value">—</div><div class="kpi-note">En attente des données</div></div>`).join("");
   ["priceChart","housingChart","servicesChart","tradeoffChart","airChart","risksChart","qualityChart"].forEach(id=>{$(id).innerHTML=chartEmpty("Les données des villes ne sont pas encore chargées.");});
   return;
  }
@@ -176,14 +162,14 @@ function renderDashboard() {
  const collectedDates=rows.map(r=>r.info.collected?.collected_at||r.info.poi?.collected_at).filter(d=>d&&!Number.isNaN(Date.parse(d))).sort((a,b)=>Date.parse(b)-Date.parse(a));
  $("dashboardDate").textContent=collectedDates.length?`Dernière collecte du ${date(collectedDates[0])}`:audit.audited_at?`Contrôle du ${date(audit.audited_at)}`:"Observations documentées";
  $("dashboardCities").innerHTML=cities.map(city=>`<button class="city-chip" data-dashboard-city="${escapeHtml(city.insee_code)}" aria-pressed="${dashboardSelection==null||dashboardSelection.has(city.insee_code)}">${escapeHtml(city.city_name)}</button>`).join("");
- const cards=[["Villes dans l’analyse",n,"Choisissez les villes à comparer ci-dessus","⌖"],["Prix immobiliers disponibles",`${prices.length} <small>/ ${n}</small>`,"Villes avec des prix disponibles pour les appartements ou les maisons","⌂"],["Ventes retenues",samples.length?number(total):"—","Ventes conservées après nettoyage des données","↗"],["Collectes de services",`${osm.length} <small>/ ${n}</small>`,"Services recensés à l’échelle de la commune","◈"]];
+ const cards=[["Villes dans l’analyse",n,"Choisissez les villes à comparer ci-dessus","⌖"],["Prix immobiliers disponibles",`${prices.length} <small>/ ${n}</small>`,"Villes avec des prix disponibles pour les appartements ou les maisons","⌂"],["Ventes analysées",samples.length?number(total):"—","Nombre de ventes de maisons et d’appartements étudiées","↗"],["Collectes de services",`${osm.length} <small>/ ${n}</small>`,"Services recensés à l’échelle de la commune","◈"]];
  $("kpiGrid").innerHTML=cards.map(([label,value,note,icon])=>`<div class="kpi-card"><div class="kpi-top"><span>${label}</span><span aria-hidden="true">${icon}</span></div><div class="kpi-value">${value}</div><div class="kpi-note">${note}</div></div>`).join("");
  const values=rows.filter(r=>r.apartment!=null).sort((a,b)=>a.apartment-b.apartment);
  if(values.length>=2){const low=values[0],high=values.at(-1);
   $("analysisInsight").innerHTML=`<strong>Dans votre sélection,</strong> les prix médians des appartements vont de <strong>${number(low.apartment)} €/m² à ${escapeHtml(low.name)}</strong> à <strong>${number(high.apartment)} €/m² à ${escapeHtml(high.name)}</strong>. Croisez ce budget avec les services de chaque commune pour affiner votre choix.`;
  }else $("analysisInsight").textContent=n?"La sélection ne contient pas assez de médianes d’appartements pour commenter leur dispersion. Les données disponibles restent affichées séparément.":"Aucune ville sélectionnée. Activez les villes à analyser ou utilisez « Toutes les villes ».";
  $("priceChart").innerHTML=priceBars(rows);$("housingChart").innerHTML=housingDumbbells(rows);
- $("servicesChart").innerHTML=servicesMatrix(rows);$("tradeoffChart").innerHTML=scatterPlot(rows);
+ $("servicesChart").innerHTML=servicesMatrix(rows);$("tradeoffChart").innerHTML=budgetRecommendations(rows);
  $("airChart").innerHTML=airLollipops(rows);$("risksChart").innerHTML=risksMatrix(rows);$("qualityChart").innerHTML=qualityCoverage(rows);
  $("dashboardCities").querySelectorAll("[data-dashboard-city]").forEach(button=>button.addEventListener("click",()=>{
   if(dashboardSelection==null)dashboardSelection=new Set(cities.map(c=>c.insee_code));
@@ -200,5 +186,6 @@ function renderDashboard() {
 }
 window.addEventListener("cities:loaded",renderDashboard);
 ["priceType","scatterMetric","riskCategory"].forEach(id=>$(id).addEventListener("change",renderDashboard));
+$("budgetMax").addEventListener("input",renderDashboard);
 $("resetDashboard").addEventListener("click",()=>{dashboardSelection=null;renderDashboard();});
 renderDashboard();
