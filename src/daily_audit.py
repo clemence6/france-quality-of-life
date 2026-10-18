@@ -40,6 +40,16 @@ def equal_number(a, b):
             and math.isfinite(a) and math.isfinite(b) and math.isclose(a, b, abs_tol=.005))
 
 
+def source_warnings(poi, now):
+    """Distinguer le jour de l'appel de l'âge de la base du serveur OSM."""
+    timestamp = poi.get("source_timestamp")
+    if timestamp and not recent(timestamp, now, 7):
+        return [f"La base OSM du serveur est datée du {timestamp}, soit plus de sept jours ou une date invalide. Le comptage reflète cet état de la source."]
+    if not timestamp:
+        return ["Date de la base OSM non renseignée par le serveur."]
+    return []
+
+
 def build_report(rows, provenance, frames, expected=CITIES_TO_PROCESS, now=None):
     """frames : chemins CSV ou DataFrames déjà téléchargés, sans nouvel appel d'API."""
     now = now or datetime.now(timezone.utc)
@@ -86,6 +96,7 @@ def build_report(rows, provenance, frames, expected=CITIES_TO_PROCESS, now=None)
         check("Date des services valide, au plus sept jours", recent(poi.get("collected_at"), now, 7))
         if poi.get("retained"):
             entry["warnings"].append("Collecte OSM précédente conservée avec sa date d'origine.")
+        entry["warnings"].extend(source_warnings(poi, now))
         air = saved.get("air") or {}
         pm = (air.get("measurements") or {}).get("pm25") or (air.get("measurements") or {}).get("pm2.5")
         check("Valeur PM2.5 conforme à la mesure et à son unité", equal_number(get_primary_pollution_value(air), row.get("air_quality_score"))
