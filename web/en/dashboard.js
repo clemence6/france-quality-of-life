@@ -51,9 +51,9 @@ function priceBars(rows) {
  present.forEach((row,i)=>{
   const y=12+i*29, length=row[type]/max*plot, selected=row.code===selectedId;
   const p=priceInfo(row.city,type), count=type==="apartment"?row.apartmentCount:row.houseCount;
-  body+=chartCity(row,`<text x="0" y="${y+13}" class="chart-label">${escapeHtml(row.name)}</text><rect x="${left}" y="${y}" width="${length}" height="18" rx="4" fill="${selected?CHART_COLORS.orange:CHART_COLORS.teal}" opacity="${selected?1:.85}"/><text x="${left+length+7}" y="${y+13}" class="chart-value">${number(row[type])}</text>`,`${row.name} : ${number(row[type])} €/m², ${number(count)} retained sales, ${p.period}. Select to highlight this city.`);
+  body+=chartCity(row,`<text x="0" y="${y+13}" class="chart-label">${escapeHtml(row.name)}</text><rect x="${left}" y="${y}" width="${length}" height="18" rx="4" fill="${selected?CHART_COLORS.orange:CHART_COLORS.teal}" opacity="${selected?1:.85}"/><text x="${left+length+7}" y="${y+13}" class="chart-value">${number(row[type])}</text>`,`${row.name} : ${number(row[type])} €/m², ${number(count)} analysed sales, ${p.period}. Select to highlight this city.`);
  });
- return svgChart("Median property prices per square metre by city, ascending order",w,h,body)+dataTable(["City","Median €/m²","Retained sales","Period"],present.map(row=>[row.name,number(row[type]),number(type==="apartment"?row.apartmentCount:row.houseCount),priceInfo(row.city,type).period]));
+ return svgChart("Median property prices per square metre by city, ascending order",w,h,body)+dataTable(["City","Median €/m²","Analysed sales","Period"],present.map(row=>[row.name,number(row[type]),number(type==="apartment"?row.apartmentCount:row.houseCount),priceInfo(row.city,type).period]));
 }
 function housingDumbbells(rows) {
  const present=rows.filter(row=>row.apartment!=null&&row.house!=null);
@@ -79,44 +79,30 @@ function servicesMatrix(rows) {
  }).join("")}</tr>`).join("");
  return `<div class="matrix-scroll"><table class="services-table"><caption class="sr-only">Mapped services by category and municipality</caption><thead><tr><th scope="col">City</th>${header}</tr></thead><tbody>${body}</tbody></table></div><div class="matrix-legend"><span>Fewer services</span><span class="legend-ramp"></span><span>More services</span></div>`;
 }
-function tradeoffAnalysis(rows,key) {
+function budgetAnalysis(rows,key,budget) {
+ if(!Number.isFinite(budget)||budget<200||budget>20000)return {status:"invalid",present:[],missing:[],eligible:[],top:[]};
  const present=rows.filter(row=>finiteMetric(row.apartment)>0 && finiteMetric(row.services[key])!=null && Number.isInteger(Number(row.info.dvf?.year)) && Number(row.info.dvf.year)>=2000);
  const codes=new Set(present.map(row=>row.code)),missing=rows.filter(row=>!codes.has(row.code));
- const years=[...new Set(present.map(row=>Number(row.info.dvf.year)))];
- if(years.length>1)return {status:"periods",present,missing};
- if(present.length<3)return {status:"insufficient",present,missing};
- const priceMedian=medianOfValues(present.map(row=>row.apartment));
- const serviceMedian=medianOfValues(present.map(row=>row.services[key]));
- const matching=present.filter(row=>row.apartment<=priceMedian && row.services[key]>serviceMedian).sort((a,b)=>a.name.localeCompare(b.name,"fr"));
- return {status:"ready",present,missing,priceMedian,serviceMedian,matching,year:years[0]};
+ const eligible=present.filter(row=>row.apartment<=budget);
+ const years=[...new Set(eligible.map(row=>Number(row.info.dvf.year)))];
+ if(years.length>1)return {status:"periods",present,missing,eligible,top:[]};
+ eligible.sort((a,b)=>b.services[key]-a.services[key] || a.apartment-b.apartment || a.name.localeCompare(b.name,"fr"));
+ return {status:"ready",present,missing,eligible,top:eligible.slice(0,3),year:years[0]};
 }
-function tradeoffMethod(year) {
- return `<section class="tradeoff-provenance" aria-label="Sources and construction of the chart"><h4>Two sources, a shared preparation process</h4><p>The collection, cleaning and calculations developed for this project link property sales with the services mapped in each municipality.</p><div class="tradeoff-source-grid"><article><h5>${sourceLink("dvf","Property sales · DVF")}</h5><p>Department-level files published by the DGFiP for ${escapeHtml(year)}. Python scripts select usable apartment sales and calculate a median price per square metre for each city.</p></article><article><h5>${sourceLink("osm","Mapped services · OpenStreetMap")}</h5><p>Overpass queries count mapped objects within municipal boundaries, identified using the INSEE code. One category is studied at a time; collection dates remain visible in city cards and the table.</p></article></div></section><details class="tradeoff-method"><summary>How was this chart built?</summary><ol><li><strong>Link the data to the correct city.</strong> The INSEE code provides a shared reference across sources. Results prepared in Python are stored in Supabase, then loaded by the chart.</li><li><strong>Calculate a comparable price.</strong> For each retained apartment, the sale price is divided by the floor area. The median of these prices per square metre gives the city value. Complex sales are excluded, and at least 10 sales are required to display a price.</li><li><strong>Define two benchmarks using the same cities.</strong> Only cities with both indicators and the same property data year enter the calculation. At least three are required. A median is calculated across city prices, and another across their service counts. Each city counts once, regardless of its number of sales.</li><li><strong>Highlight a clear trade-off.</strong> The selection requires a price at or below its benchmark and a service count strictly above its own benchmark. Filters recalculate the benchmarks and the selection; qualifying cities are listed alphabetically.</li></ol><p>Using the median limits the influence of extreme values. A moderate price remains relative to the selected cities: this threshold does not define a budget everyone can afford.</p><p>Services are compared one category at a time using raw municipal counts. Larger cities may have more services; this does not measure proximity from a neighbourhood, quality or mapping completeness. This selection is not a quality-of-life ranking.</p><p>Missing values are excluded from both calculations. When service collection fails, previous figures may be retained for up to seven days, with their original date.</p></details>`;
+function budgetMethod(year) {
+ return `<details class="tradeoff-method"><summary>Sources and method behind this selection</summary><p>${sourceLink("dvf","Property sales · DVF")} · ${sourceLink("osm","Mapped services · OpenStreetMap")}</p><ol><li><strong>Your budget determines the first selection.</strong> The median apartment price must be at or below your budget. It is calculated from analysed DVF sales, with at least 10 sales per city.</li><li><strong>Your priority determines the order.</strong> Cities are ordered by mapped service count, highest first, for your chosen category. Ties are resolved by lower property price, then alphabetically. Up to three cities are suggested, without adding cities outside your budget.</li><li><strong>The same data rules apply to all results.</strong> The INSEE code links sales and service counts for each municipality. Compared property prices cover the same year${year?` : ${escapeHtml(year)}`:""}. Cities without a documented price or service count are excluded.</li></ol><p>The budget applies to a median price per square metre, not to every apartment. Service counts cover the whole municipality and may favour larger cities. They measure neither quality nor proximity to a home.</p><p>Python scripts prepare the data; Supabase stores results and provenance; JavaScript filters build this selection. Collection dates remain visible, including when a previous observation is retained.</p></details>`;
 }
-function scatterPlot(rows) {
- const key=$("scatterMetric").value,label=POI.find(([k])=>k===key)[1];
- const analysis=tradeoffAnalysis(rows,key),{present,missing}=analysis;
- const exclusions=missing.length?`<p class="tradeoff-exclusions">Cities not assessed because of incomplete data: ${missing.map(row=>escapeHtml(row.name)).join(", ")}. Missing values are not replaced with zero.</p>`:"";
- if(analysis.status!=="ready")return chartEmpty(analysis.status==="periods"?"Property prices cover different years. Select cities with prices from the same year to calculate the benchmarks.":"Select at least three cities with documented apartment prices and this service to display the analysis.")+exclusions;
- const {priceMedian,serviceMedian,matching,year}=analysis;
- const matchingCodes=new Set(matching.map(row=>row.code));
- const w=560,h=340,left=58,right=28,top=28,bottom=65,plotW=w-left-right,plotH=h-top-bottom;
- const xMax=niceMaximum(Math.max(...present.map(r=>r.apartment))),yMax=Math.max(4,niceMaximum(Math.max(...present.map(r=>r.services[key]))));
- const medianX=left+priceMedian/xMax*plotW,medianY=top+plotH-serviceMedian/yMax*plotH;
- let body=`<rect x="${left}" y="${top}" width="${medianX-left}" height="${medianY-top}" fill="#e4f2e7"/>`;
- for(let i=0;i<=4;i++){
-  const x=left+plotW*i/4,y=top+plotH-plotH*i/4;
-  body+=`<line x1="${x}" y1="${top}" x2="${x}" y2="${top+plotH}" class="chart-gridline"/><text x="${x}" y="${h-42}" text-anchor="middle" class="chart-axis">${number(xMax*i/4)}</text><line x1="${left}" y1="${y}" x2="${w-right}" y2="${y}" class="chart-gridline"/><text x="${left-10}" y="${y+4}" text-anchor="end" class="chart-axis">${number(yMax*i/4,1)}</text>`;
- }
- body+=`<line x1="${medianX}" y1="${top}" x2="${medianX}" y2="${top+plotH}" stroke="#57796b" stroke-dasharray="5 5"/><line x1="${left}" y1="${medianY}" x2="${w-right}" y2="${medianY}" stroke="#57796b" stroke-dasharray="5 5"/>`;
- body+=`<text x="${left}" y="14" class="chart-axis">${label} · count across the municipality</text><text x="${left+plotW/2}" y="${h-13}" text-anchor="middle" class="chart-axis">Apartments · €/m²</text>`;
- present.forEach(row=>{
-  const x=left+row.apartment/xMax*plotW,y=top+plotH-row.services[key]/yMax*plotH,selected=row.code===selectedId,match=matchingCodes.has(row.code);
-  body+=chartCity(row,`<circle cx="${x}" cy="${y}" r="${selected?9:7}" fill="${selected?CHART_COLORS.orange:match?CHART_COLORS.teal:"#829b95"}" stroke="white" stroke-width="2" opacity=".9"/>${selected?`<text x="${x-10}" y="${y-12}" text-anchor="end" class="chart-label">${escapeHtml(row.name)}</text>`:""}`,`${row.name} : ${number(row.apartment)} €/m² and ${number(row.services[key])} mapped ${label.toLowerCase()} across the municipality. Select to highlight this city.`);
- });
- const summary=`<div class="tradeoff-summary" role="status"><p><strong>${matching.length} / ${present.length} cities meet both criteria.</strong> An apartment price at or below the selection benchmark and a service count above its benchmark.</p><div class="tradeoff-benchmarks"><div><span>Price benchmark · apartments</span><strong>${number(priceMedian)} €/m²</strong><small>Sales ${escapeHtml(year)}</small></div><div><span>Service benchmark · ${escapeHtml(label.toLowerCase())}</span><strong>${number(serviceMedian,1)}</strong><small>Mapped objects per municipality</small></div></div></div>`;
- const cards=matching.length?`<div class="tradeoff-shortlist">${matching.map(row=>`<button class="tradeoff-city" data-chart-city="${escapeHtml(row.code)}"><strong>${escapeHtml(row.name)} ↗</strong><span>${number(row.apartment)} €/m² · ${number(row.apartmentCount)} retained sales</span><span>${escapeHtml(label)} : ${number(row.services[key])}</span><small>Services collected on ${date(row.info.poi.collected_at)}${row.info.poi.retained?" · previous figures retained":""}</small></button>`).join("")}</div>`:chartEmpty("No city meets both criteria in this selection. Change the service or the selected cities to explore another trade-off.");
- return summary+`<div class="tradeoff-layout"><div><div class="chart-legend"><span><i style="background:#248474"></i>Both criteria met</span><span><i style="background:#829b95"></i>Other cities</span></div>`+svgChart(`Apartment prices and number of ${label.toLowerCase()} across the municipality for ${present.length} cities`,w,h,body)+`<p class="chart-footnote">The green area combines lower prices and more services, relative to the benchmarks for this selection.</p></div><div><h4>Cities to explore</h4>${cards}</div></div>`+exclusions+tradeoffMethod(year)+dataTable(["City","Apartment prices €/m²",`${label} · count across the municipality`,"Retained sales","Service collection date"],present.map(r=>[r.name,number(r.apartment),number(r.services[key]),number(r.apartmentCount),date(r.info.poi.collected_at)]));
+function budgetRecommendations(rows) {
+ const key=$("scatterMetric").value,label=POI.find(([k])=>k===key)[1],budget=Number($("budgetMax").value);
+ const result=budgetAnalysis(rows,key,budget);
+ if(result.status==="invalid")return chartEmpty("Enter a maximum budget between 200 and 20,000 €/m².");
+ if(result.status==="periods")return chartEmpty("Prices within this budget cover different years. Choose cities with property prices from the same year.");
+ const {top,eligible,missing,year}=result;
+ const summary=`<div class="budget-summary" role="status"><strong>Cities within your maximum budget of ${number(budget)} €/m²: ${eligible.length}.</strong><p>${top.length?`Your priority: ${escapeHtml(label.toLowerCase())}. Results are ordered by the number of mapped services.`:"No documented city matches this budget. Increase it or change the selected cities."}</p></div>`;
+ const cards=top.length?`<div class="budget-shortlist">${top.map((row,i)=>`<button class="tradeoff-city budget-city" data-chart-city="${escapeHtml(row.code)}"><span class="budget-rank">${i+1}</span><strong>${escapeHtml(row.name)} ↗</strong><span class="budget-service-count">${number(row.services[key])} <small>${escapeHtml(label.toLowerCase())}</small></span><span>${number(row.apartment)} €/m² · apartments</span><small>DVF ${escapeHtml(row.info.dvf.year)} · ${number(row.apartmentCount)} analysed sales</small><small>Services collected on ${date(row.info.poi.collected_at)}${row.info.poi.retained?" · previous figures retained":""}</small></button>`).join("")}</div>`:"";
+ const schoolNote=key==="poi_school"?`<p class="tradeoff-exclusions">${escapeHtml(SCHOOL_COUNT_NOTE)}</p>`:"";
+ const exclusions=missing.length?`<details class="budget-exclusions"><summary>Cities not assessed: ${missing.length} · incomplete data</summary><p>${missing.map(row=>escapeHtml(row.name)).join(", ")}. Missing values are not replaced with zero.</p></details>`:"";
+ return summary+cards+schoolNote+exclusions+budgetMethod(year);
 }
 function airLollipops(rows) {
  const present=rows.filter(row=>row.air!=null);
@@ -167,7 +153,7 @@ function renderDashboard() {
  if(!cities.length){
   $("dashboardDate").textContent="Waiting for the data connection";
   $("analysisInsight").textContent="Charts will appear once the cities have loaded. The connection status is shown above the map.";
-  $("kpiGrid").innerHTML=["Cities in the analysis","Available property prices","Retained sales","Service collections"].map(label=>`<div class="kpi-card"><div class="kpi-top">${label}</div><div class="kpi-value">—</div><div class="kpi-note">Waiting for data</div></div>`).join("");
+  $("kpiGrid").innerHTML=["Cities in the analysis","Available property prices","Analysed sales","Service collections"].map(label=>`<div class="kpi-card"><div class="kpi-top">${label}</div><div class="kpi-value">—</div><div class="kpi-note">Waiting for data</div></div>`).join("");
   ["priceChart","housingChart","servicesChart","tradeoffChart","airChart","risksChart","qualityChart"].forEach(id=>{$(id).innerHTML=chartEmpty("City data has not loaded yet.");});
   return;
  }
@@ -176,14 +162,14 @@ function renderDashboard() {
  const collectedDates=rows.map(r=>r.info.collected?.collected_at||r.info.poi?.collected_at).filter(d=>d&&!Number.isNaN(Date.parse(d))).sort((a,b)=>Date.parse(b)-Date.parse(a));
  $("dashboardDate").textContent=collectedDates.length?`Last collected on ${date(collectedDates[0])}`:audit.audited_at?`Checked on ${date(audit.audited_at)}`:"Documented observations";
  $("dashboardCities").innerHTML=cities.map(city=>`<button class="city-chip" data-dashboard-city="${escapeHtml(city.insee_code)}" aria-pressed="${dashboardSelection==null||dashboardSelection.has(city.insee_code)}">${escapeHtml(city.city_name)}</button>`).join("");
- const cards=[["Cities in the analysis",n,"Choose the cities to compare above","⌖"],["Available property prices",`${prices.length} <small>/ ${n}</small>`,"Cities with available prices for apartments or houses","⌂"],["Retained sales",samples.length?number(total):"—","Sales retained after data cleaning","↗"],["Service collections",`${osm.length} <small>/ ${n}</small>`,"Services mapped across the municipality","◈"]];
+ const cards=[["Cities in the analysis",n,"Choose the cities to compare above","⌖"],["Available property prices",`${prices.length} <small>/ ${n}</small>`,"Cities with available prices for apartments or houses","⌂"],["Analysed sales",samples.length?number(total):"—","Number of house and apartment sales analysed","↗"],["Service collections",`${osm.length} <small>/ ${n}</small>`,"Services mapped across the municipality","◈"]];
  $("kpiGrid").innerHTML=cards.map(([label,value,note,icon])=>`<div class="kpi-card"><div class="kpi-top"><span>${label}</span><span aria-hidden="true">${icon}</span></div><div class="kpi-value">${value}</div><div class="kpi-note">${note}</div></div>`).join("");
  const values=rows.filter(r=>r.apartment!=null).sort((a,b)=>a.apartment-b.apartment);
  if(values.length>=2){const low=values[0],high=values.at(-1);
   $("analysisInsight").innerHTML=`<strong>In your selection,</strong> median apartment prices range from <strong>${number(low.apartment)} €/m² in ${escapeHtml(low.name)}</strong> to <strong>${number(high.apartment)} €/m² in ${escapeHtml(high.name)}</strong>. Compare this budget with municipal services to refine your choice.`;
  }else $("analysisInsight").textContent=n?"There are not enough apartment medians in the selection to describe their spread. Available indicators remain displayed separately.":"No city is selected. Choose cities to analyse, or use All cities.";
  $("priceChart").innerHTML=priceBars(rows);$("housingChart").innerHTML=housingDumbbells(rows);
- $("servicesChart").innerHTML=servicesMatrix(rows);$("tradeoffChart").innerHTML=scatterPlot(rows);
+ $("servicesChart").innerHTML=servicesMatrix(rows);$("tradeoffChart").innerHTML=budgetRecommendations(rows);
  $("airChart").innerHTML=airLollipops(rows);$("risksChart").innerHTML=risksMatrix(rows);$("qualityChart").innerHTML=qualityCoverage(rows);
  $("dashboardCities").querySelectorAll("[data-dashboard-city]").forEach(button=>button.addEventListener("click",()=>{
   if(dashboardSelection==null)dashboardSelection=new Set(cities.map(c=>c.insee_code));
@@ -200,5 +186,6 @@ function renderDashboard() {
 }
 window.addEventListener("cities:loaded",renderDashboard);
 ["priceType","scatterMetric","riskCategory"].forEach(id=>$(id).addEventListener("change",renderDashboard));
+$("budgetMax").addEventListener("input",renderDashboard);
 $("resetDashboard").addEventListener("click",()=>{dashboardSelection=null;renderDashboard();});
 renderDashboard();
