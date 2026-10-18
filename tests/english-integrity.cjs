@@ -3,7 +3,7 @@ const path=require('node:path');
 const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const root=path.join(__dirname,'../web');
-const elements={priceType:{value:'apartment'},scatterMetric:{value:'poi_park'},riskCategory:{value:'all'}};
+const elements={priceType:{value:'apartment'},scatterMetric:{value:'poi_park'},budgetMax:{value:'3000'},riskCategory:{value:'all'}};
 const context=vm.createContext({document:{getElementById(id){return elements[id]||={value:'',textContent:''};}},window:{matchMedia(){return {matches:false};}},Intl,Date,Number,String,URL});
 vm.runInContext(fs.readFileSync(path.join(root,'en/app.js'),'utf8').split('$("searchInput").addEventListener')[0],context);
 vm.runInContext(fs.readFileSync(path.join(root,'en/dashboard.js'),'utf8').split('window.addEventListener("cities:loaded"')[0],context);
@@ -18,7 +18,7 @@ assert.equal(vm.runInContext('date("2026-10-15T12:00:00Z")',context),'15 Oct 202
 assert.equal(vm.runInContext('date(null)',context),'unknown date');
 assert.equal(vm.runInContext('riskLabel("Inondation")',context),'Flooding');
 assert.equal(vm.runInContext('riskFamily("Inondation")',context),'water','Filters still operate on original source labels');
-for(const name of ['priceBars','housingDumbbells','servicesMatrix','scatterPlot','airLollipops','risksMatrix','qualityCoverage']) {
+for(const name of ['priceBars','housingDumbbells','servicesMatrix','budgetRecommendations','airLollipops','risksMatrix','qualityCoverage']) {
  const output=vm.runInContext(`${name}(dashboardRows())`,context);
  assert.doesNotMatch(output,/NaN|Infinity|undefined|ventes retenues|dans la commune|Sélectionnez|Lire les valeurs|Prix appartements|Donnée indisponible|collecte du/);
  assert.ok(output.length>100,name);
@@ -27,7 +27,7 @@ for(const name of ['priceBars','housingDumbbells','servicesMatrix','scatterPlot'
 const english=fs.readFileSync(path.join(root,'en/index.html'),'utf8');
 assert.match(english,/<html lang="en">/);
 assert.match(english,/<base href="\.\.\/">/);
-assert.match(english,/src="en\/app.js\?v=13"/);
+assert.match(english,/src="en\/app.js\?v=14"/);
 assert.match(english,/Find the city that suits you/);
 assert.match(english,/Sources & methodology/);
 assert.doesNotMatch(english,/11 villes|Connexion aux données|Quel budget|La qualité/);
