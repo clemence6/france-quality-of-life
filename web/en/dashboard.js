@@ -45,7 +45,7 @@ function priceBars(rows) {
  const present = rows.filter(row=>row[type] != null).sort((a,b)=>a[type]-b[type]);
  $("priceNote").textContent = `${present.length} / ${rows.length} cities with available prices. Hover over a bar to see the sample size and dates. The calculation is explained in Sources & methodology.`;
  if (!present.length) return chartEmpty("No documented median is available for this property type in the selection.");
- const w=560, left=113, right=70, plot=w-left-right, h=present.length*29+50, max=niceMaximum(Math.max(...present.map(r=>r[type])));
+ const w=560, left=132, right=70, plot=w-left-right, h=present.length*29+50, max=niceMaximum(Math.max(...present.map(r=>r[type])));
  let body="";
  for (let i=0;i<=4;i++) {const x=left+plot*i/4;body+=`<line x1="${x}" y1="8" x2="${x}" y2="${h-35}" class="chart-gridline"/><text x="${x}" y="${h-13}" text-anchor="middle" class="chart-axis">${number(max*i/4)}</text>`;}
  present.forEach((row,i)=>{
