@@ -423,3 +423,8 @@ Parcs, pharmacies, établissements scolaires, commerces : comparez les services 
 Le compteur scolaire OSM inclut les écoles, collèges et lycées cartographiés. Il ne garantit pas un nombre d’établissements uniques.|||The OSM school count includes mapped primary and secondary schools. It does not guarantee a count of unique institutions.
 Ce comptage OSM inclut les écoles, collèges et lycées, publics ou privés. Un établissement peut être représenté plusieurs fois ; ce total ne constitue pas un annuaire officiel.|||This OSM count includes public and private primary and secondary schools. An institution may be represented more than once; the total is not an official directory count.
 Villes non évaluées : ${missing.length} · données incomplètes|||Cities not assessed: ${missing.length} · incomplete data
+
+Échangeons sur LinkedIn autour du projet ou d’une opportunité professionnelle. Retrouvez aussi les projets et le code sur GitHub.|||Let’s connect on LinkedIn to discuss the project or a professional opportunity. You can also find projects and code on GitHub.
+Voir mon GitHub ↗|||View my GitHub ↗
+
+Rapport de contrôle du ${date(audit.audited_at)}. Actualisé automatiquement après la collecte quotidienne, il compare les valeurs enregistrées à leurs sources et recalcule les prix à partir des fichiers DVF. Chaque source conserve sa propre date.|||Audit report dated ${date(audit.audited_at)}. Updated automatically after daily collection, it compares stored values with their sources and recalculates prices from DVF files. Each source retains its own date.
