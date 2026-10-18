@@ -137,8 +137,8 @@ source n'a pas changé. Strasbourg reste sans prix DVF car le Bas-Rhin n'est
 pas couvert. L'absence de mesure récente d'air est également possible.
 
 Le pipeline actualise Supabase et publie les métadonnées dans son bucket public
-`qol-public-metadata`, créé à la première exécution. Il contient uniquement le
-fichier JSON des observations, de leurs sources, dates et calculs ; aucune clé.
+`qol-public-metadata`, créé à la première exécution. Il contient les observations, leurs sources, dates et calculs, ainsi que le
+rapport de contrôle quotidien ; aucune clé privée.
 Le site récupère automatiquement ce fichier à chaque rechargement, y compris
 lorsqu'il tourne sur localhost. Il vérifie que ces informations correspondent
 aux chiffres chargés avant de les afficher. Les fichiers locaux restent un repli
@@ -163,3 +163,25 @@ Les erreurs par ville et par source apparaissent dans le résumé du lancement.
 Le cron ne fonctionne que sur la branche par défaut. GitHub peut retarder son
 exécution et désactive les tâches planifiées d'un dépôt public inactif pendant
 60 jours. Voir la [documentation GitHub sur les tâches planifiées](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+
+### Contrôle automatique après la collecte
+
+Le même workflow lance `python -m src.daily_audit --publish`, même si la collecte
+est partielle. Il relit Supabase et le fichier de provenance réellement publié,
+contrôle les 20 villes attendues, la correspondance des valeurs et des communes,
+les comptages de services, leurs dates et les unités PM2.5. Les médianes et les
+effectifs immobiliers sont recalculés depuis les CSV DVF téléchargés par la collecte.
+L'absence attendue de prix pour Strasbourg et les relevés d'air indisponibles
+sont explicités dans le rapport. Une incohérence ou une ville manquante fait
+échouer le contrôle ; les lignes non conformes ne servent pas de métadonnées de
+repli au site. Ce contrôle vérifie la cohérence et la reproductibilité du calcul,
+sans prétendre vérifier l'exhaustivité des bases sources sur le terrain.
+
+Le rapport `data/daily-audit.json` est conservé avec les artefacts du lancement et
+publié sous `qol-public-metadata/audit.json` dans Supabase Storage, y compris si
+des contrôles échouent. Firebase redirige `/data/audit.json` vers cet objet public :
+le bouton du site suit le dernier contrôle sans nouveau déploiement du site.
+Le résumé GitHub Actions affiche les villes et contrôles à vérifier ; une collecte,
+un contrôle ou une publication en échec fait apparaître le lancement en erreur.
+Le script historique `src.audit_sources` reste disponible pour une vérification
+manuelle distincte ; le cron utilise `src.daily_audit`.
