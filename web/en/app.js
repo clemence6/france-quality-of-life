@@ -6,7 +6,7 @@ const date = (value) => value && !Number.isNaN(Date.parse(value)) ? new Intl.Dat
 const dateTime = (value) => value && !Number.isNaN(Date.parse(value)) ? new Intl.DateTimeFormat("en-GB", {dateStyle:"medium",timeStyle:"short",timeZone:"Europe/Paris"}).format(new Date(value)) + " (Paris)" : "unknown date";
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 // URL publique du profil de l’autrice du portfolio.
-const PORTFOLIO_LINKEDIN_URL = "";
+const PORTFOLIO_LINKEDIN_URL = "https://www.linkedin.com/in/clemence-core-462648216/";
 const SOURCE_URLS = {
  dvf:"https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres-geolocalisees",
  risks:"https://www.georisques.gouv.fr/donnees/bases-de-donnees/procedures-administratives-relatives-aux-risques",
@@ -102,7 +102,7 @@ async function loadCities() {
   $("statusArea").hidden = true;
   $("studyCityCount").textContent = `${cities.length} French cities`;
   $("dataFreshness").textContent = `${cities.length} documented cities · metropolitan France`;
-  $("auditCaption").textContent = audit.audited_at ? `Validation report dated ${date(audit.audited_at)}. Prices are recalculated from downloaded DVF files; each API collection keeps its own date.` : "The validation report is unavailable for this version.";
+  $("auditCaption").textContent = audit.audited_at ? `Audit report dated ${date(audit.audited_at)}. Updated automatically after daily collection, it compares stored values with their sources and recalculates prices from DVF files. Each source retains its own date.` : "The validation report is unavailable for this version.";
   fillCompare(); renderList(); addMarkers(); renderCompare();
   window.dispatchEvent(new Event("cities:loaded"));
  } catch (error) {
@@ -219,7 +219,7 @@ function renderSources() {
  ["OpenAQ · what is measured in the air nearby?","air","OpenAQ v3 API · fine-particle readings","The script looks for a fixed reference station within 25 km and retrieves a PM2.5 fine-particle reading. It retains the station, distance, time and unit. At collection time, only readings less than 48 hours old are accepted.","The chart shows the PM2.5 concentration in µg/m³ measured near each city. The station, its distance and the reading date accompany the value to put the observation in context."],
  ["IGN · where should the city appear on the map?","ign","Geocoding API · municipal coordinates","The IGN service provides municipal coordinates. The returned code is checked to avoid mapping a different city with the same name.","The coordinates position cities on the interactive map. They also help find nearby air monitoring stations and calculate their distance from the city."],
  ];
- $("sourceCards").innerHTML=sources.map(([title,key,format,text,scope])=>`<article class="source-card"><span class="source-format">${format}</span><h4>${title}${sourceLink(key,"View source")}</h4><p>${text}</p><p class="source-scope"><strong>On the site.</strong> ${scope}</p></article>`).join("");
+ $("sourceCards").innerHTML=sources.map(([title,key,format,text,scope])=>`<article class="source-card"><span class="source-format">${format}</span><h4>${title}${sourceLink(key,"View source")}</h4><p>${text} ${scope}</p></article>`).join("");
 }
 function mapMessage(message) {$("mapStatus").hidden=false;$("mapStatus").textContent=message;}
 function initMap() {
