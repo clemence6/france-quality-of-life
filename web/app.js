@@ -305,6 +305,11 @@ function updateRadius(city) {
 $("searchInput").addEventListener("input",renderList);
 ["compareCityA","compareCityB"].forEach(id=>$(id).addEventListener("change",renderCompare));
 document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>{switchView(b.dataset.view);$("explorer").scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"start"});}));
+$("viewProfile").addEventListener("click",()=>{
+ switchView("sources");
+ $("authorProfile").focus({preventScroll:true});
+ $("authorProfile").scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"start"});
+});
 $("franceBtn").addEventListener("click",()=>{switchView("explore");focusFrance();});
 $("worldBtn").addEventListener("click",()=>{switchView("explore");focusFrance();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCity();if(e.key==="/"&&!/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();switchView("explore");$("searchInput").focus();}});
