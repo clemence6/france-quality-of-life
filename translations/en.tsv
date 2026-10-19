@@ -428,3 +428,20 @@ Villes non évaluées : ${missing.length} · données incomplètes|||Cities not 
 Voir mon GitHub ↗|||View my GitHub ↗
 
 Rapport de contrôle du ${date(audit.audited_at)}. Actualisé automatiquement après la collecte quotidienne, il compare les valeurs enregistrées à leurs sources et recalcule les prix à partir des fichiers DVF. Chaque source conserve sa propre date.|||Audit report dated ${date(audit.audited_at)}. Updated automatically after daily collection, it compares stored values with their sources and recalculates prices from DVF files. Each source retains its own date.
+
+Un projet de|||A project by
+LE PORTFOLIO DE CLEMENCE CORE|||CLEMENCE CORE’S PORTFOLIO
+Conçu et développé par Clemence Core, Data Analyst.|||Designed and developed by Clemence Core, Data Analyst.
+Comment comparer les villes à partir de données publiques ? De la collecte aux graphiques interactifs, cette page présente la démarche et les choix d’analyse qui ont donné forme au projet.|||How can public data help compare cities? From collection to interactive charts, this page explains the process and analytical choices behind the project.
+À L’ORIGINE DU PROJET|||BEHIND THE PROJECT
+Échangeons autour d’un projet ou d’une opportunité en data analyse. Le code et la méthode sont disponibles sur GitHub.|||Let’s discuss a project or a data analyst opportunity. The code and methodology are available on GitHub.
+PARCOURS & CONTACT|||BACKGROUND & CONTACT
+Data Analyst · Python · SQL · Data visualisation|||Data Analyst · Python · SQL · Data visualisation
+Pour découvrir le parcours et échanger autour d’une opportunité professionnelle.|||Explore the professional background and get in touch about an opportunity.
+CODE & MÉTHODE|||CODE & METHODOLOGY
+Collecte · Analyse · Visualisation · Automatisation|||Collection · Analysis · Visualisation · Automation
+Les scripts Python, les choix d’analyse et les contrôles quotidiens du projet.|||The project’s Python scripts, analytical choices and daily data checks.
+Le code du projet ↗|||Project source code ↗
+Conçu et développé par Clemence Core|||Designed and developed by Clemence Core
+
+Conçu et développé par|||Designed and developed by
