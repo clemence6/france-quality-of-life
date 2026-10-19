@@ -115,3 +115,10 @@
 .profile-actions{margin-top:auto;display:grid;gap:12px}.project-code-link{font-size:12px;color:var(--accent);text-align:center;text-underline-offset:3px}
 @media(max-width:760px){.portfolio-contact{padding:22px}.contact-intro{grid-template-columns:100px minmax(0,1fr);gap:20px}.contact-intro .author-portrait{width:100px;height:130px;border-radius:14px}.profile-previews{grid-template-columns:1fr}.portfolio-contact h3{font-size:23px}}
 @media(max-width:480px){.contact-intro{grid-template-columns:1fr}.contact-intro .author-portrait{width:96px;height:112px}.author-signature{font-size:11px}.profile-preview{padding:18px}.profile-network>span:last-child{font-size:8px}}
+
+@media(max-width:1000px){.topbar{flex-wrap:wrap;gap:10px;padding:12px 20px}.site-identity{order:0}.header-actions{display:contents}.language-switch{margin-left:auto;order:1}.header-actions nav{order:2;width:100%;justify-content:space-between}.nav-btn{padding:9px 12px}}
+@media(min-width:601px) and (max-width:1000px){.city-panel{top:145px;max-height:calc(100dvh - 170px)}}
+@media(max-width:600px){.topbar{padding:12px 16px}.header-actions .nav-btn{padding:8px 3px}}
+
+.portfolio-contact h3{text-wrap:balance}
+@media(min-width:601px) and (max-width:1000px){html{scroll-padding-top:160px}}
