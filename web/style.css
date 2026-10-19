@@ -92,3 +92,26 @@
 @media(max-width:600px){.header-actions nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}.header-actions .nav-btn{font-size:11px;padding:8px 3px;white-space:normal;min-height:44px}.topbar .brand{font-size:22px}.topbar .brand-symbol{font-size:32px}.language-switch select{font-size:12px;max-width:105px;padding:8px 18px 8px 8px}}
 
 .contact-links{display:flex;flex-wrap:wrap;gap:12px}.contact-links .contact-link{flex:1;text-align:center}
+
+/* L'autrice reste identifiable de la carte à la présentation de la démarche. */
+.site-identity{display:flex;flex-direction:column;align-items:flex-start;flex-shrink:0;gap:1px}
+.author-signature{border:0;background:none;padding:0 0 0 2px;color:var(--muted);font-size:12px;line-height:1.5;text-align:left}
+.author-signature strong{font-weight:600;color:var(--accent)}.author-signature:hover{color:var(--accent)}
+.author-intro{display:flex;align-items:center;gap:13px;margin:24px 0 14px}.author-intro>div:last-child{display:grid;gap:2px}.author-intro strong{font-size:17px}.author-intro span{font-size:13px;color:var(--muted)}
+.author-portrait{display:grid;place-items:center;overflow:hidden;flex-shrink:0;width:158px;height:188px;border-radius:18px;background:#e2ece3;color:var(--accent);font-family:Manrope,sans-serif;font-size:44px;font-weight:600;border:1px solid #c8dacc}
+.author-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%}.author-portrait-small{width:52px;height:52px;border-radius:50%;font-size:18px}
+.sources-panel .section-heading .project-ownership{font-size:16px;font-weight:600;color:var(--accent);margin:0 0 12px}
+.portfolio-contact{display:block;background:#f4f8f2;border:1px solid #d4e2d3;border-radius:18px;padding:30px;margin-top:42px}
+.contact-intro{display:grid;grid-template-columns:158px minmax(0,1fr);gap:28px;align-items:center}
+.portfolio-contact .contact-author{font-family:Manrope,sans-serif;font-size:21px;font-weight:700;color:var(--text);margin:10px 0 8px;line-height:1.4}.contact-author span{display:block;font-family:var(--font);font-size:14px;font-weight:400;color:var(--muted);margin-top:3px}
+.portfolio-contact h3{font-size:25px;margin:0 0 12px}.portfolio-contact p{max-width:580px}
+.profile-previews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:28px}
+.profile-preview{background:white;border:1px solid #d8e2db;border-radius:13px;padding:22px;display:flex;flex-direction:column;min-width:0}
+.profile-network{display:flex;align-items:center;gap:10px;margin-bottom:20px}.sources-panel .profile-network h4{font-size:16px;margin:0}.profile-network>span:last-child{font-size:9px;letter-spacing:1px;color:var(--muted);margin-left:auto;text-align:right}
+.network-icon{display:grid;place-items:center;width:31px;height:31px;border-radius:7px;flex-shrink:0;font-weight:700}.linkedin-icon{background:#0a66c2;color:white;font-size:22px;letter-spacing:-1px}.github-icon{background:#24332f;color:white;font-size:11px;letter-spacing:.5px}
+.profile-name{display:block;font-family:Manrope,sans-serif;font-size:19px;line-height:1.4}.profile-name span{display:block;color:var(--muted);font-family:var(--font);font-size:12px;font-weight:400;margin-top:3px}.profile-role{font-size:12px;color:var(--accent);line-height:1.7;margin:7px 0 12px}
+.portfolio-contact .profile-preview p{font-size:14px;line-height:1.75;margin:0 0 20px;color:var(--muted)}
+.profile-button{display:block;text-align:center;padding:11px 13px;background:var(--accent);color:white;border:1px solid var(--accent);border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;margin-top:auto}.profile-button:hover{background:#115f4b}.linkedin-preview .profile-button{background:#0a66c2;border-color:#0a66c2}.linkedin-preview .profile-button:hover{background:#084f96}
+.profile-actions{margin-top:auto;display:grid;gap:12px}.project-code-link{font-size:12px;color:var(--accent);text-align:center;text-underline-offset:3px}
+@media(max-width:760px){.portfolio-contact{padding:22px}.contact-intro{grid-template-columns:100px minmax(0,1fr);gap:20px}.contact-intro .author-portrait{width:100px;height:130px;border-radius:14px}.profile-previews{grid-template-columns:1fr}.portfolio-contact h3{font-size:23px}}
+@media(max-width:480px){.contact-intro{grid-template-columns:1fr}.contact-intro .author-portrait{width:96px;height:112px}.author-signature{font-size:11px}.profile-preview{padding:18px}.profile-network>span:last-child{font-size:8px}}
