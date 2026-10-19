@@ -116,4 +116,4 @@ Further methodological notes are available in French in [docs/AUDIT_SOURCES.md](
 
 ---
 
-Built by **Clémence** · [LinkedIn](https://www.linkedin.com/in/clemence-core-462648216/) · [GitHub](https://github.com/clemence6)
+Built by **Clemence Core** · [LinkedIn](https://www.linkedin.com/in/clemence-core-462648216/) · [GitHub](https://github.com/clemence6)
