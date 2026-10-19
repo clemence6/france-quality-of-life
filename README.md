@@ -1,4 +1,4 @@
-# Où habiter? — Where to live in France
+# Où habiter? Where to live in France
 
 **Public data, clearer choices.** An interactive data analysis project comparing housing prices, local services, air quality and recorded risks across **20 French cities**.
 
