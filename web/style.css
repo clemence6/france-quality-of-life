@@ -121,4 +121,6 @@
 @media(max-width:600px){.topbar{padding:12px 16px}.header-actions .nav-btn{padding:8px 3px}}
 
 .portfolio-contact h3{text-wrap:balance}
+.profile-invite{display:flex;align-items:center;gap:16px;width:fit-content;max-width:100%;margin:30px 0 0 auto;padding:16px 20px;background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px #163f3310}.profile-invite .author-portrait{width:52px;height:60px;border-radius:10px}.profile-invite strong,.profile-invite span{display:block}.profile-invite strong{font-size:15px;font-weight:600}.profile-invite span{font-size:12px;color:var(--muted);margin-top:3px}.profile-invite .secondary-btn{margin-left:12px;background:var(--accent);color:white;border-color:var(--accent)}
+@media(max-width:480px){.profile-invite{width:100%;gap:12px;padding:16px;flex-wrap:wrap}.profile-invite .secondary-btn{width:100%;margin-left:0;text-align:center}}
 @media(min-width:601px) and (max-width:1000px){html{scroll-padding-top:160px}}
