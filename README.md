@@ -1,6 +1,6 @@
 # Où habiter? Where to live in France
 
-**Public data, clearer choices.** An interactive data analysis project comparing housing prices, local services, air quality and recorded risks across **20 French cities**.
+**Public data, clearer choices.** An interactive data analysis project comparing housing prices, local services, air quality and recorded risks across **35 French cities**.
 
 [Explore the live app →](https://ou-habiter-clemence.web.app/en/) · [Version française](https://ou-habiter-clemence.web.app/) · [View the daily audit](https://ou-habiter-clemence.web.app/data/audit.json) · [Connect on LinkedIn](https://www.linkedin.com/in/clemence-core-462648216/)
 
@@ -49,7 +49,7 @@ Interactive map, comparisons & SVG charts · Firebase
 [update-data.yml](.github/workflows/update-data.yml) runs daily at **04:17 UTC**, and supports manual runs. GitHub can delay scheduled execution.
 
 1. Run the Python tests, then collect and update the city data.
-2. Check the 20 expected cities against the published provenance and recalculate DVF results from the downloaded CSV files.
+2. Check the 35 expected cities against the published provenance and recalculate DVF results from the downloaded CSV files.
 3. Publish the [audit report](https://ou-habiter-clemence.web.app/data/audit.json), retain the run artefacts for 30 days and list any issues in the Actions summary.
 
 The audit checks stored values, municipal scope, service counts, dates and PM2.5 units. It distinguishes collection time from the age of the OSM server database. A recent valid service count can be retained for up to seven days during an API outage, with its original date. Missing observations remain missing. An inconsistent audit makes the workflow fail.
