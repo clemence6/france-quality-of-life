@@ -277,7 +277,7 @@ function chooseLabelPlacement(point,width,height,occupied,dots,bounds,above=fals
   const padded={left:rect.left-3,top:rect.top-3,right:rect.right+3,bottom:rect.bottom+3};
   const covered=occupied.reduce((n,r)=>n+overlap(padded,r),0)+dots.reduce((n,p)=>n+overlap(padded,{left:p.x-6,top:p.y-6,right:p.x+6,bottom:p.y+6}),0);
   const outside=width*height-overlap(rect,{left:8,top:8,right:bounds.width-8,bottom:bounds.height-8});
-  return {x,y,rect,score:covered*1000+outside*2000+index};
+  return {x,y,rect,clear:covered===0 && outside<.01,score:covered*1000+outside*2000+index};
  }).sort((a,b)=>a.score-b.score)[0];
 }
 function layoutMapLabels() {
@@ -287,11 +287,16 @@ function layoutMapLabels() {
   const bounds=map.getContainer().getBoundingClientRect();
   const visible=markers.filter(({marker})=>!marker.getElement().hidden).map(item=>({...item,point:map.project(item.marker.getLngLat())}));
   const dots=visible.map(item=>item.point),occupied=[];
-  // Montpellier garde son nom au-dessus du point, à proximité du repère.
-  visible.sort((a,b)=>(b.city.insee_code==="34172")-(a.city.insee_code==="34172") || a.point.y-b.point.y);
+  const labelLimit=map.getZoom()<5.5 ? (bounds.width<700?10:16) : map.getZoom()<6.5?24:Infinity;
+  const priority=["75056","13055","69123","31555","33063","44109","59350","67482","34172","06088","87085","72181","51454","29019","74010","06029"];
+  const rank=city=>city.insee_code===selectedId?-2:city.insee_code==="34172"?-1:priority.includes(city.insee_code)?priority.indexOf(city.insee_code):priority.length;
+  // La sélection reste nommée. Les autres noms ne s'affichent que s'ils ont de la place.
+  visible.sort((a,b)=>rank(a.city)-rank(b.city) || a.point.y-b.point.y || a.city.insee_code.localeCompare(b.city.insee_code));
   for(const {city,marker,point} of visible){
    const element=marker.getElement(),label=element.querySelector(".marker-label");
+   label.hidden=false;
    const placement=chooseLabelPlacement(point,label.offsetWidth,label.offsetHeight,occupied,dots,bounds,city.insee_code==="34172");
+   if(city.insee_code!==selectedId && (!placement.clear || occupied.length>=labelLimit)){label.hidden=true;continue;}
    label.style.left=`${13+placement.x}px`;label.style.top=`${13+placement.y}px`;
    occupied.push(placement.rect);
   }
