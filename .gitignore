@@ -6,6 +6,7 @@ __pycache__/
 .tools/
 firebase-debug*.log
 docs/local-server*.log
+docs/local-*-refresh.log
 data/pipeline-run.json
 data/expanded-cities-run.json
 data/freshness-*.json
