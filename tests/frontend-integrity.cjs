@@ -52,3 +52,24 @@ context.labelCase.point={x:590,y:250};
 placement=vm.runInContext('chooseLabelPlacement(labelCase.point,labelCase.width,labelCase.height,[],[],labelCase.bounds)',context);
 assert.ok(placement.rect.right<=592 && placement.rect.left>=8,'Une étiquette reste dans la carte près du bord droit');
 console.log('PASS: étiquettes sans collision, Montpellier en hauteur et limites de carte');
+// Une carte dense garde tous ses points sans forcer leurs 35 noms à se chevaucher.
+context.mapElements=Array.from({length:35},(_,i)=>{
+ const label={offsetWidth:90,offsetHeight:24,hidden:false,style:{}};
+ return {hidden:false,label,querySelector(){return label;}};
+});
+context.testMarkers=context.mapElements.map((el,i)=>({city:{insee_code:`test-${i}`},marker:{getElement(){return el;},getLngLat(){return {x:60+(i%7)*70,y:60+Math.floor(i/7)*55};}}}));
+context.requestAnimationFrame=callback=>{context.flushLabels=callback;return 1;};
+context.testMap={getZoom(){return context.testZoom;},getContainer(){return {getBoundingClientRect(){return {width:600,height:400};}};},project(point){return point;}};
+context.testZoom=4.7;
+vm.runInContext('map=testMap; mapReady=true; markers=testMarkers; selectedId="test-34"; layoutMapLabels();',context);
+context.flushLabels();
+const overviewNames=context.mapElements.filter(el=>!el.label.hidden).length;
+assert.ok(overviewNames<=10 && overviewNames>0,'Vue générale limitée à dix noms sur une petite carte');
+assert.equal(context.mapElements[34].label.hidden,false,'La ville sélectionnée reste nommée');
+assert.ok(context.mapElements.every(el=>!el.hidden),'Les 35 points restent disponibles même sans nom');
+const rects=context.mapElements.flatMap((el,i)=>el.label.hidden?[]:[{left:60+(i%7)*70+parseFloat(el.label.style.left)-13,top:60+Math.floor(i/7)*55+parseFloat(el.label.style.top)-13,width:90,height:24}]);
+rects.forEach((a,i)=>rects.slice(i+1).forEach(b=>assert.ok(a.left+a.width<=b.left || b.left+b.width<=a.left || a.top+a.height<=b.top || b.top+b.height<=a.top,'Les noms visibles ne se chevauchent pas')));
+context.testZoom=7;
+vm.runInContext('layoutMapLabels()',context);context.flushLabels();
+assert.ok(context.mapElements.filter(el=>!el.label.hidden).length>overviewNames,'Le zoom autorise davantage de noms');
+console.log('PASS: carte dense de 35 points, noms limités sans chevauchement et sélection conservée');
