@@ -50,6 +50,21 @@ CITIES_TO_PROCESS = [
     {"name": "Dijon", "dept": "21", "insee": "21231"},
     {"name": "Clermont-Ferrand", "dept": "63", "insee": "63113"},
     {"name": "Grenoble", "dept": "38", "insee": "38185"},
+    {"name": "Cannes", "dept": "06", "insee": "06029"},
+    {"name": "Limoges", "dept": "87", "insee": "87085"},
+    {"name": "Poitiers", "dept": "86", "insee": "86194"},
+    {"name": "Le Mans", "dept": "72", "insee": "72181"},
+    {"name": "Saint-Étienne", "dept": "42", "insee": "42218"},
+    {"name": "Reims", "dept": "51", "insee": "51454"},
+    {"name": "Nancy", "dept": "54", "insee": "54395"},
+    {"name": "La Rochelle", "dept": "17", "insee": "17300"},
+    {"name": "Besançon", "dept": "25", "insee": "25056"},
+    {"name": "Orléans", "dept": "45", "insee": "45234"},
+    {"name": "Perpignan", "dept": "66", "insee": "66136"},
+    {"name": "Avignon", "dept": "84", "insee": "84007"},
+    {"name": "Pau", "dept": "64", "insee": "64445"},
+    {"name": "Bayonne", "dept": "64", "insee": "64102"},
+    {"name": "Annecy", "dept": "74", "insee": "74010"},
 ]
 
 
